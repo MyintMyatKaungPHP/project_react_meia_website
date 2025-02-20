@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useMotionValue, useTransform } from "framer-motion";
 import Pearson_logo from "../assets/images/Pearson_logo.png";
 import Pearson_logo_white from "../assets/images/Pearson_logo_white.png";
 import CIE_logo from "../assets/images/CIE_logo.png";
@@ -7,6 +8,29 @@ import miea_school from "../assets/images/miea_school.png";
 import { motion } from "framer-motion";
 
 const Hero = () => {
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMouseMove = (event) => {
+      setMousePos({
+        x: event.clientX - window.innerWidth / 2,
+        y: event.clientY - window.innerHeight / 2,
+      });
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
+  const xMotion = useMotionValue(0);
+  const yMotion = useMotionValue(0);
+
+  useEffect(() => {
+    xMotion.set(mousePos.x * 0.02);
+    yMotion.set(mousePos.y * 0.02);
+  }, [mousePos.x, mousePos.y, xMotion, yMotion]);
+
+  const xTransform = useTransform(xMotion, (val) => `${val}px`);
+  const yTransform = useTransform(yMotion, (val) => `${val}px`);
   return (
     <>
       <div className="relative bg-white pb-[110px] pt-[30px] dark:bg-dark lg:pt-[80px]">
@@ -105,7 +129,10 @@ const Hero = () => {
                       />
                     </span>
                   </motion.div>
-                  <span className="absolute -bottom-8 -left-8 z-[-1]">
+                  <motion.span
+                    className="absolute -bottom-8 -left-8 z-[-1]"
+                    style={{ x: xTransform, y: yTransform }}
+                  >
                     <svg
                       width="93"
                       height="93"
@@ -139,8 +166,11 @@ const Hero = () => {
                       <circle cx="90.5" cy="68.5" r="2.5" fill="#21ad5c" />
                       <circle cx="90.5" cy="90.5" r="2.5" fill="#21ad5c" />
                     </svg>
-                  </span>
-                  <span className="absolute -top-8 -right-8 z-[-1]">
+                  </motion.span>
+                  <motion.span
+                    className="absolute -top-8 -right-8 z-[-1]"
+                    style={{ x: xTransform, y: yTransform }}
+                  >
                     <svg
                       width="93"
                       height="93"
@@ -174,7 +204,7 @@ const Hero = () => {
                       <circle cx="90.5" cy="68.5" r="2.5" fill="#f5c115" />
                       <circle cx="90.5" cy="90.5" r="2.5" fill="#f5c115" />
                     </svg>
-                  </span>
+                  </motion.span>
                 </div>
               </div>
             </div>
