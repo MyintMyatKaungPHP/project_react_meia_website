@@ -6,6 +6,7 @@ import CIE_logo from "../assets/images/CIE_logo.png";
 import CIE_logo_white from "../assets/images/CIE_logo_white.png";
 import miea_school from "../assets/images/miea_school.png";
 import { motion } from "framer-motion";
+import { Typewriter } from "react-simple-typewriter";
 
 const Hero = () => {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -47,8 +48,16 @@ const Hero = () => {
                   <h1 className="mb-5 text-4xl font-bold !leading-[1.208] text-green dark:text-green-300 xs:text-[30px] sm:text-[40px] md:text-[45px] lg:text-[38px] xl:text-5xl">
                     MIEA School
                   </h1>
-                  <h2 className="mb-8 text-dark dark:text-white xs:text-[28px] sm:text-[32px] md:text-[36px] lg:text-[40px] xl:text-[42px]">
-                    A Level and IGCSE Centre
+                  <h2 className="mb-8 text-dark dark:text-white xs:text-[28px] sm:text-[32px] md:text-[36px] lg:text-[40px] xl:text-[40px]">
+                    <Typewriter
+                      words={["A Level and IGCSE Centre"]}
+                      loop={0} // 0 means infinite loop
+                      cursor
+                      cursorStyle="_"
+                      typeSpeed={100}
+                      deleteSpeed={50}
+                      delaySpeed={1000}
+                    />
                   </h2>
                   <p className="mb-8 max-w-[480px] text-base text-body-color dark:text-dark-6 xs:text-[14px] sm:text-[16px] md:text-[18px] lg:text-[20px] xl:text-[22px]">
                     We are committed to providing the best education for

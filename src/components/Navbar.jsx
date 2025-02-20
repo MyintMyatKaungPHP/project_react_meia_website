@@ -60,33 +60,61 @@ const Navbar = () => {
               >
                 <ul className="block lg:flex">
                   <ListItem>
-                    <LinkItem dropdown="true" NavLink="/#">
-                      Home
+                    <LinkItem NavLink="/#">Home</LinkItem>
+                  </ListItem>
+                  <ListItem>
+                    <LinkItem NavLink="/#" dropdown="true">
+                      About
                     </LinkItem>
                     <Dropdown>
                       <DropdownItem
                         dropdownLink="#"
-                        dropdownText="Creative Homepage"
+                        dropdownText="MIEA School"
                       />
                       <DropdownItem
                         dropdownLink="#"
-                        dropdownText="Business Homepage"
+                        dropdownText="Organizational Structure"
                       />
                       <DropdownItem
                         dropdownLink="#"
-                        dropdownText="Corporate Homepage"
-                      />
-                      <DropdownItem
-                        dropdownLink="#"
-                        dropdownText="Personal Homepage"
+                        dropdownText="Achievments"
                       />
                     </Dropdown>
                   </ListItem>
                   <ListItem>
-                    <LinkItem NavLink="/#">Payment</LinkItem>
+                    <LinkItem NavLink="/#" dropdown="true">
+                      Academic
+                    </LinkItem>
+                    <Dropdown>
+                      <DropdownItem
+                        dropdownLink="#"
+                        dropdownText="Programmes"
+                      />
+                      <DropdownItem
+                        dropdownLink="#"
+                        dropdownText="School Facilities"
+                      />
+                      <DropdownItem dropdownLink="#" dropdownText="Alumini" />
+                    </Dropdown>
                   </ListItem>
                   <ListItem>
-                    <LinkItem NavLink="/#">Features</LinkItem>
+                    <LinkItem dropdown="true" NavLink="/#">
+                      Media
+                    </LinkItem>
+                    <Dropdown>
+                      <DropdownItem
+                        dropdownLink="#"
+                        dropdownText="News & Announcements"
+                      />
+                      <DropdownItem
+                        dropdownLink="#"
+                        dropdownText="Events & Activities"
+                      />
+                    </Dropdown>
+                  </ListItem>
+
+                  <ListItem>
+                    <LinkItem NavLink="/#">Contact</LinkItem>
                   </ListItem>
                 </ul>
               </nav>
@@ -174,5 +202,123 @@ const DropdownItem = ({ dropdownLink, dropdownText }) => {
     >
       {dropdownText}
     </Link>
+  );
+};
+
+const SubmenuGroup = () => {
+  return (
+    <div className="-mx-4 flex flex-wrap lg:justify-center">
+      <div className="w-full px-4 lg:w-1/3">
+        <div>
+          <h3 className="mb-[14px] text-base font-semibold text-dark dark:text-white">
+            New Arrivals
+          </h3>
+          <a
+            href="/#"
+            className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
+          >
+            Dresses
+          </a>
+          <a
+            href="/#"
+            className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
+          >
+            Jackets
+          </a>
+          <a
+            href="/#"
+            className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
+          >
+            Sweatshirts
+          </a>
+          <a
+            href="/#"
+            className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
+          >
+            Tops &amp; Tees
+          </a>
+          <a
+            href="/#"
+            className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
+          >
+            Party Dresses
+          </a>
+        </div>
+      </div>
+      <div className="w-full px-4 lg:w-1/3">
+        <div>
+          <h3 className="mb-[14px] text-base font-semibold text-dark dark:text-white">
+            New Arrivals
+          </h3>
+          <a
+            href="/#"
+            className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
+          >
+            Dresses
+          </a>
+          <a
+            href="/#"
+            className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
+          >
+            Jackets
+          </a>
+          <a
+            href="/#"
+            className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
+          >
+            Sweatshirts
+          </a>
+          <a
+            href="/#"
+            className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
+          >
+            Tops &amp; Tees
+          </a>
+          <a
+            href="/#"
+            className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
+          >
+            Party Dresses
+          </a>
+        </div>
+      </div>
+      <div className="w-full px-4 lg:w-1/3">
+        <div>
+          <h3 className="mb-[14px] text-base font-semibold text-dark dark:text-white">
+            New Arrivals
+          </h3>
+          <a
+            href="/#"
+            className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
+          >
+            Dresses
+          </a>
+          <a
+            href="/#"
+            className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
+          >
+            Jackets
+          </a>
+          <a
+            href="/#"
+            className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
+          >
+            Sweatshirts
+          </a>
+          <a
+            href="/#"
+            className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
+          >
+            Tops &amp; Tees
+          </a>
+          <a
+            href="/#"
+            className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
+          >
+            Party Dresses
+          </a>
+        </div>
+      </div>
+    </div>
   );
 };
