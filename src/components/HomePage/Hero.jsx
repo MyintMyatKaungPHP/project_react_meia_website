@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useMotionValue, useTransform } from "framer-motion";
-import Pearson_logo from "../assets/images/Pearson_logo.png";
-import Pearson_logo_white from "../assets/images/Pearson_logo_white.png";
-import CIE_logo from "../assets/images/CIE_logo.png";
-import CIE_logo_white from "../assets/images/CIE_logo_white.png";
-import miea_school from "../assets/images/miea_school.png";
+import Pearson_logo from "../../assets/images/Pearson_logo.png";
+import Pearson_logo_white from "../../assets/images/Pearson_logo_white.png";
+import CIE_logo from "../../assets/images/CIE_logo.png";
+import CIE_logo_white from "../../assets/images/CIE_logo_white.png";
+import miea_school from "../../assets/images/miea_school.png";
 import { motion } from "framer-motion";
 import { Typewriter } from "react-simple-typewriter";
 

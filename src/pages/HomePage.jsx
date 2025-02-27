@@ -1,12 +1,12 @@
 import React from "react";
-import Hero from "../components/Hero";
-import Services from "../components/Services";
-import RecentNews from "../components/RecentNews";
-import Features from "../components/Features";
-import Testimonials from "../components/Testimonials";
-import About from "../components/About";
-import Achievements from "../components/Achievements";
-import Video from "../components/Video";
+import Hero from "../components/HomePage/Hero";
+import Services from "../components/HomePage/Services";
+import RecentNews from "../components/HomePage/RecentNews";
+import Features from "../components/HomePage/Features";
+import Testimonials from "../components/HomePage/Testimonials";
+import About from "../components/HomePage/About";
+import Achievements from "../components/HomePage/Achievements";
+import Video from "../components/HomePage/Video";
 
 function Home() {
   return (

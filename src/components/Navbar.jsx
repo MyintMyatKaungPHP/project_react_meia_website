@@ -60,19 +60,19 @@ const Navbar = () => {
               >
                 <ul className="block lg:flex">
                   <ListItem>
-                    <LinkItem NavLink="/#">Home</LinkItem>
+                    <LinkItem NavLink="/">Home</LinkItem>
                   </ListItem>
                   <ListItem>
-                    <LinkItem NavLink="/#" dropdown="true">
+                    <LinkItem NavLink="#" dropdown="true">
                       About
                     </LinkItem>
                     <Dropdown>
                       <DropdownItem
-                        dropdownLink="#"
+                        dropdownLink="/about_miea"
                         dropdownText="MIEA School"
                       />
                       <DropdownItem
-                        dropdownLink="#"
+                        dropdownLink="/organisational_structure"
                         dropdownText="Organizational Structure"
                       />
                       <DropdownItem
@@ -173,7 +173,7 @@ const LinkItem = ({ children, NavLink, subMenu, setSubMenu, dropdown }) => {
     <Link
       to={NavLink}
       onClick={handleClick}
-      className={`relative flex px-6 py-2 text-base font-medium bg-transparent text-body-color group-hover:text-dark dark:text-dark-6 dark:group-hover:text-white  lg:inline-flex lg:py-6 lg:pl-0 lg:pr-4 ${
+      className={`relative flex px-6 py-2 text-base font-medium bg-transparent text-body-color group-hover:text-green dark:text-dark-6 dark:group-hover:text-yellow  lg:inline-flex lg:py-6 lg:pl-0 lg:pr-4 ${
         dropdown &&
         "after:absolute after:right-5 after:top-1/2 after:mt-[-2px] after:h-2 after:w-2 after:translate-y-[-50%] after:rotate-45 after:border-b-2 after:border-r-2 after:border-current lg:after:right-0"
       }`}

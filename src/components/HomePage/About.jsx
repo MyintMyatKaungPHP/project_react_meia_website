@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
-import StuGroup from "../assets/images/stugroup.png";
-import StuGroupWhite from "../assets/images/stugroup_white.png";
+import StuGroup from "../../assets/images/stugroup.png";
+import StuGroupWhite from "../../assets/images/stugroup_white.png";
 
 export default function About() {
   return (
