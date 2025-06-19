@@ -76,8 +76,8 @@ const Navbar = () => {
                         dropdownText="Organizational Structure"
                       />
                       <DropdownItem
-                        dropdownLink="#"
-                        dropdownText="Achievments"
+                        dropdownLink="/achievement"
+                        dropdownText="Achievements"
                       />
                     </Dropdown>
                   </ListItem>
@@ -94,7 +94,10 @@ const Navbar = () => {
                         dropdownLink="#"
                         dropdownText="School Facilities"
                       />
-                      <DropdownItem dropdownLink="#" dropdownText="Alumini" />
+                      <DropdownItem
+                        dropdownLink="/StudentAchievements"
+                        dropdownText="Student's Achievements"
+                      />
                     </Dropdown>
                   </ListItem>
                   <ListItem>

@@ -49,8 +49,7 @@ const TeamCard = ({ imageSrc, name, profession, circleColor, direction }) => {
       <motion.div
         className="mx-auto mb-10 w-full max-w-[370px]"
         initial={{ opacity: 0, x: direction === "left" ? -100 : 100 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: false }}
+        animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5 }}
       >
         <div className="relative overflow-hidden rounded-lg shadow-lg">

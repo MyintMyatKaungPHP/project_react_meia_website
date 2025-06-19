@@ -11,6 +11,8 @@
     "tw": "npx tailwindcss -i ./src/assets/styles/tailwind.css -o ./src/assets/styles/style.css --watch"
   },
   "dependencies": {
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "framer-motion": "^12.4.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
