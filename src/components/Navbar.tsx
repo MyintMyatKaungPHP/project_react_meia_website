@@ -1,11 +1,39 @@
-import React, { useState, useEffect } from "react";
+import React, {
+  useState,
+  useEffect,
+  ReactNode,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import { Link } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
 import { FaSun, FaMoon } from "react-icons/fa";
 import miea_logo_hr from "../assets/images/miea_logo_hr.png";
 import miea_logo_hr_white from "../assets/images/miea_logo_hr_white.png";
 
-const Navbar = () => {
+interface ListItemProps {
+  children: ReactNode;
+}
+
+interface LinkItemProps {
+  children: ReactNode;
+  NavLink: string;
+  subMenu?: boolean;
+  setSubMenu?: Dispatch<SetStateAction<boolean>>;
+  dropdown?: boolean;
+}
+
+interface DropdownProps {
+  children: ReactNode;
+  subMenu?: boolean;
+}
+
+interface DropdownItemProps {
+  dropdownLink: string;
+  dropdownText: string;
+}
+
+const Navbar: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
   const { theme, toggleTheme } = useTheme();
@@ -14,7 +42,6 @@ const Navbar = () => {
     const handleScroll = () => {
       setIsSticky(window.scrollY > 0);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -63,7 +90,7 @@ const Navbar = () => {
                     <LinkItem NavLink="/">Home</LinkItem>
                   </ListItem>
                   <ListItem>
-                    <LinkItem NavLink="#" dropdown="true">
+                    <LinkItem NavLink="#" dropdown={true}>
                       About
                     </LinkItem>
                     <Dropdown>
@@ -82,7 +109,7 @@ const Navbar = () => {
                     </Dropdown>
                   </ListItem>
                   <ListItem>
-                    <LinkItem NavLink="/#" dropdown="true">
+                    <LinkItem NavLink="/#" dropdown={true}>
                       Academic
                     </LinkItem>
                     <Dropdown>
@@ -101,7 +128,7 @@ const Navbar = () => {
                     </Dropdown>
                   </ListItem>
                   <ListItem>
-                    <LinkItem dropdown="true" NavLink="/#">
+                    <LinkItem dropdown={true} NavLink="/#">
                       Media
                     </LinkItem>
                     <Dropdown>
@@ -115,7 +142,6 @@ const Navbar = () => {
                       />
                     </Dropdown>
                   </ListItem>
-
                   <ListItem>
                     <LinkItem NavLink="/#">Contact</LinkItem>
                   </ListItem>
@@ -149,29 +175,34 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
-
-const ListItem = ({ children }) => {
+const ListItem: React.FC<ListItemProps> = ({ children }) => {
   const [subMenu, setSubMenu] = useState(true);
-
   const childWithProps = React.Children.map(children, (child) => {
-    return React.cloneElement(child, {
-      subMenu: subMenu,
-      setSubMenu: setSubMenu,
-    });
+    return React.isValidElement(child)
+      ? React.cloneElement(child as React.ReactElement<any>, {
+          subMenu: subMenu,
+          setSubMenu: setSubMenu,
+        })
+      : child;
   });
-
   return (
     <li className="submenu-item group relative lg:ml-12">{childWithProps}</li>
   );
 };
 
-const LinkItem = ({ children, NavLink, subMenu, setSubMenu, dropdown }) => {
-  const handleClick = () => {
-    event.preventDefault();
-    setSubMenu(!subMenu);
+const LinkItem: React.FC<LinkItemProps> = ({
+  children,
+  NavLink,
+  subMenu,
+  setSubMenu,
+  dropdown,
+}) => {
+  const handleClick = (event: React.MouseEvent) => {
+    if (dropdown && setSubMenu && typeof subMenu !== "undefined") {
+      event.preventDefault();
+      setSubMenu(!subMenu);
+    }
   };
-
   return (
     <Link
       to={NavLink}
@@ -186,7 +217,7 @@ const LinkItem = ({ children, NavLink, subMenu, setSubMenu, dropdown }) => {
   );
 };
 
-const Dropdown = ({ children, subMenu }) => {
+const Dropdown: React.FC<DropdownProps> = ({ children, subMenu }) => {
   return (
     <div
       className={`relative left-0 top-full rounded-lg bg-white  px-4 transition-all group-hover:opacity-100 dark:bg-dark-2 lg:invisible lg:absolute lg:top-[115%] lg:w-[250px] lg:p-4 lg:opacity-0 lg:shadow-lg lg:group-hover:visible lg:group-hover:top-full 
@@ -197,7 +228,10 @@ const Dropdown = ({ children, subMenu }) => {
   );
 };
 
-const DropdownItem = ({ dropdownLink, dropdownText }) => {
+const DropdownItem: React.FC<DropdownItemProps> = ({
+  dropdownLink,
+  dropdownText,
+}) => {
   return (
     <Link
       to={dropdownLink}
@@ -208,120 +242,4 @@ const DropdownItem = ({ dropdownLink, dropdownText }) => {
   );
 };
 
-const SubmenuGroup = () => {
-  return (
-    <div className="-mx-4 flex flex-wrap lg:justify-center">
-      <div className="w-full px-4 lg:w-1/3">
-        <div>
-          <h3 className="mb-[14px] text-base font-semibold text-dark dark:text-white">
-            New Arrivals
-          </h3>
-          <a
-            href="/#"
-            className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
-          >
-            Dresses
-          </a>
-          <a
-            href="/#"
-            className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
-          >
-            Jackets
-          </a>
-          <a
-            href="/#"
-            className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
-          >
-            Sweatshirts
-          </a>
-          <a
-            href="/#"
-            className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
-          >
-            Tops &amp; Tees
-          </a>
-          <a
-            href="/#"
-            className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
-          >
-            Party Dresses
-          </a>
-        </div>
-      </div>
-      <div className="w-full px-4 lg:w-1/3">
-        <div>
-          <h3 className="mb-[14px] text-base font-semibold text-dark dark:text-white">
-            New Arrivals
-          </h3>
-          <a
-            href="/#"
-            className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
-          >
-            Dresses
-          </a>
-          <a
-            href="/#"
-            className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
-          >
-            Jackets
-          </a>
-          <a
-            href="/#"
-            className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
-          >
-            Sweatshirts
-          </a>
-          <a
-            href="/#"
-            className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
-          >
-            Tops &amp; Tees
-          </a>
-          <a
-            href="/#"
-            className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
-          >
-            Party Dresses
-          </a>
-        </div>
-      </div>
-      <div className="w-full px-4 lg:w-1/3">
-        <div>
-          <h3 className="mb-[14px] text-base font-semibold text-dark dark:text-white">
-            New Arrivals
-          </h3>
-          <a
-            href="/#"
-            className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
-          >
-            Dresses
-          </a>
-          <a
-            href="/#"
-            className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
-          >
-            Jackets
-          </a>
-          <a
-            href="/#"
-            className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
-          >
-            Sweatshirts
-          </a>
-          <a
-            href="/#"
-            className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
-          >
-            Tops &amp; Tees
-          </a>
-          <a
-            href="/#"
-            className="block py-[6px] text-base text-body-color hover:text-primary dark:text-dark-6"
-          >
-            Party Dresses
-          </a>
-        </div>
-      </div>
-    </div>
-  );
-};
+export default Navbar;

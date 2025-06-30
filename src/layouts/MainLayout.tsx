@@ -1,11 +1,13 @@
 import { Outlet } from "react-router-dom";
-import Navbar from "./Navbar";
-import Footer from "./Footer";
+import Navbar from "../components/Navbar.tsx";
+import Footer from "../components/Footer.tsx";
 import { ThemeProvider } from "../context/ThemeContext";
+import ScrollToTop from "../components/ScrollToTop";
 
-function Layout() {
+const MainLayout: React.FC = () => {
   return (
     <ThemeProvider>
+      <ScrollToTop />
       <Navbar />
       <main>
         <Outlet />
@@ -13,6 +15,6 @@ function Layout() {
       <Footer />
     </ThemeProvider>
   );
-}
+};
 
-export default Layout;
+export default MainLayout;

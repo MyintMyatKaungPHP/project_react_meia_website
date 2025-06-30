@@ -1,15 +1,15 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import Layout from "./Layout.jsx";
-import HomePage from "../pages/HomePage.jsx";
-import AboutMIEAPage from "../pages/AboutMIEAPage.jsx";
-import OrganisationalPage from "../pages/OrganisationalPage.jsx";
-import AchievementPage from "../pages/AchievementPage.jsx";
-import StudentAchievements from "../components/StudentAchievementsPage/StudentAchievements.jsx";
+import MainLayout from "../layouts/MainLayout";
+import HomePage from "../pages/HomePage";
+import AboutMIEAPage from "../pages/AboutMIEAPage";
+import OrganisationalPage from "../pages/OrganisationalPage";
+import AchievementPage from "../pages/AchievementPage";
+import StudentAchievementsPage from "../pages/StudentAchievementsPage";
 
 const router = createBrowserRouter([
   {
-    element: <Layout />,
+    element: <MainLayout />,
     children: [
       {
         path: "/",
@@ -29,7 +29,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/StudentAchievements",
-        element: <StudentAchievements />,
+        element: <StudentAchievementsPage />,
       },
     ],
   },

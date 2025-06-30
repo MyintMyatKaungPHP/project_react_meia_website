@@ -2,8 +2,21 @@ import React from "react";
 import MIEA_Logo from "../assets/images/MIEA_logo.png";
 import { FaCheckCircle } from "react-icons/fa";
 import { motion } from "framer-motion";
+
+// Define types for our data
+interface AchievementData {
+  year: string;
+  achievements: string[];
+}
+
+// Props for the SingleCard component
+interface SingleCardProps {
+  year: string;
+  achievements: string[];
+}
+
 // Test data
-const testData = [
+const testData: AchievementData[] = [
   {
     year: "2023 - 2024",
     achievements: [
@@ -52,7 +65,7 @@ const testData = [
   },
 ];
 
-export default function AchievementPage() {
+const AchievementPage: React.FC = () => {
   return (
     <section className="bg-gray-2 py-10  dark:bg-dark">
       <div className="container mx-auto">
@@ -86,9 +99,9 @@ export default function AchievementPage() {
       </div>
     </section>
   );
-}
+};
 
-const SingleCard = ({ year, achievements }) => {
+const SingleCard: React.FC<SingleCardProps> = ({ year, achievements }) => {
   return (
     <div className="shadow-xs mx-auto w-full rounded-[20px] bg-white p-11 dark:bg-dark-2">
       <div className="mb-8 flex items-center gap-6 max-sm:flex-wrap">
@@ -127,3 +140,5 @@ const SingleCard = ({ year, achievements }) => {
     </div>
   );
 };
+
+export default AchievementPage;

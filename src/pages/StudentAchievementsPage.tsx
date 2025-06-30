@@ -1,24 +1,42 @@
 import React, { useState, useMemo } from "react";
 import { motion } from "framer-motion";
-import MIEA_logo from "../../assets/images/MIEA_logo.png";
+import MIEA_logo from "../assets/images/MIEA_logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMedal } from "@fortawesome/free-solid-svg-icons";
 
-const StudentAchievements = () => {
-  const [selectedYear, setSelectedYear] = useState("all");
+// Define types for our data
+interface Student {
+  Image: string;
+  Name: string;
+  Program: string;
+  Description: string[];
+  Year: string;
+}
+
+// Props for the SingleCard component
+interface SingleCardProps {
+  Image?: string;
+  Name: string;
+  Program: string;
+  Description: string[];
+  Year: string;
+}
+
+const StudentAchievementsPage: React.FC = () => {
+  const [selectedYear, setSelectedYear] = useState<string>("all");
 
   // Generate years from 2019 to last year
-  const years = useMemo(() => {
+  const years = useMemo<string[]>(() => {
     const lastYear = new Date().getFullYear() - 1;
-    const yearArray = ["all"];
+    const yearArray: string[] = ["all"];
     for (let year = lastYear; year >= 2019; year--) {
       yearArray.push(`Class of ${year}`);
     }
     return yearArray;
   }, []);
 
-  const filteredCards = useMemo(() => {
-    const students = [
+  const filteredCards = useMemo<Student[]>(() => {
+    const students: Student[] = [
       // Class of 2024 (10 students)
       {
         Image: "https://i.ibb.co/MVv7h59/student1.jpg",
@@ -380,17 +398,17 @@ const StudentAchievements = () => {
   );
 };
 
-export default StudentAchievements;
+export default StudentAchievementsPage;
 
-const SingleCard = ({
+const SingleCard: React.FC<SingleCardProps> = ({
   Image = MIEA_logo,
   Description,
   Name,
   Year,
   Program,
 }) => {
-  // Program အရောင် သတ်မှတ်ချက်
-  const programColor = {
+  // Program color mapping
+  const programColor: Record<string, string> = {
     "Advanced Level (A Level)": "text-red-500",
     "Upper Secondary Level (IGCSE)": "text-green-500",
     "Lower Secondary Level (Pre-IGCSE)": "text-blue-500",
