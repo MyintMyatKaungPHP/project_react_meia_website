@@ -6,6 +6,7 @@ import AboutMIEAPage from "../pages/AboutMIEAPage";
 import OrganisationalPage from "../pages/OrganisationalPage";
 import AchievementPage from "../pages/AchievementPage";
 import StudentAchievementsPage from "../pages/StudentAchievementsPage";
+import ProgrammesPage from "../pages/ProgrammesPage";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/StudentAchievements",
         element: <StudentAchievementsPage />,
+      },
+      {
+        path: "/programmes",
+        element: <ProgrammesPage />,
       },
     ],
   },

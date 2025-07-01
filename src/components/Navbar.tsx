@@ -114,7 +114,7 @@ const Navbar: React.FC = () => {
                     </LinkItem>
                     <Dropdown>
                       <DropdownItem
-                        dropdownLink="#"
+                        dropdownLink="/programmes"
                         dropdownText="Programmes"
                       />
                       <DropdownItem

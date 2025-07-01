@@ -1,4 +1,4 @@
-import miea_logo_hr from "../assets/images/miea_logo_hr.png";
+import miea_logo_hr_green from "../assets/images/miea_logo_hr_green.png";
 import miea_logo_hr_white from "../assets/images/miea_logo_hr_white.png";
 import {
   FaFacebook,
@@ -11,7 +11,7 @@ import React from "react";
 const Footer: React.FC = () => {
   return (
     <footer className="relative z-10 bg-white pt-20 dark:bg-dark">
-      <div className="w-full bg-green px-5 py-14 sm:p-14 mb-16 dark:bg-yellow dark:text-dark">
+      <div className="w-full bg-green px-5 py-14 sm:p-14 dark:bg-yellow dark:text-dark">
         <div className="container mx-auto flex flex-wrap">
           <div className="w-full px-4 md:w-1/2 lg:w-1/3">
             <div className="mb-5 flex lg:mb-0">
@@ -65,40 +65,33 @@ const Footer: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className="container mx-auto pb-10">
-        <div className="-mx-4 flex flex-wrap items-center">
-          <div className="w-full px-4 lg:w-3/12 xl:w-1/3">
-            <div className="w-full py-3 text-center lg:text-left">
-              <a href="" className="inline-block max-w-[260px]">
-                <img
-                  src={miea_logo_hr}
-                  alt="logo"
-                  className="max-w-full dark:hidden"
-                />
-                <img
-                  src={miea_logo_hr_white}
-                  alt="logo"
-                  className="max-w-full hidden dark:block"
-                />
-              </a>
-            </div>
-          </div>
-          <div className="w-full px-4 md:w-1/2 lg:w-5/12 xl:w-1/3">
-            <div className="py-3 text-center">
-              <p className="text-base text-body-color dark:text-dark-6">
-                © {new Date().getFullYear()} MIEA School | All Rights Reserved
-              </p>
-            </div>
-          </div>
-          <div className="w-full px-4 md:w-1/2 lg:w-4/12 xl:w-1/3">
-            <div className="w-full py-3">
-              <div className="-mx-3 flex items-center justify-center lg:justify-end">
-                <a
-                  href="https://www.facebook.com/mieaschool"
-                  className="px-3 text-dark-7 hover:text-primary dark:text-white/40"
-                >
-                  <FaFacebook className="text-blue text-4xl" />
+      <div className="py-3 bg-[#005e16]">
+        <div className="container mx-auto">
+          <div className="-mx-4 flex flex-wrap items-center">
+            <div className="w-full px-4 lg:w-3/12 xl:w-1/3">
+              <div className="w-60 py-3 text-center lg:text-left">
+                <a href="" className="inline-block max-w-[260px]">
+                  <img src={miea_logo_hr_green} alt="logo" className="w-3/4" />
                 </a>
+              </div>
+            </div>
+            <div className="w-full px-4 md:w-1/2 lg:w-5/12 xl:w-1/3">
+              <div className="py-3 text-center">
+                <p className="text-base text-white">
+                  © {new Date().getFullYear()} MIEA School | All Rights Reserved
+                </p>
+              </div>
+            </div>
+            <div className="w-full px-4 md:w-1/2 lg:w-4/12 xl:w-1/3">
+              <div className="w-full py-3">
+                <div className="-mx-3 flex items-center justify-center lg:justify-end">
+                  <a
+                    href="https://www.facebook.com/mieaschool"
+                    className="px-3"
+                  >
+                    <FaFacebook className="text-white text-4xl hover:text-blue" />
+                  </a>
+                </div>
               </div>
             </div>
           </div>
