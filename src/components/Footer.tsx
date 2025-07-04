@@ -67,11 +67,15 @@ const Footer: React.FC = () => {
       </div>
       <div className="py-3 bg-[#005e16]">
         <div className="container mx-auto">
-          <div className="-mx-4 flex flex-wrap items-center">
+          <div className="-mx-4 flex flex-wrap items-center justify-center lg:justify-start">
             <div className="w-full px-4 lg:w-3/12 xl:w-1/3">
-              <div className="w-60 py-3 text-center lg:text-left">
+              <div className="w-30 py-3 text-center lg:text-left">
                 <a href="" className="inline-block max-w-[260px]">
-                  <img src={miea_logo_hr_green} alt="logo" className="w-3/4" />
+                  <img
+                    src={miea_logo_hr_green}
+                    alt="logo"
+                    className="w-[65%] mx-auto lg:mx-0"
+                  />
                 </a>
               </div>
             </div>

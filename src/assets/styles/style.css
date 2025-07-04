@@ -1138,6 +1138,30 @@ input[type="radio"]:checked ~ .box .circle background {
   width: 100%;
 }
 
+.w-28 {
+  width: 7rem;
+}
+
+.w-\[80\%\] {
+  width: 80%;
+}
+
+.w-\[50\%\] {
+  width: 50%;
+}
+
+.w-\[60\%\] {
+  width: 60%;
+}
+
+.w-\[70\%\] {
+  width: 70%;
+}
+
+.w-\[65\%\] {
+  width: 65%;
+}
+
 .min-w-\[140px\] {
   min-width: 140px;
 }
@@ -2761,6 +2785,11 @@ input[type="radio"]:checked ~ .box .circle background {
     margin-right: -1rem;
   }
 
+  .sm\:mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .sm\:mb-8 {
     margin-bottom: 2rem;
   }
@@ -2855,6 +2884,11 @@ input[type="radio"]:checked ~ .box .circle background {
   .md\:-mx-4 {
     margin-left: -1rem;
     margin-right: -1rem;
+  }
+
+  .md\:mx-auto {
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .md\:mb-8 {
@@ -3010,6 +3044,16 @@ input[type="radio"]:checked ~ .box .circle background {
     margin-right: -0.5rem;
   }
 
+  .lg\:mx-0 {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+
+  .lg\:mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .lg\:mb-0 {
     margin-bottom: 0px;
   }
@@ -3120,6 +3164,10 @@ input[type="radio"]:checked ~ .box .circle background {
 
   .lg\:flex-row-reverse {
     flex-direction: row-reverse;
+  }
+
+  .lg\:justify-start {
+    justify-content: flex-start;
   }
 
   .lg\:justify-end {
