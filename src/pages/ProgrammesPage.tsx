@@ -74,7 +74,7 @@ interface ListItemProps {
 
 const ListItem_Pearson: React.FC<ListItemProps> = ({ count, text }) => {
   return (
-    <li className="flex text-base">
+    <li className="flex text-base text-left">
       <span className="bg-sky-500 mr-2.5 flex h-[26px] w-full max-w-[26px] items-center justify-center rounded text-base text-white">
         {count}
       </span>
@@ -87,6 +87,17 @@ const ListItem_CIE: React.FC<ListItemProps> = ({ count, text }) => {
   return (
     <li className="flex text-base">
       <span className="bg-red mr-2.5 flex h-[26px] w-full max-w-[26px] items-center justify-center rounded text-base text-white">
+        {count}
+      </span>
+      {text}
+    </li>
+  );
+};
+
+const ListItem_MIEA: React.FC<ListItemProps> = ({ count, text }) => {
+  return (
+    <li className="flex text-base text-left">
+      <span className="bg-green mr-2.5 flex h-[26px] w-full max-w-[26px] items-center justify-center rounded text-base text-white">
         {count}
       </span>
       {text}
@@ -174,16 +185,65 @@ const ProgrammesPage: React.FC = () => {
                       images={imagesTab1}
                       key={imagesTab1.join("-")}
                     />
-                    <p>
-                      An "advanced level" generally signifies a high degree of
-                      skill or knowledge in a particular subject or activity,
-                      surpassing beginner or intermediate stages and often
-                      requiring more experience and dedication. In the context
-                      of education, it most commonly refers to the "A-Level"
-                      qualification, a secondary school leaving qualification in
-                      various countries, notably the United Kingdom and
-                      Singapore.
+                    <p className="mb-2">
+                      The Advanced Level (A Level) is an internationally
+                      recognized academic qualification, particularly prominent
+                      in the United Kingdom and in many countries around the
+                      world.
                     </p>
+                    <p className="mb-2">
+                      Studied typically over two years by students aged 16 to
+                      19, A Levels allow learners to focus deeply on a few
+                      chosen subjects based on their interests and future
+                      university plans. The courses are designed to promote
+                      analytical thinking, problem-solving, and a thorough
+                      understanding of each subject.
+                    </p>
+                    <p className="mb-2">
+                      Completing A Levels is a common pathway to higher
+                      education; universities in the UK and across the globe
+                      widely accept A Levels as proof of academic achievement
+                      and subject expertise. As such, A Levels are highly valued
+                      by both universities and employers, providing students
+                      with strong foundations for further study and professional
+                      success.
+                    </p>
+                    <h2 className="text-2xl font-semibold py-3">
+                      Programme Information
+                    </h2>
+                    <table className="min-w-full border border-gray-300">
+                      <tbody>
+                        <tr>
+                          <td className="border px-4 py-2 font-semibold bg-gray-100 dark:bg-dark-2">
+                            Age Range
+                          </td>
+                          <td className="border px-4 py-2">
+                            16 - 19 years old
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="border px-4 py-2 font-semibold bg-gray-100 dark:bg-dark-2">
+                            Class Year
+                          </td>
+                          <td className="border px-4 py-2">Year 12, Year 13</td>
+                        </tr>
+                        <tr>
+                          <td className="border px-4 py-2 font-semibold bg-gray-100 dark:bg-dark-2">
+                            Duration
+                          </td>
+                          <td className="border px-4 py-2">24 months</td>
+                        </tr>
+                        <tr>
+                          <td className="border px-4 py-2 font-semibold bg-gray-100 dark:bg-dark-2">
+                            Class Types
+                          </td>
+                          <td className="border px-4 py-2">
+                            On-Campus or Online
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+
                     <h2 className="text-2xl font-semibold py-3">
                       Available Subjects in MIEA
                     </h2>
@@ -223,6 +283,7 @@ const ProgrammesPage: React.FC = () => {
                     </div>
                   </div>
                 )}
+
                 {openTab === "2" && (
                   <div>
                     <h2 className="mb-6 text-3xl font-semibold text-dark dark:text-white">
@@ -232,7 +293,64 @@ const ProgrammesPage: React.FC = () => {
                       images={imagesTab2}
                       key={imagesTab2.join("-")}
                     />
-                    <p>Tab 2 အတွက် သီးသန့် description...</p>
+                    <p className="mb-2">
+                      Upper Secondary (IGCSE) refers to an academic stage
+                      designed for students typically aged 14 to 16, offering
+                      them an internationally recognized qualification called
+                      the International General Certificate of Secondary
+                      Education (IGCSE). Developed by Cambridge Assessment
+                      International Education and other major examination boards
+                      such as Pearson | Edexcel.
+                    </p>
+                    <p className="mb-2">
+                      IGCSE provides a wide range of subjects and is designed
+                      for a global student community. It emphasizes both
+                      knowledge and practical skill development, using a
+                      flexible curriculum and modern assessment methods.
+                    </p>
+                    <p className="mb-2">
+                      IGCSE is widely accepted by universities and employers
+                      around the world as equivalent to the UK’s GCSE. It is an
+                      ideal stepping stone toward A Levels, International
+                      Baccalaureate (IB), or other post-16 programs.
+                    </p>
+                    <h2 className="text-2xl font-semibold py-3">
+                      Programme Information
+                    </h2>
+                    <table className="min-w-full border border-gray-300">
+                      <tbody>
+                        <tr>
+                          <td className="border px-4 py-2 font-semibold bg-gray-100 dark:bg-dark-2">
+                            Age Range
+                          </td>
+                          <td className="border px-4 py-2">
+                            14 - 16 years old
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="border px-4 py-2 font-semibold bg-gray-100 dark:bg-dark-2">
+                            Class Year
+                          </td>
+                          <td className="border px-4 py-2">Year 10, Year 11</td>
+                        </tr>
+                        <tr>
+                          <td className="border px-4 py-2 font-semibold bg-gray-100 dark:bg-dark-2">
+                            Duration
+                          </td>
+                          <td className="border px-4 py-2">
+                            18 months or 24 months
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="border px-4 py-2 font-semibold bg-gray-100 dark:bg-dark-2">
+                            Class Types
+                          </td>
+                          <td className="border px-4 py-2">
+                            On-Campus or Online
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
                     <h2 className="text-2xl font-semibold py-3">
                       Available Subjects in MIEA
                     </h2>
@@ -312,7 +430,114 @@ const ProgrammesPage: React.FC = () => {
                       images={imagesTab3}
                       key={imagesTab3.join("-")}
                     />
-                    <p>Tab 3 အတွက် သီးသန့် description...</p>
+                    <p className="mb-2">
+                      Lower Secondary is an important stage in a student’s
+                      education, typically designed for learners aged 11 to 14.
+                      During this phase, students build on the foundational
+                      skills acquired in primary school and are introduced to a
+                      wider range of subjects, such as mathematics, science,
+                      languages, and social studies.
+                    </p>
+                    <p className="mb-2">
+                      The Lower Secondary curriculum aims to develop students’
+                      critical thinking, creativity, and problem-solving
+                      abilities while encouraging independent learning and a
+                      deeper understanding of core concepts.
+                    </p>
+                    <p className="mb-2">
+                      This programmes serves as preparation for the next level
+                      of education, enabling students to transition smoothly
+                      into Upper Secondary programmes like IGCSE and beyond.
+                    </p>
+                    <h2 className="text-2xl font-semibold py-3">
+                      Programme Information
+                    </h2>
+                    <table className="min-w-full border border-gray-300">
+                      <tbody>
+                        <tr>
+                          <td className="border px-4 py-2 font-semibold bg-gray-100 dark:bg-dark-2">
+                            Age Range
+                          </td>
+                          <td className="border px-4 py-2">
+                            11 - 14 years old
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="border px-4 py-2 font-semibold bg-gray-100 dark:bg-dark-2">
+                            Class Year
+                          </td>
+                          <td className="border px-4 py-2">
+                            Year 7, Year 8, Year 9
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="border px-4 py-2 font-semibold bg-gray-100 dark:bg-dark-2">
+                            Duration
+                          </td>
+                          <td className="border px-4 py-2">33 months</td>
+                        </tr>
+                        <tr>
+                          <td className="border px-4 py-2 font-semibold bg-gray-100 dark:bg-dark-2">
+                            Class Types
+                          </td>
+                          <td className="border px-4 py-2">
+                            On-Campus or Online
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <h2 className="text-2xl font-semibold py-3">Subjects</h2>
+                    <div className="mb-3 flex flex-col md:flex-row gap-x-8 gap-y-4">
+                      <div className="w-full md:w-1/3">
+                        <h3 className="text-lg pb-3 font-semibold text-green">
+                          Year 7
+                        </h3>
+                        <ol className="space-y-3">
+                          <ListItem_MIEA count={1} text="English" />
+                          <ListItem_MIEA count={2} text="Mathematics" />
+                          <ListItem_MIEA count={3} text="Computing" />
+                          <ListItem_MIEA
+                            count={4}
+                            text="Combined Science (Physics, Chemistry, Biology)"
+                          />
+                          <ListItem_MIEA count={5} text="Global Perspectives" />
+                        </ol>
+                      </div>
+                      <div className="w-full md:w-1/3">
+                        <h3 className="text-lg pb-3 font-semibold text-green">
+                          Year 8
+                        </h3>
+                        <ol className="space-y-3">
+                          <ListItem_MIEA count={1} text="English" />
+                          <ListItem_MIEA count={2} text="Mathematics" />
+                          <ListItem_MIEA count={3} text="Computing" />
+                          <ListItem_MIEA
+                            count={4}
+                            text="Combined Science (Physics, Chemistry, Biology)"
+                          />
+                          <ListItem_MIEA count={5} text="Global Perspectives" />
+                        </ol>
+                      </div>
+                      <div className="w-full md:w-1/3">
+                        <h3 className="text-lg pb-3 font-semibold text-green">
+                          Year 9
+                        </h3>
+                        <ol className="space-y-3">
+                          <ListItem_MIEA count={1} text="English" />
+                          <ListItem_MIEA count={2} text="Mathematics" />
+                          <ListItem_MIEA count={3} text="Computing" />
+                          <ListItem_MIEA
+                            count={4}
+                            text="Combined Science (Physics, Chemistry, Biology)"
+                          />
+                          <ListItem_MIEA count={5} text="Global Perspectives" />
+                          <ListItem_MIEA
+                            count={6}
+                            text="FAME (Business, Economics, Accounting"
+                          />
+                        </ol>
+                      </div>
+                    </div>
                   </div>
                 )}
               </div>
