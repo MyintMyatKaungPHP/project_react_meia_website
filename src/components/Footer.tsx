@@ -1,5 +1,4 @@
 import miea_logo_hr_green from "../assets/images/miea_logo_hr_green.png";
-import miea_logo_hr_white from "../assets/images/miea_logo_hr_white.png";
 import {
   FaFacebook,
   FaEnvelope,

@@ -7,6 +7,7 @@ import OrganisationalPage from "../pages/OrganisationalPage";
 import AchievementPage from "../pages/AchievementPage";
 import StudentAchievementsPage from "../pages/StudentAchievementsPage";
 import ProgrammesPage from "../pages/ProgrammesPage";
+import FacilitiesPage from "../pages/FacilitiesPage";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: "/programmes",
         element: <ProgrammesPage />,
+      },
+      {
+        path: "/facilities",
+        element: <FacilitiesPage />,
       },
     ],
   },

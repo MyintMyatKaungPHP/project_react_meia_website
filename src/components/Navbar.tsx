@@ -118,7 +118,7 @@ const Navbar: React.FC = () => {
                         dropdownText="Programmes"
                       />
                       <DropdownItem
-                        dropdownLink="#"
+                        dropdownLink="/facilities"
                         dropdownText="School Facilities"
                       />
                       <DropdownItem
