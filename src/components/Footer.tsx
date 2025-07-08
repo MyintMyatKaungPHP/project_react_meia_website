@@ -9,7 +9,7 @@ import React from "react";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="relative z-10 bg-white pt-20 dark:bg-dark">
+    <footer className="relative z-10">
       <div className="w-full bg-green px-5 py-14 sm:p-14 dark:bg-yellow dark:text-dark">
         <div className="container mx-auto flex flex-wrap">
           <div className="w-full px-4 md:w-1/2 lg:w-1/3">
