@@ -26,7 +26,7 @@ const router = createBrowserRouter([
         element: <OrganisationalPage />,
       },
       {
-        path: "/achievement",
+        path: "/school_achievement",
         element: <AchievementPage />,
       },
       {

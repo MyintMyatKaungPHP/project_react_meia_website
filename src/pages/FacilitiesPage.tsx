@@ -341,16 +341,28 @@ const FacilitiesPage: React.FC = () => {
         </motion.div>
 
         {/* Tabs for Facilities */}
-        <div className="flex flex-wrap mb-8 px-4 justify-center">
+        {/* Mobile: Dropdown */}
+        <div className="w-full mb-4 px-4 flex md:hidden">
+          <select
+            className="w-full border-2 border-green-500 rounded-md py-2 px-3 text-lg"
+            value={openTab}
+            onChange={(e) => setOpenTab(e.target.value)}
+          >
+            {tabList.map((tab) => (
+              <option key={tab.id} value={tab.id}>
+                {tab.label}
+              </option>
+            ))}
+          </select>
+        </div>
+        {/* Desktop: Tab Row */}
+        <div className="flex flex-wrap mb-8 px-4 justify-center hidden md:flex">
           {tabList.map((tab) => {
             const isActive = openTab === tab.id;
             const tabClasses = isActive
               ? "bg-green-100 dark:bg-green-900 border-green-500 text-green-700 dark:text-green-300 hover:border-green-500 hover:text-green-700 dark:hover:text-green-300"
               : `${inactiveClasses} hover:bg-gray-100 dark:hover:bg-gray-700`;
-
-            // Icon ကို component အနေနဲ့ render
             const IconComponent = tab.icon;
-
             return (
               <button
                 key={tab.id}

@@ -103,8 +103,8 @@ const Navbar: React.FC = () => {
                         dropdownText="Organizational Structure"
                       />
                       <DropdownItem
-                        dropdownLink="/achievement"
-                        dropdownText="Achievements"
+                        dropdownLink="/school_achievement"
+                        dropdownText="School's Achievements"
                       />
                     </Dropdown>
                   </ListItem>
