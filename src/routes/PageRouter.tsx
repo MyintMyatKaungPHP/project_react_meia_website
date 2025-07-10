@@ -8,6 +8,7 @@ import AchievementPage from "../pages/AchievementPage";
 import StudentAchievementsPage from "../pages/StudentAchievementsPage";
 import ProgrammesPage from "../pages/ProgrammesPage";
 import FacilitiesPage from "../pages/FacilitiesPage";
+import Contact from "../pages/ContactPage";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
       {
         path: "/facilities",
         element: <FacilitiesPage />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
       },
     ],
   },

@@ -967,6 +967,22 @@ input[type="radio"]:checked ~ .box .circle background {
   margin-top: 0.5rem;
 }
 
+.mb-2\.5 {
+  margin-bottom: 0.625rem;
+}
+
+.mb-20 {
+  margin-bottom: 5rem;
+}
+
+.mb-24 {
+  margin-bottom: 6rem;
+}
+
+.ml-2 {
+  margin-left: 0.5rem;
+}
+
 .block {
   display: block;
 }
@@ -1137,6 +1153,10 @@ input[type="radio"]:checked ~ .box .circle background {
 
 .h-\[380px\] {
   height: 380px;
+}
+
+.h-\[52px\] {
+  height: 52px;
 }
 
 .max-h-\[70vh\] {
@@ -1382,6 +1402,18 @@ input[type="radio"]:checked ~ .box .circle background {
 
 .max-w-3xl {
   max-width: 48rem;
+}
+
+.max-w-\[310px\] {
+  max-width: 310px;
+}
+
+.max-w-\[400px\] {
+  max-width: 400px;
+}
+
+.max-w-\[442px\] {
+  max-width: 442px;
 }
 
 .table-auto {
@@ -1681,6 +1713,11 @@ input[type="radio"]:checked ~ .box .circle background {
   border-width: 2px;
 }
 
+.border-x {
+  border-left-width: 1px;
+  border-right-width: 1px;
+}
+
 .border-b {
   border-bottom-width: 1px;
 }
@@ -1695,6 +1732,10 @@ input[type="radio"]:checked ~ .box .circle background {
 
 .border-t {
   border-top-width: 1px;
+}
+
+.border-l {
+  border-left-width: 1px;
 }
 
 .border-dashed {
@@ -1773,6 +1814,10 @@ input[type="radio"]:checked ~ .box .circle background {
 .border-gray-200 {
   --tw-border-opacity: 1;
   border-color: rgb(229 231 235 / var(--tw-border-opacity, 1));
+}
+
+.border-stroke\/10 {
+  border-color: rgb(223 228 234 / 0.1);
 }
 
 .border-opacity-30 {
@@ -1952,6 +1997,15 @@ input[type="radio"]:checked ~ .box .circle background {
   background-color: rgb(254 252 232 / var(--tw-bg-opacity, 1));
 }
 
+.bg-dark {
+  --tw-bg-opacity: 1;
+  background-color: rgb(17 25 40 / var(--tw-bg-opacity, 1));
+}
+
+.bg-white\/5 {
+  background-color: rgb(255 255 255 / 0.05);
+}
+
 .bg-opacity-20 {
   --tw-bg-opacity: 0.2;
 }
@@ -2009,6 +2063,14 @@ input[type="radio"]:checked ~ .box .circle background {
 
 .p-2 {
   padding: 0.5rem;
+}
+
+.p-5 {
+  padding: 1.25rem;
+}
+
+.p-7 {
+  padding: 1.75rem;
 }
 
 .px-2 {
@@ -2186,6 +2248,14 @@ input[type="radio"]:checked ~ .box .circle background {
 
 .pt-\[50px\] {
   padding-top: 50px;
+}
+
+.pt-5 {
+  padding-top: 1.25rem;
+}
+
+.pt-10 {
+  padding-top: 2.5rem;
 }
 
 .text-left {
@@ -2439,8 +2509,23 @@ input[type="radio"]:checked ~ .box .circle background {
   color: rgb(107 114 128 / var(--tw-text-opacity, 1));
 }
 
+.text-pink-500 {
+  --tw-text-opacity: 1;
+  color: rgb(236 72 153 / var(--tw-text-opacity, 1));
+}
+
 .text-opacity-70 {
   --tw-text-opacity: 0.7;
+}
+
+.placeholder-dark-5::-moz-placeholder {
+  --tw-placeholder-opacity: 1;
+  color: rgb(107 114 128 / var(--tw-placeholder-opacity, 1));
+}
+
+.placeholder-dark-5::placeholder {
+  --tw-placeholder-opacity: 1;
+  color: rgb(107 114 128 / var(--tw-placeholder-opacity, 1));
 }
 
 .opacity-0 {
@@ -2790,6 +2875,10 @@ input[type="radio"]:checked ~ .box .circle background {
   background-color: rgb(243 244 246 / var(--tw-bg-opacity, 1));
 }
 
+.hover\:bg-primary\/90:hover {
+  background-color: rgb(55 88 249 / 0.9);
+}
+
 .hover\:bg-opacity-30:hover {
   --tw-bg-opacity: 0.3;
 }
@@ -2852,6 +2941,11 @@ input[type="radio"]:checked ~ .box .circle background {
 .focus\:border-green-600:focus {
   --tw-border-opacity: 1;
   border-color: rgb(22 163 74 / var(--tw-border-opacity, 1));
+}
+
+.focus\:border-primary:focus {
+  --tw-border-opacity: 1;
+  border-color: rgb(55 88 249 / var(--tw-border-opacity, 1));
 }
 
 .focus\:outline-none:focus {
@@ -3132,6 +3226,10 @@ input[type="radio"]:checked ~ .box .circle background {
   .max-lg\:mb-12 {
     margin-bottom: 3rem;
   }
+
+  .max-lg\:border-r {
+    border-right-width: 1px;
+  }
 }
 
 @media not all and (min-width: 540px) {
@@ -3206,6 +3304,10 @@ input[type="radio"]:checked ~ .box .circle background {
 
   .sm\:p-6 {
     padding: 1.5rem;
+  }
+
+  .sm\:p-10 {
+    padding: 2.5rem;
   }
 
   .sm\:px-10 {
@@ -3392,6 +3494,15 @@ input[type="radio"]:checked ~ .box .circle background {
     font-size: 1.125rem;
     line-height: 1.75rem;
   }
+
+  .md\:text-3xl {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+
+  .md\:text-\[60px\] {
+    font-size: 60px;
+  }
 }
 
 @media (min-width: 960px) {
@@ -3545,6 +3656,10 @@ input[type="radio"]:checked ~ .box .circle background {
     padding: 1rem;
   }
 
+  .lg\:p-7 {
+    padding: 1.75rem;
+  }
+
   .lg\:px-2 {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
@@ -3625,6 +3740,10 @@ input[type="radio"]:checked ~ .box .circle background {
     padding-top: 80px;
   }
 
+  .lg\:pb-\[120px\] {
+    padding-bottom: 120px;
+  }
+
   .lg\:text-left {
     text-align: left;
   }
@@ -3643,6 +3762,11 @@ input[type="radio"]:checked ~ .box .circle background {
 
   .lg\:text-\[40px\] {
     font-size: 40px;
+  }
+
+  .lg\:text-5xl {
+    font-size: 3rem;
+    line-height: 1;
   }
 
   .lg\:opacity-0 {
@@ -3721,6 +3845,10 @@ input[type="radio"]:checked ~ .box .circle background {
     padding: 2rem;
   }
 
+  .xl\:p-10 {
+    padding: 2.5rem;
+  }
+
   .xl\:px-10 {
     padding-left: 2.5rem;
     padding-right: 2.5rem;
@@ -3757,6 +3885,10 @@ input[type="radio"]:checked ~ .box .circle background {
 
   .xl\:text-\[40px\] {
     font-size: 40px;
+  }
+
+  .xl\:text-\[60px\] {
+    font-size: 60px;
   }
 }
 

@@ -143,7 +143,7 @@ const Navbar: React.FC = () => {
                     </Dropdown>
                   </ListItem>
                   <ListItem>
-                    <LinkItem NavLink="/#">Contact</LinkItem>
+                    <LinkItem NavLink="/contact">Contact</LinkItem>
                   </ListItem>
                 </ul>
               </nav>
