@@ -28,7 +28,7 @@ const ImageModal: React.FC<ImageModalProps> = ({
         exit={{ opacity: 0 }}
       >
         <motion.div
-          className="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 max-w-3xl w-full max-h-[90vh] overflow-hidden flex flex-col items-center"
+          className="relative bg-gray-200 dark:bg-gray-800 rounded-lg shadow-xl p-6 w-full max-w-lg flex flex-col items-center"
           onClick={(e) => e.stopPropagation()}
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -37,7 +37,7 @@ const ImageModal: React.FC<ImageModalProps> = ({
         >
           <button
             onClick={onClose}
-            className="absolute top-3 right-3 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 text-2xl font-bold z-10"
+            className="absolute top-0.5 right-2 text-red-400 hover:text-red text-2xl font-bold z-10"
             aria-label="Close modal"
           >
             &times;

@@ -9,6 +9,8 @@ import StudentAchievementsPage from "../pages/StudentAchievementsPage";
 import ProgrammesPage from "../pages/ProgrammesPage";
 import FacilitiesPage from "../pages/FacilitiesPage";
 import Contact from "../pages/ContactPage";
+import NewsPage from "../pages/NewsPage";
+import NewsDetailPage from "../pages/NewsDetailPage";
 
 const router = createBrowserRouter([
   {
@@ -31,7 +33,7 @@ const router = createBrowserRouter([
         element: <AchievementPage />,
       },
       {
-        path: "/StudentAchievements",
+        path: "/student_achievements",
         element: <StudentAchievementsPage />,
       },
       {
@@ -45,6 +47,17 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />,
+      },
+      {
+        path: "/news",
+        element: <NewsPage />,
+      },
+      {
+        path: "/news_details",
+        element: <NewsDetailPage />,
+      },
+      {
+        path: "/events",
       },
     ],
   },

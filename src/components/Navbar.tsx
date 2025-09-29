@@ -122,7 +122,7 @@ const Navbar: React.FC = () => {
                         dropdownText="School Facilities"
                       />
                       <DropdownItem
-                        dropdownLink="/StudentAchievements"
+                        dropdownLink="/student_achievements"
                         dropdownText="Student's Achievements"
                       />
                     </Dropdown>
@@ -133,12 +133,12 @@ const Navbar: React.FC = () => {
                     </LinkItem>
                     <Dropdown>
                       <DropdownItem
-                        dropdownLink="#"
+                        dropdownLink="/news"
                         dropdownText="News & Announcements"
                       />
                       <DropdownItem
-                        dropdownLink="#"
-                        dropdownText="Events & Activities"
+                        dropdownLink="/news_details"
+                        dropdownText="News Details"
                       />
                     </Dropdown>
                   </ListItem>
