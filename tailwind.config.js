@@ -2,7 +2,11 @@
 export default {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['"Roboto Slab"', "serif"],
+      },
+    },
     keyframes: {
       // Keyframes for the circular background animation - INCREASED TRANSLATION
       move1: {

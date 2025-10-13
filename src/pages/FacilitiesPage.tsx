@@ -16,28 +16,7 @@ import {
   FaBus,
   FaWifi,
   FaShieldAlt,
-  FaCheckCircle, // Import the checkmark icon
 } from "react-icons/fa";
-
-// TabItem interface definition
-interface TabItem {
-  id: string;
-  label: string;
-}
-
-// Reusable ListItem component with configurable icon color
-interface ListItemProps {
-  text: string;
-}
-
-const ListItem: React.FC<ListItemProps> = ({ text }) => (
-  <li className="flex items-center text-base">
-    <span className="mr-2.5 text-lg text-green dark:text-yellow">
-      <FaCheckCircle />
-    </span>
-    {text}
-  </li>
-);
 
 // Facility Data Structure with Image Gallery
 interface Facility {
@@ -356,7 +335,7 @@ const FacilitiesPage: React.FC = () => {
           </select>
         </div>
         {/* Desktop: Tab Row */}
-        <div className="flex flex-wrap mb-8 px-4 justify-center hidden md:flex">
+        <div className="hidden md:flex flex-wrap mb-8 px-4 justify-center">
           {tabList.map((tab) => {
             const isActive = openTab === tab.id;
             const tabClasses = isActive

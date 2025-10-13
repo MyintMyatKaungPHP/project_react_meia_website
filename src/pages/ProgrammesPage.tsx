@@ -94,7 +94,7 @@ const ListItem_CIE: React.FC<ListItemProps> = ({ count, text }) => {
   );
 };
 
-const ListItem_MIEA: React.FC<ListItemProps> = ({ count, text }) => {
+const ProgramListItem: React.FC<ListItemProps> = ({ count, text }) => {
   return (
     <li className="flex text-base text-left">
       <span className="bg-green mr-2.5 flex h-[26px] w-full max-w-[26px] items-center justify-center rounded text-base text-white">
@@ -493,14 +493,17 @@ const ProgrammesPage: React.FC = () => {
                           Year 7
                         </h3>
                         <ol className="space-y-3">
-                          <ListItem_MIEA count={1} text="English" />
-                          <ListItem_MIEA count={2} text="Mathematics" />
-                          <ListItem_MIEA count={3} text="Computing" />
-                          <ListItem_MIEA
+                          <ProgramListItem count={1} text="English" />
+                          <ProgramListItem count={2} text="Mathematics" />
+                          <ProgramListItem count={3} text="Computing" />
+                          <ProgramListItem
                             count={4}
                             text="Combined Science (Physics, Chemistry, Biology)"
                           />
-                          <ListItem_MIEA count={5} text="Global Perspectives" />
+                          <ProgramListItem
+                            count={5}
+                            text="Global Perspectives"
+                          />
                         </ol>
                       </div>
                       <div className="w-full md:w-1/3">
@@ -508,14 +511,17 @@ const ProgrammesPage: React.FC = () => {
                           Year 8
                         </h3>
                         <ol className="space-y-3">
-                          <ListItem_MIEA count={1} text="English" />
-                          <ListItem_MIEA count={2} text="Mathematics" />
-                          <ListItem_MIEA count={3} text="Computing" />
-                          <ListItem_MIEA
+                          <ProgramListItem count={1} text="English" />
+                          <ProgramListItem count={2} text="Mathematics" />
+                          <ProgramListItem count={3} text="Computing" />
+                          <ProgramListItem
                             count={4}
                             text="Combined Science (Physics, Chemistry, Biology)"
                           />
-                          <ListItem_MIEA count={5} text="Global Perspectives" />
+                          <ProgramListItem
+                            count={5}
+                            text="Global Perspectives"
+                          />
                         </ol>
                       </div>
                       <div className="w-full md:w-1/3">
@@ -523,15 +529,18 @@ const ProgrammesPage: React.FC = () => {
                           Year 9
                         </h3>
                         <ol className="space-y-3">
-                          <ListItem_MIEA count={1} text="English" />
-                          <ListItem_MIEA count={2} text="Mathematics" />
-                          <ListItem_MIEA count={3} text="Computing" />
-                          <ListItem_MIEA
+                          <ProgramListItem count={1} text="English" />
+                          <ProgramListItem count={2} text="Mathematics" />
+                          <ProgramListItem count={3} text="Computing" />
+                          <ProgramListItem
                             count={4}
                             text="Combined Science (Physics, Chemistry, Biology)"
                           />
-                          <ListItem_MIEA count={5} text="Global Perspectives" />
-                          <ListItem_MIEA
+                          <ProgramListItem
+                            count={5}
+                            text="Global Perspectives"
+                          />
+                          <ProgramListItem
                             count={6}
                             text="FAME (Business, Economics, Accounting"
                           />

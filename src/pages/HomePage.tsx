@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useMotionValue, useTransform, motion } from "framer-motion";
 import { Typewriter } from "react-simple-typewriter";
 import { FaBullhorn, FaChartLine, FaPaintBrush, FaPlay } from "react-icons/fa";
@@ -6,6 +6,8 @@ import { useInView } from "react-intersection-observer";
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
+import BlogCard from "../components/BlogCard";
+import BlogSideCardItem from "../components/BlogSideCard";
 
 // Import images
 import Pearson_logo from "../assets/images/Pearson_logo.png";
@@ -36,20 +38,6 @@ interface TestimonialProps {
   details: string;
   name: string;
   position: string;
-}
-
-interface BlogCardProps {
-  image: string;
-  CardSubTitle: string;
-  CardTitle: string;
-  CardDescription: string;
-  date: string;
-}
-
-interface BlogSideCardItemProps {
-  subtitle: string;
-  title: string;
-  description: string;
 }
 
 const ServiceCard: React.FC<ServiceCardProps> = ({ icon, title, details }) => {
@@ -596,20 +584,7 @@ const StatsItem: React.FC<StatsItemProps> = ({ user, title, suffix = "" }) => {
 };
 
 const Testimonials = () => {
-  const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
   const swiperRef = useRef<any>(null);
-
-  const handlePrev = useCallback(() => {
-    if (swiperRef.current && swiperRef.current.swiper) {
-      swiperRef.current.swiper.slidePrev();
-    }
-  }, []);
-
-  const handleNext = useCallback(() => {
-    if (swiperRef.current && swiperRef.current.swiper) {
-      swiperRef.current.swiper.slideNext();
-    }
-  }, []);
 
   return (
     <>
@@ -617,14 +592,29 @@ const Testimonials = () => {
         <div className="container mx-auto">
           <div className="-mx-4 flex flex-wrap justify-center">
             <div className="w-full px-4">
-              <div className="mx-auto mb-[60px] max-w-[510px] text-center">
-                <span className="mb-2 block text-lg font-semibold text-green">
+              <motion.div
+                className="mx-auto mb-[60px] max-w-[510px] text-center"
+                initial={{ opacity: 0, y: -40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+              >
+                <motion.span
+                  className="mb-2 block text-lg font-semibold text-green"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                >
                   Testimonials
-                </span>
-                <h2 className="mb-3 text-3xl font-bold leading-[1.2] text-dark dark:text-white sm:text-4xl md:text-[40px]">
+                </motion.span>
+                <motion.h2
+                  className="mb-3 text-3xl font-bold leading-[1.2] text-dark dark:text-white sm:text-4xl md:text-[40px]"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.3 }}
+                >
                   What our students say
-                </h2>
-              </div>
+                </motion.h2>
+              </motion.div>
             </div>
           </div>
 
@@ -808,16 +798,24 @@ const Video = () => {
 
               <div className="relative z-10 px-8 py-32 md:py-[180px]">
                 <div className="mx-auto max-w-[500px] text-center">
-                  <h2 className="mb-5 text-3xl font-bold leading-[1.2] text-yellow sm:text-4xl md:text-[40px]">
+                  <motion.h2
+                    className="mb-5 text-3xl font-bold leading-[1.2] text-yellow sm:text-4xl md:text-[40px]"
+                    initial={{ opacity: 0, y: -30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
+                  >
                     School Life at MIEA
-                  </h2>
+                  </motion.h2>
 
-                  <button
+                  <motion.button
                     onClick={() => setVideoOpen(true)}
                     className="z-20 mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-transparent text-white/80 hover:text-white transition-all duration-300 ease-in-out md:h-[100px] md:w-[100px]"
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.8, delay: 0.3, ease: "backOut" }}
                   >
                     <FaPlay className="text-2xl md:text-4xl hover:scale-150 transition-transform duration-300" />
-                  </button>
+                  </motion.button>
                 </div>
                 <div>
                   <span className="absolute bottom-0 left-0 z-[-1]">
@@ -928,39 +926,78 @@ const RecentNews = () => {
       <section className="bg-white pb-12 pt-20 dark:bg-dark lg:pb-[90px] lg:pt-[120px]">
         <div className="container mx-auto">
           <div className="w-full px-4">
-            <div className="mx-auto mb-[60px] max-w-[510px] text-center lg:mb-20">
-              <span className="mb-2 block text-lg font-semibold text-green dark:text-green-400">
+            <motion.div
+              className="mx-auto mb-[60px] max-w-[510px] text-center lg:mb-20"
+              initial={{ opacity: 0, y: -50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <motion.span
+                className="mb-2 block text-lg font-semibold text-green dark:text-green-400"
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
                 Blogs
-              </span>
-              <h2 className="mb-4 text-3xl font-bold text-dark dark:text-white sm:text-4xl md:text-[40px]">
+              </motion.span>
+              <motion.h2
+                className="mb-4 text-3xl font-bold text-dark dark:text-white sm:text-4xl md:text-[40px]"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+              >
                 Our Recent News
-              </h2>
-              <p className="text-base text-body-color dark:text-dark-6">
+              </motion.h2>
+              <motion.p
+                className="text-base text-body-color dark:text-dark-6"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+              >
                 Stay updated with the latest news and events from MIEA.
-              </p>
-            </div>
+              </motion.p>
+            </motion.div>
           </div>
 
           <div className="-mx-4 flex flex-wrap">
-            <div className="w-full px-4 lg:w-8/12">
+            <motion.div
+              className="w-full px-4 lg:w-8/12"
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
               <BlogCard
-                CardSubTitle="Digital Marketing"
-                CardTitle="How to use Facebook ads to sell online courses"
-                CardDescription="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+                subtitle="Digital Marketing"
+                title="How to use Facebook ads to sell online courses"
+                description="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
                 image="https://i.ibb.co/9WvDZHw/image-01.png"
-                date="Dec 22, 2024"
+                date="2024-12-22"
+                category="Education"
+                tags={["marketing", "online-course", "facebook"]}
               />
               <BlogCard
-                CardSubTitle="Digital Marketing"
-                CardTitle="The Data-Driven Approach to Understanding."
-                CardDescription="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+                subtitle="Digital Marketing"
+                title="The Data-Driven Approach to Understanding."
+                description="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
                 image="https://i.ibb.co/X44PwNn/image-02.jpg"
-                date="Dec 15, 2024"
+                date="2024-12-15"
+                category="Technology"
+                tags={["data", "analysis", "research"]}
               />
-            </div>
+            </motion.div>
 
-            <div className="w-full px-4 lg:w-4/12">
-              <div className="relative mb-8 bg-gradient-to-br from-green-600 to-green-800 dark:from-green-700 dark:to-green-900 p-8">
+            <motion.div
+              className="w-full px-4 lg:w-4/12"
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              <motion.div
+                className="relative mb-8 bg-gradient-to-br from-green-600 to-green-800 dark:from-green-700 dark:to-green-900 p-8"
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+              >
                 <BlogSideCardItem
                   subtitle="Graphics Design"
                   title="Design is a Plan or The Construction of an Object."
@@ -1110,8 +1147,8 @@ const RecentNews = () => {
                     ></circle>
                   </svg>
                 </span>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -1119,95 +1156,143 @@ const RecentNews = () => {
   );
 };
 
-const BlogCard: React.FC<BlogCardProps> = ({
-  image,
-  CardSubTitle,
-  CardTitle,
-  CardDescription,
-  date,
-}) => {
-  return (
-    <>
-      <div className="mb-8 bg-gray dark:bg-dark-2">
-        <div className="w-full items-stretch md:-mx-4 md:flex">
-          <div className="w-full md:w-1/2 md:px-4">
-            <div className="h-full w-full">
-              <img
-                src={image}
-                alt="image"
-                className="h-full w-full object-cover object-center"
-              />
-            </div>
-          </div>
-          <div className="w-full px-8 md:w-1/2 md:px-4">
-            <div className="w-full py-8">
-              <div className="mb-2 flex items-center justify-between">
-                <span className="text-sm font-medium tracking-wide text-yellow-400 dark:text-yellow">
-                  {CardSubTitle}
-                </span>
-                <span className="text-xs text-body-color dark:text-dark-6">
-                  {date}
-                </span>
-              </div>
-              <h3>
-                <a
-                  href="#"
-                  className="mb-3 inline-block text-xl font-semibold text-dark hover:text-green dark:text-white dark:hover:text-green-400"
-                >
-                  {CardTitle}
-                </a>
-              </h3>
-              <p className="mb-7 text-base text-body-color dark:text-dark-6">
-                {CardDescription}
-              </p>
-              <a
-                href="#"
-                className="group inline-flex items-center text-sm font-medium text-body-color duration-300 hover:text-green dark:text-dark-6 dark:hover:text-green-400"
-              >
-                Read More
-                <span className="ml-1 duration-300 group-hover:translate-x-2">
-                  <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 18 18"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M16.2 8.54995L10.3781 2.6437C10.125 2.39058 9.73125 2.39058 9.47812 2.6437C9.225 2.89683 9.225 3.29058 9.47812 3.5437L14.2031 8.35308H2.25C1.9125 8.35308 1.63125 8.63433 1.63125 8.97183C1.63125 9.30933 1.9125 9.6187 2.25 9.6187H14.2594L9.47812 14.4843C9.225 14.7375 9.225 15.1312 9.47812 15.3843C9.59062 15.4968 9.75937 15.5531 9.92812 15.5531C10.0969 15.5531 10.2656 15.4968 10.3781 15.3562L16.2 9.44995C16.4531 9.19683 16.4531 8.80308 16.2 8.54995Z"
-                      fill="currentColor"
-                    />
-                  </svg>
-                </span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
-};
+const Partners = () => {
+  const partnersData = [
+    {
+      name: "Pearson Edexcel",
+      logo: Pearson_logo,
+      link: "https://qualifications.pearson.com/",
+    },
+    {
+      name: "Cambridge Assessment International Education",
+      logo: CIE_logo,
+      link: "https://www.cambridgeinternational.org/",
+    },
+    {
+      name: "iQuals",
+      logo: "https://www.iquals.org/wp-content/uploads/2023/05/iQuals-Logo.png",
+      link: "https://www.iquals.org/",
+    },
+    {
+      name: "British Council Myanmar",
+      logo: "https://upload.wikimedia.org/wikipedia/en/thumb/8/89/British_Council_logo.svg/1200px-British_Council_logo.svg.png",
+      link: "https://www.britishcouncil.org.mm/",
+    },
+    {
+      name: "TEDx",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/TEDx_logo.svg/2560px-TEDx_logo.svg.png",
+      link: "https://www.ted.com/about/programs-initiatives/tedx-program",
+    },
+    {
+      name: "Oxford University Press",
+      logo: "https://global.oup.com/academic/online/free/images/9780198736424_cover.jpg",
+      link: "https://global.oup.com/",
+    },
+    {
+      name: "International Baccalaureate",
+      logo: "https://upload.wikimedia.org/wikipedia/en/thumb/8/89/International_Baccalaureate_Logo.svg/1200px-International_Baccalaureate_Logo.svg.png",
+      link: "https://www.ibo.org/",
+    },
+    {
+      name: "Coursera",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Coursera-Logo_600x600.svg/1200px-Coursera-Logo_600x600.svg.png",
+      link: "https://www.coursera.org/",
+    },
+    {
+      name: "Khan Academy",
+      logo: "https://cdn.kastatic.org/images/khan-logo-dark-background.png",
+      link: "https://www.khanacademy.org/",
+    },
+    {
+      name: "EdX",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/EdX_newer_logo.svg/1200px-EdX_newer_logo.svg.png",
+      link: "https://www.edx.org/",
+    },
+  ];
 
-const BlogSideCardItem: React.FC<BlogSideCardItemProps> = ({
-  subtitle,
-  title,
-  description,
-}) => {
+  const swiperRef = useRef<any>(null);
+
   return (
-    <div className="mb-8">
-      <span className="mb-2 inline-block text-sm font-medium text-white">
-        {subtitle}
-      </span>
-      <h3>
-        <a
-          href="#"
-          className="mb-3 inline-block text-lg font-semibold text-white hover:text-opacity-80"
+    <section className="bg-white py-16 lg:py-20 dark:bg-dark">
+      <div className="container mx-auto">
+        <div className="w-full px-4">
+          <motion.div
+            className="mx-auto mb-12 max-w-[510px] text-center"
+            initial={{ opacity: 0, y: -40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <motion.span
+              className="mb-2 block text-lg font-semibold text-green dark:text-green-400"
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              Trusted By
+            </motion.span>
+            <motion.h2
+              className="mb-3 text-3xl font-bold text-dark dark:text-white sm:text-4xl md:text-[36px]"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+            >
+              Our Partners
+            </motion.h2>
+            <motion.p
+              className="text-base text-body-color dark:text-dark-6"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+            >
+              Collaborating with world-class organizations to deliver excellence
+              in education.
+            </motion.p>
+          </motion.div>
+        </div>
+
+        <Swiper
+          breakpoints={{
+            320: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            640: {
+              slidesPerView: 3,
+              spaceBetween: 30,
+            },
+            1024: {
+              slidesPerView: 5,
+              spaceBetween: 40,
+            },
+          }}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
+          modules={[Autoplay]}
+          loop={true}
+          ref={swiperRef}
+          className="!overflow-visible"
         >
-          {title}
-        </a>
-      </h3>
-      <p className="text-base text-white text-opacity-70">{description}</p>
-    </div>
+          {partnersData.map((partner, index) => (
+            <SwiperSlide key={index}>
+              <a
+                href={partner.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-28 items-center justify-center rounded-lg border border-stroke bg-white px-6 py-6 hover:border-green hover:shadow-lg transition-all duration-300 dark:bg-gray-100"
+              >
+                <img
+                  src={partner.logo}
+                  alt={partner.name}
+                  className="h-16 w-full object-contain"
+                />
+              </a>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+    </section>
   );
 };
 
@@ -1222,6 +1307,7 @@ const Home: React.FC = () => {
       <Testimonials />
       <Video />
       <RecentNews />
+      <Partners />
     </>
   );
 };

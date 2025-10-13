@@ -6,20 +6,20 @@ import { faMedal } from "@fortawesome/free-solid-svg-icons";
 
 // Define types for our data
 interface Student {
-  Image: string;
-  Name: string;
-  Program: string;
-  Description: string[];
-  Year: string;
+  image: string;
+  name: string;
+  program: string;
+  description: string[];
+  year: string;
 }
 
 // Props for the SingleCard component
 interface SingleCardProps {
-  Image?: string;
-  Name: string;
-  Program: string;
-  Description: string[];
-  Year: string;
+  image?: string;
+  name: string;
+  program: string;
+  description: string[];
+  year: string;
 }
 
 const StudentAchievementsPage: React.FC = () => {
@@ -39,312 +39,312 @@ const StudentAchievementsPage: React.FC = () => {
     const students: Student[] = [
       // Class of 2024 (10 students)
       {
-        Image: "https://i.ibb.co/MVv7h59/student1.jpg",
-        Name: "Htet Aung Kyaw",
-        Program: "Advanced Level (A Level)",
-        Description: [
+        image: "https://i.ibb.co/MVv7h59/student1.jpg",
+        name: "Htet Aung Kyaw",
+        program: "Advanced Level (A Level)",
+        description: [
           "Top in Myanmar (Physics)",
           "Outstanding Cambridge Learner Award",
         ],
-        Year: "Class of 2024",
+        year: "Class of 2024",
       },
       {
-        Image: "https://i.ibb.co/MVv7h59/student2.jpg",
-        Name: "May Myat Noe",
-        Program: "Advanced Level (A Level)",
-        Description: ["High Achievement in Chemistry", "Academic Excellence"],
-        Year: "Class of 2024",
+        image: "https://i.ibb.co/MVv7h59/student2.jpg",
+        name: "May Myat Noe",
+        program: "Advanced Level (A Level)",
+        description: ["High Achievement in Chemistry", "Academic Excellence"],
+        year: "Class of 2024",
       },
       {
-        Image: "https://i.ibb.co/MVv7h59/student3.jpg",
-        Name: "Pyae Sone Aung",
-        Program: "Upper Secondary Level (IGCSE)",
-        Description: ["Best in Mathematics", "Outstanding Performance"],
-        Year: "Class of 2024",
+        image: "https://i.ibb.co/MVv7h59/student3.jpg",
+        name: "Pyae Sone Aung",
+        program: "Upper Secondary Level (IGCSE)",
+        description: ["Best in Mathematics", "Outstanding Performance"],
+        year: "Class of 2024",
       },
       {
-        Image: "https://i.ibb.co/MVv7h59/student4.jpg",
-        Name: "Su Myat Mon",
-        Program: "Upper Secondary Level (IGCSE)",
-        Description: ["Top in Biology", "Merit Award"],
-        Year: "Class of 2024",
+        image: "https://i.ibb.co/MVv7h59/student4.jpg",
+        name: "Su Myat Mon",
+        program: "Upper Secondary Level (IGCSE)",
+        description: ["Top in Biology", "Merit Award"],
+        year: "Class of 2024",
       },
       {
-        Image: "https://i.ibb.co/MVv7h59/student5.jpg",
-        Name: "Kaung Htet Aung",
-        Program: "Lower Secondary Level (Pre-IGCSE)",
-        Description: ["Excellence in English", "Academic Achievement"],
-        Year: "Class of 2024",
+        image: "https://i.ibb.co/MVv7h59/student5.jpg",
+        name: "Kaung Htet Aung",
+        program: "Lower Secondary Level (Pre-IGCSE)",
+        description: ["Excellence in English", "Academic Achievement"],
+        year: "Class of 2024",
       },
       {
-        Image: "https://i.ibb.co/MVv7h59/student6.jpg",
-        Name: "Aye Myat Thu",
-        Program: "Advanced Level (A Level)",
-        Description: ["Outstanding in ICT", "High Achievement"],
-        Year: "Class of 2024",
+        image: "https://i.ibb.co/MVv7h59/student6.jpg",
+        name: "Aye Myat Thu",
+        program: "Advanced Level (A Level)",
+        description: ["Outstanding in ICT", "High Achievement"],
+        year: "Class of 2024",
       },
       {
-        Image: "https://i.ibb.co/MVv7h59/student7.jpg",
-        Name: "Min Khant Ko",
-        Program: "Upper Secondary Level (IGCSE)",
-        Description: ["Best in Physics", "Academic Excellence"],
-        Year: "Class of 2024",
+        image: "https://i.ibb.co/MVv7h59/student7.jpg",
+        name: "Min Khant Ko",
+        program: "Upper Secondary Level (IGCSE)",
+        description: ["Best in Physics", "Academic Excellence"],
+        year: "Class of 2024",
       },
       {
-        Image: "https://i.ibb.co/MVv7h59/student8.jpg",
-        Name: "Thiri Yadanar",
-        Program: "Lower Secondary Level (Pre-IGCSE)",
-        Description: ["Top Performance in Science", "Merit Award"],
-        Year: "Class of 2024",
+        image: "https://i.ibb.co/MVv7h59/student8.jpg",
+        name: "Thiri Yadanar",
+        program: "Lower Secondary Level (Pre-IGCSE)",
+        description: ["Top Performance in Science", "Merit Award"],
+        year: "Class of 2024",
       },
       {
-        Image: "https://i.ibb.co/MVv7h59/student9.jpg",
-        Name: "Aung Kaung Myat",
-        Program: "Advanced Level (A Level)",
-        Description: ["Excellence in Chemistry", "Outstanding Achievement"],
-        Year: "Class of 2024",
+        image: "https://i.ibb.co/MVv7h59/student9.jpg",
+        name: "Aung Kaung Myat",
+        program: "Advanced Level (A Level)",
+        description: ["Excellence in Chemistry", "Outstanding Achievement"],
+        year: "Class of 2024",
       },
       {
-        Image: "https://i.ibb.co/MVv7h59/student10.jpg",
-        Name: "Ei Thandar Kyaw",
-        Program: "Upper Secondary Level (IGCSE)",
-        Description: ["Best in Global Perspectives", "Academic Excellence"],
-        Year: "Class of 2024",
+        image: "https://i.ibb.co/MVv7h59/student10.jpg",
+        name: "Ei Thandar Kyaw",
+        program: "Upper Secondary Level (IGCSE)",
+        description: ["Best in Global Perspectives", "Academic Excellence"],
+        year: "Class of 2024",
       },
 
       // Class of 2023 (6 students)
       {
-        Image: "https://i.ibb.co/MVv7h59/student11.jpg",
-        Name: "Kyaw Zin Thant",
-        Program: "Advanced Level (A Level)",
-        Description: [
+        image: "https://i.ibb.co/MVv7h59/student11.jpg",
+        name: "Kyaw Zin Thant",
+        program: "Advanced Level (A Level)",
+        description: [
           "Top in Myanmar (Mathematics)",
           "Outstanding Achievement",
         ],
-        Year: "Class of 2023",
+        year: "Class of 2023",
       },
       {
-        Image: "https://i.ibb.co/MVv7h59/student12.jpg",
-        Name: "Hnin Ei Phyu",
-        Program: "Upper Secondary Level (IGCSE)",
-        Description: ["Excellence in Biology", "High Achievement"],
-        Year: "Class of 2023",
+        image: "https://i.ibb.co/MVv7h59/student12.jpg",
+        name: "Hnin Ei Phyu",
+        program: "Upper Secondary Level (IGCSE)",
+        description: ["Excellence in Biology", "High Achievement"],
+        year: "Class of 2023",
       },
       {
-        Image: "https://i.ibb.co/MVv7h59/student13.jpg",
-        Name: "Zaw Lin Htike",
-        Program: "Lower Secondary Level (Pre-IGCSE)",
-        Description: ["Best in Mathematics", "Merit Award"],
-        Year: "Class of 2023",
+        image: "https://i.ibb.co/MVv7h59/student13.jpg",
+        name: "Zaw Lin Htike",
+        program: "Lower Secondary Level (Pre-IGCSE)",
+        description: ["Best in Mathematics", "Merit Award"],
+        year: "Class of 2023",
       },
       {
-        Image: "https://i.ibb.co/MVv7h59/student14.jpg",
-        Name: "Thet Hnin Yee",
-        Program: "Advanced Level (A Level)",
-        Description: ["Outstanding in Physics", "Academic Excellence"],
-        Year: "Class of 2023",
+        image: "https://i.ibb.co/MVv7h59/student14.jpg",
+        name: "Thet Hnin Yee",
+        program: "Advanced Level (A Level)",
+        description: ["Outstanding in Physics", "Academic Excellence"],
+        year: "Class of 2023",
       },
       {
-        Image: "https://i.ibb.co/MVv7h59/student15.jpg",
-        Name: "Phone Myint Aung",
-        Program: "Upper Secondary Level (IGCSE)",
-        Description: ["Top Performance in Chemistry", "High Achievement"],
-        Year: "Class of 2023",
+        image: "https://i.ibb.co/MVv7h59/student15.jpg",
+        name: "Phone Myint Aung",
+        program: "Upper Secondary Level (IGCSE)",
+        description: ["Top Performance in Chemistry", "High Achievement"],
+        year: "Class of 2023",
       },
       {
-        Image: "https://i.ibb.co/MVv7h59/student16.jpg",
-        Name: "Yoon Myat Thwe",
-        Program: "Lower Secondary Level (Pre-IGCSE)",
-        Description: ["Excellence in Science", "Outstanding Performance"],
-        Year: "Class of 2023",
+        image: "https://i.ibb.co/MVv7h59/student16.jpg",
+        name: "Yoon Myat Thwe",
+        program: "Lower Secondary Level (Pre-IGCSE)",
+        description: ["Excellence in Science", "Outstanding Performance"],
+        year: "Class of 2023",
       },
 
       // Class of 2022 (7 students)
       {
-        Image: "https://i.ibb.co/MVv7h59/student17.jpg",
-        Name: "Thant Zin Oo",
-        Program: "Advanced Level (A Level)",
-        Description: ["Top in Biology", "Academic Excellence"],
-        Year: "Class of 2022",
+        image: "https://i.ibb.co/MVv7h59/student17.jpg",
+        name: "Thant Zin Oo",
+        program: "Advanced Level (A Level)",
+        description: ["Top in Biology", "Academic Excellence"],
+        year: "Class of 2022",
       },
       {
-        Image: "https://i.ibb.co/MVv7h59/student18.jpg",
-        Name: "Thant Zin Oo",
-        Program: "Advanced Level (A Level)",
-        Description: ["Top in Biology", "Academic Excellence"],
-        Year: "Class of 2022",
+        image: "https://i.ibb.co/MVv7h59/student18.jpg",
+        name: "Thant Zin Oo",
+        program: "Advanced Level (A Level)",
+        description: ["Top in Biology", "Academic Excellence"],
+        year: "Class of 2022",
       },
       {
-        Image: "https://i.ibb.co/MVv7h59/student19.jpg",
-        Name: "Thant Zin Oo",
-        Program: "Advanced Level (A Level)",
-        Description: ["Top in Biology", "Academic Excellence"],
-        Year: "Class of 2022",
+        image: "https://i.ibb.co/MVv7h59/student19.jpg",
+        name: "Thant Zin Oo",
+        program: "Advanced Level (A Level)",
+        description: ["Top in Biology", "Academic Excellence"],
+        year: "Class of 2022",
       },
       {
-        Image: "https://i.ibb.co/MVv7h59/student20.jpg",
-        Name: "Thant Zin Oo",
-        Program: "Advanced Level (A Level)",
-        Description: ["Top in Biology", "Academic Excellence"],
-        Year: "Class of 2022",
+        image: "https://i.ibb.co/MVv7h59/student20.jpg",
+        name: "Thant Zin Oo",
+        program: "Advanced Level (A Level)",
+        description: ["Top in Biology", "Academic Excellence"],
+        year: "Class of 2022",
       },
       {
-        Image: "https://i.ibb.co/MVv7h59/student21.jpg",
-        Name: "Thant Zin Oo",
-        Program: "Advanced Level (A Level)",
-        Description: ["Top in Biology", "Academic Excellence"],
-        Year: "Class of 2022",
+        image: "https://i.ibb.co/MVv7h59/student21.jpg",
+        name: "Thant Zin Oo",
+        program: "Advanced Level (A Level)",
+        description: ["Top in Biology", "Academic Excellence"],
+        year: "Class of 2022",
       },
       {
-        Image: "https://i.ibb.co/MVv7h59/student22.jpg",
-        Name: "Thant Zin Oo",
-        Program: "Advanced Level (A Level)",
-        Description: ["Top in Biology", "Academic Excellence"],
-        Year: "Class of 2022",
+        image: "https://i.ibb.co/MVv7h59/student22.jpg",
+        name: "Thant Zin Oo",
+        program: "Advanced Level (A Level)",
+        description: ["Top in Biology", "Academic Excellence"],
+        year: "Class of 2022",
       },
       {
-        Image: "https://i.ibb.co/MVv7h59/student23.jpg",
-        Name: "Thant Zin Oo",
-        Program: "Advanced Level (A Level)",
-        Description: ["Top in Biology", "Academic Excellence"],
-        Year: "Class of 2022",
+        image: "https://i.ibb.co/MVv7h59/student23.jpg",
+        name: "Thant Zin Oo",
+        program: "Advanced Level (A Level)",
+        description: ["Top in Biology", "Academic Excellence"],
+        year: "Class of 2022",
       },
 
       // Class of 2021 (5 students)
       {
-        Image: "https://i.ibb.co/MVv7h59/student24.jpg",
-        Name: "Myat Noe Wai",
-        Program: "Advanced Level (A Level)",
-        Description: ["Outstanding in Mathematics", "High Achievement"],
-        Year: "Class of 2021",
+        image: "https://i.ibb.co/MVv7h59/student24.jpg",
+        name: "Myat Noe Wai",
+        program: "Advanced Level (A Level)",
+        description: ["Outstanding in Mathematics", "High Achievement"],
+        year: "Class of 2021",
       },
       {
-        Image: "https://i.ibb.co/MVv7h59/student25.jpg",
-        Name: "Thant Zin Oo",
-        Program: "Advanced Level (A Level)",
-        Description: ["Top in Biology", "Academic Excellence"],
-        Year: "Class of 2021",
+        image: "https://i.ibb.co/MVv7h59/student25.jpg",
+        name: "Thant Zin Oo",
+        program: "Advanced Level (A Level)",
+        description: ["Top in Biology", "Academic Excellence"],
+        year: "Class of 2021",
       },
       {
-        Image: "https://i.ibb.co/MVv7h59/student26.jpg",
-        Name: "Thant Zin Oo",
-        Program: "Advanced Level (A Level)",
-        Description: ["Top in Biology", "Academic Excellence"],
-        Year: "Class of 2021",
+        image: "https://i.ibb.co/MVv7h59/student26.jpg",
+        name: "Thant Zin Oo",
+        program: "Advanced Level (A Level)",
+        description: ["Top in Biology", "Academic Excellence"],
+        year: "Class of 2021",
       },
       {
-        Image: "https://i.ibb.co/MVv7h59/student27.jpg",
-        Name: "Thant Zin Oo",
-        Program: "Advanced Level (A Level)",
-        Description: ["Top in Biology", "Academic Excellence"],
-        Year: "Class of 2021",
+        image: "https://i.ibb.co/MVv7h59/student27.jpg",
+        name: "Thant Zin Oo",
+        program: "Advanced Level (A Level)",
+        description: ["Top in Biology", "Academic Excellence"],
+        year: "Class of 2021",
       },
       {
-        Image: "https://i.ibb.co/MVv7h59/student28.jpg",
-        Name: "Thant Zin Oo",
-        Program: "Advanced Level (A Level)",
-        Description: ["Top in Biology", "Academic Excellence"],
-        Year: "Class of 2021",
+        image: "https://i.ibb.co/MVv7h59/student28.jpg",
+        name: "Thant Zin Oo",
+        program: "Advanced Level (A Level)",
+        description: ["Top in Biology", "Academic Excellence"],
+        year: "Class of 2021",
       },
 
       // Class of 2020 (9 students)
       {
-        Image: "https://i.ibb.co/MVv7h59/student29.jpg",
-        Name: "Kaung Sat Aung",
-        Program: "Upper Secondary Level (IGCSE)",
-        Description: ["Excellence in Physics", "Merit Award"],
-        Year: "Class of 2020",
+        image: "https://i.ibb.co/MVv7h59/student29.jpg",
+        name: "Kaung Sat Aung",
+        program: "Upper Secondary Level (IGCSE)",
+        description: ["Excellence in Physics", "Merit Award"],
+        year: "Class of 2020",
       },
       {
-        Image: "https://i.ibb.co/MVv7h59/student30.jpg",
-        Name: "Thant Zin Oo",
-        Program: "Advanced Level (A Level)",
-        Description: ["Top in Biology", "Academic Excellence"],
-        Year: "Class of 2020",
+        image: "https://i.ibb.co/MVv7h59/student30.jpg",
+        name: "Thant Zin Oo",
+        program: "Advanced Level (A Level)",
+        description: ["Top in Biology", "Academic Excellence"],
+        year: "Class of 2020",
       },
       {
-        Image: "https://i.ibb.co/MVv7h59/student31.jpg",
-        Name: "Thant Zin Oo",
-        Program: "Advanced Level (A Level)",
-        Description: ["Top in Biology", "Academic Excellence"],
-        Year: "Class of 2020",
+        image: "https://i.ibb.co/MVv7h59/student31.jpg",
+        name: "Thant Zin Oo",
+        program: "Advanced Level (A Level)",
+        description: ["Top in Biology", "Academic Excellence"],
+        year: "Class of 2020",
       },
       {
-        Image: "https://i.ibb.co/MVv7h59/student32.jpg",
-        Name: "Thant Zin Oo",
-        Program: "Advanced Level (A Level)",
-        Description: ["Top in Biology", "Academic Excellence"],
-        Year: "Class of 2020",
+        image: "https://i.ibb.co/MVv7h59/student32.jpg",
+        name: "Thant Zin Oo",
+        program: "Advanced Level (A Level)",
+        description: ["Top in Biology", "Academic Excellence"],
+        year: "Class of 2020",
       },
       {
-        Image: "https://i.ibb.co/MVv7h59/student33.jpg",
-        Name: "Thant Zin Oo",
-        Program: "Advanced Level (A Level)",
-        Description: ["Top in Biology", "Academic Excellence"],
-        Year: "Class of 2020",
+        image: "https://i.ibb.co/MVv7h59/student33.jpg",
+        name: "Thant Zin Oo",
+        program: "Advanced Level (A Level)",
+        description: ["Top in Biology", "Academic Excellence"],
+        year: "Class of 2020",
       },
       {
-        Image: "https://i.ibb.co/MVv7h59/student34.jpg",
-        Name: "Thant Zin Oo",
-        Program: "Advanced Level (A Level)",
-        Description: ["Top in Biology", "Academic Excellence"],
-        Year: "Class of 2020",
+        image: "https://i.ibb.co/MVv7h59/student34.jpg",
+        name: "Thant Zin Oo",
+        program: "Advanced Level (A Level)",
+        description: ["Top in Biology", "Academic Excellence"],
+        year: "Class of 2020",
       },
       {
-        Image: "https://i.ibb.co/MVv7h59/student35.jpg",
-        Name: "Thant Zin Oo",
-        Program: "Advanced Level (A Level)",
-        Description: ["Top in Biology", "Academic Excellence"],
-        Year: "Class of 2020",
+        image: "https://i.ibb.co/MVv7h59/student35.jpg",
+        name: "Thant Zin Oo",
+        program: "Advanced Level (A Level)",
+        description: ["Top in Biology", "Academic Excellence"],
+        year: "Class of 2020",
       },
       {
-        Image: "https://i.ibb.co/MVv7h59/student36.jpg",
-        Name: "Thant Zin Oo",
-        Program: "Advanced Level (A Level)",
-        Description: ["Top in Biology", "Academic Excellence"],
-        Year: "Class of 2020",
+        image: "https://i.ibb.co/MVv7h59/student36.jpg",
+        name: "Thant Zin Oo",
+        program: "Advanced Level (A Level)",
+        description: ["Top in Biology", "Academic Excellence"],
+        year: "Class of 2020",
       },
       {
-        Image: "https://i.ibb.co/MVv7h59/student37.jpg",
-        Name: "Thant Zin Oo",
-        Program: "Advanced Level (A Level)",
-        Description: ["Top in Biology", "Academic Excellence"],
-        Year: "Class of 2020",
+        image: "https://i.ibb.co/MVv7h59/student37.jpg",
+        name: "Thant Zin Oo",
+        program: "Advanced Level (A Level)",
+        description: ["Top in Biology", "Academic Excellence"],
+        year: "Class of 2020",
       },
 
       // Class of 2019 (4 students)
       {
-        Image: "https://i.ibb.co/MVv7h59/student38.jpg",
-        Name: "Thet Hmue Wai",
-        Program: "Advanced Level (A Level)",
-        Description: ["Top Performance in Chemistry", "Academic Excellence"],
-        Year: "Class of 2019",
+        image: "https://i.ibb.co/MVv7h59/student38.jpg",
+        name: "Thet Hmue Wai",
+        program: "Advanced Level (A Level)",
+        description: ["Top Performance in Chemistry", "Academic Excellence"],
+        year: "Class of 2019",
       },
       {
-        Image: "https://i.ibb.co/MVv7h59/student39.jpg",
-        Name: "Thant Zin Oo",
-        Program: "Advanced Level (A Level)",
-        Description: ["Top in Biology", "Academic Excellence"],
-        Year: "Class of 2019",
+        image: "https://i.ibb.co/MVv7h59/student39.jpg",
+        name: "Thant Zin Oo",
+        program: "Advanced Level (A Level)",
+        description: ["Top in Biology", "Academic Excellence"],
+        year: "Class of 2019",
       },
       {
-        Image: "https://i.ibb.co/MVv7h59/student40.jpg",
-        Name: "Thant Zin Oo",
-        Program: "Advanced Level (A Level)",
-        Description: ["Top in Biology", "Academic Excellence"],
-        Year: "Class of 2019",
+        image: "https://i.ibb.co/MVv7h59/student40.jpg",
+        name: "Thant Zin Oo",
+        program: "Advanced Level (A Level)",
+        description: ["Top in Biology", "Academic Excellence"],
+        year: "Class of 2019",
       },
       {
-        Image: "https://i.ibb.co/MVv7h59/student41.jpg",
-        Name: "Thant Zin Oo",
-        Program: "Advanced Level (A Level)",
-        Description: ["Top in Biology", "Academic Excellence"],
-        Year: "Class of 2019",
+        image: "https://i.ibb.co/MVv7h59/student41.jpg",
+        name: "Thant Zin Oo",
+        program: "Advanced Level (A Level)",
+        description: ["Top in Biology", "Academic Excellence"],
+        year: "Class of 2019",
       },
     ];
 
     if (selectedYear === "all") return students;
-    return students.filter((student) => student.Year === selectedYear);
+    return students.filter((student) => student.year === selectedYear);
   }, [selectedYear]);
 
   return (
@@ -401,11 +401,11 @@ const StudentAchievementsPage: React.FC = () => {
 export default StudentAchievementsPage;
 
 const SingleCard: React.FC<SingleCardProps> = ({
-  Image = MIEA_logo,
-  Description,
-  Name,
-  Year,
-  Program,
+  image = MIEA_logo,
+  description,
+  name,
+  year,
+  program,
 }) => {
   // Program color mapping
   const programColor: Record<string, string> = {
@@ -434,10 +434,10 @@ const SingleCard: React.FC<SingleCardProps> = ({
         <div className="w-full sm:max-w-[200px] md:max-w-[250px] lg:max-w-full xl:max-w-[200px] 2xl:max-w-[240px]">
           <div className="h-[250px] sm:h-full lg:h-[250px] xl:h-full">
             <img
-              src={Image}
-              alt={Name}
+              src={image}
+              alt={name}
               className={`w-full ${
-                Image === MIEA_logo ? "bg-green-100 p-8" : "h-full object-cover"
+                image === MIEA_logo ? "bg-green-100 p-8" : "h-full object-cover"
               }`}
             />
           </div>
@@ -445,19 +445,19 @@ const SingleCard: React.FC<SingleCardProps> = ({
         <div className="w-full p-8 sm:p-6 md:p-8">
           <h3>
             <a className="mb-3 block text-xl font-semibold text-dark dark:text-white">
-              {Name}
+              {name}
             </a>
           </h3>
           <div className="space-y-2 mb-5">
-            <span className={`text-sm block w-fit ${programColor[Program]}`}>
-              {Program}
+            <span className={`text-sm block w-fit ${programColor[program]}`}>
+              {program}
             </span>
             <span className="bg-yellow-500 text-dark px-3 py-1 rounded-full text-sm inline-block">
-              {Year}
+              {year}
             </span>
           </div>
           <ul className="space-y-3">
-            {Description.map((item, index) => (
+            {description.map((item, index) => (
               <li key={index} className="flex items-center space-x-3">
                 <FontAwesomeIcon
                   icon={faMedal}

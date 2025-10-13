@@ -1,4 +1,8 @@
 import React from "react";
+import { FaSearch } from "react-icons/fa";
+import CategoryItem from "../components/CategoryItem";
+import BlogSideCardItem from "../components/BlogSideCard";
+import { formatDateToDMY } from "../utils/dateFormatter";
 
 interface BlogItemProps {
   title: string;
@@ -33,7 +37,7 @@ const BlogItem: React.FC<BlogItemProps> = ({
         {/* Content Side */}
         <div className="w-full md:w-2/3 flex flex-col">
           <div className="mb-4 flex items-center justify-between text-xs text-body-color dark:text-dark-6">
-            <span>{date}</span>
+            <span>{formatDateToDMY(date)}</span>
             <span className="px-2 py-0.5 rounded bg-green text-white dark:bg-yellow dark:text-dark font-semibold">
               {category}
             </span>
@@ -74,33 +78,196 @@ const CategorySidebar: React.FC<{ categories: string[] }> = ({
 }) => (
   <aside className="w-full lg:w-3/12 px-4">
     <div className="sticky top-24">
-      <div className="mb-8 rounded-lg border border-stroke p-5 dark:border-dark-3 bg-white dark:bg-dark-2">
-        <h4 className="mb-4 text-lg font-bold text-dark dark:text-white">
-          Search
-        </h4>
-        <input
-          type="text"
-          placeholder="Search..."
-          className="w-full px-4 py-2 border rounded-lg focus-lg border-stroke focus:outline-none focus:border bg-transparent text-body-color dark:text-dark-6"
-        />
+      {/* Search Box */}
+      <div className="mb-8 w-full">
+        <div className="w-full">
+          <h2 className="relative text-2xl font-semibold text-dark dark:text-white">
+            Search
+          </h2>
+          <span className="mb-6 inline-block h-[2px] w-24 bg-green dark:bg-yellow"></span>
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Search articles..."
+              className="w-full rounded border border-stroke bg-white py-3 pl-4 pr-12 text-base text-body-color outline-none focus:border-green dark:border-dark-3 dark:bg-dark-2 dark:text-dark-6 dark:focus:border-yellow"
+            />
+            <button className="absolute right-0 top-0 flex h-full w-12 items-center justify-center text-body-color hover:text-green dark:text-dark-6 dark:hover:text-yellow">
+              <FaSearch className="text-lg" />
+            </button>
+          </div>
+        </div>
       </div>
-      <div className="mb-8 rounded-lg border border-stroke p-5 dark:border-dark-3 bg-white dark:bg-dark-2">
-        <h4 className="mb-4 text-lg font-bold text-dark dark:text-white">
-          Categories
-        </h4>
-        <ul className="space-y-2">
-          {categories.map((cat) => (
-            <li key={cat}>
-              <a
-                href="#"
-                className="text-base text-body-color dark:text-dark-6 hover:text-green dark:hover:text-yellow transition-colors"
-                onClick={(e) => e.preventDefault()}
-              >
-                {cat}
-              </a>
-            </li>
-          ))}
-        </ul>
+
+      {/* Category List */}
+      <div className="mb-8 w-full">
+        <div className="w-full">
+          <h2 className="relative text-2xl font-semibold text-dark dark:text-white">
+            Categories
+          </h2>
+          <span className="mb-6 inline-block h-[2px] w-24 bg-green dark:bg-yellow"></span>
+          <div className="space-y-2">
+            {categories.map((cat, index) => (
+              <CategoryItem
+                key={cat}
+                name={cat}
+                count={[12, 8, 15][index] || 5}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Featured News */}
+      <div className="relative mb-8 bg-gradient-to-br from-green-600 to-green-800 dark:from-green-700 dark:to-green-900 p-8">
+        <BlogSideCardItem
+          subtitle="Featured"
+          title="Design is a Plan or The Construction of an Object."
+          description="Lorem Ipsum is simply dummy text of the printing and industry page when looking at its layout."
+        />
+        <BlogSideCardItem
+          subtitle="Trending"
+          title="How to use Facebook ads to sell online courses"
+          description="Lorem Ipsum is simply dummy text of the printing and industry page when looking at its layout."
+        />
+
+        <span className="absolute right-0 top-0">
+          <svg
+            width="46"
+            height="45"
+            viewBox="0 0 46 45"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle
+              cx="1.39737"
+              cy="43.6026"
+              r="1.39737"
+              transform="rotate(-90 1.39737 43.6026)"
+              fill="white"
+              fillOpacity="0.44"
+            ></circle>
+            <circle
+              cx="1.39737"
+              cy="6.9913"
+              r="1.39737"
+              transform="rotate(-90 1.39737 6.9913)"
+              fill="white"
+              fillOpacity="0.44"
+            ></circle>
+            <circle
+              cx="13.6943"
+              cy="43.6026"
+              r="1.39737"
+              transform="rotate(-90 13.6943 43.6026)"
+              fill="white"
+              fillOpacity="0.44"
+            ></circle>
+            <circle
+              cx="13.6943"
+              cy="6.9913"
+              r="1.39737"
+              transform="rotate(-90 13.6943 6.9913)"
+              fill="white"
+              fillOpacity="0.44"
+            ></circle>
+            <circle
+              cx="25.9911"
+              cy="43.6026"
+              r="1.39737"
+              transform="rotate(-90 25.9911 43.6026)"
+              fill="white"
+              fillOpacity="0.44"
+            ></circle>
+            <circle
+              cx="25.9911"
+              cy="6.9913"
+              r="1.39737"
+              transform="rotate(-90 25.9911 6.9913)"
+              fill="white"
+              fillOpacity="0.44"
+            ></circle>
+            <circle
+              cx="38.288"
+              cy="43.6026"
+              r="1.39737"
+              transform="rotate(-90 38.288 43.6026)"
+              fill="white"
+              fillOpacity="0.44"
+            ></circle>
+            <circle
+              cx="38.288"
+              cy="6.9913"
+              r="1.39737"
+              transform="rotate(-90 38.288 6.9913)"
+              fill="white"
+              fillOpacity="0.44"
+            ></circle>
+            <circle
+              cx="1.39737"
+              cy="31.3057"
+              r="1.39737"
+              transform="rotate(-90 1.39737 31.3057)"
+              fill="white"
+              fillOpacity="0.44"
+            ></circle>
+            <circle
+              cx="13.6943"
+              cy="31.3057"
+              r="1.39737"
+              transform="rotate(-90 13.6943 31.3057)"
+              fill="white"
+              fillOpacity="0.44"
+            ></circle>
+            <circle
+              cx="25.9911"
+              cy="31.3057"
+              r="1.39737"
+              transform="rotate(-90 25.9911 31.3057)"
+              fill="white"
+              fillOpacity="0.44"
+            ></circle>
+            <circle
+              cx="38.288"
+              cy="31.3057"
+              r="1.39737"
+              transform="rotate(-90 38.288 31.3057)"
+              fill="white"
+              fillOpacity="0.44"
+            ></circle>
+            <circle
+              cx="1.39737"
+              cy="19.0086"
+              r="1.39737"
+              transform="rotate(-90 1.39737 19.0086)"
+              fill="white"
+              fillOpacity="0.44"
+            ></circle>
+            <circle
+              cx="13.6943"
+              cy="19.0086"
+              r="1.39737"
+              transform="rotate(-90 13.6943 19.0086)"
+              fill="white"
+              fillOpacity="0.44"
+            ></circle>
+            <circle
+              cx="25.9911"
+              cy="19.0086"
+              r="1.39737"
+              transform="rotate(-90 25.9911 19.0086)"
+              fill="white"
+              fillOpacity="0.44"
+            ></circle>
+            <circle
+              cx="38.288"
+              cy="19.0086"
+              r="1.39737"
+              transform="rotate(-90 38.288 19.0086)"
+              fill="white"
+              fillOpacity="0.44"
+            ></circle>
+          </svg>
+        </span>
       </div>
     </div>
   </aside>
