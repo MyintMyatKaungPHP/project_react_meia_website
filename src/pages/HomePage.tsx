@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useMotionValue, useTransform, motion } from "framer-motion";
 import { Typewriter } from "react-simple-typewriter";
-import { FaBullhorn, FaChartLine, FaPaintBrush } from "react-icons/fa";
+import { FaBullhorn, FaChartLine, FaPaintBrush, FaPlay } from "react-icons/fa";
 import { useInView } from "react-intersection-observer";
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
 
 // Import images
 import Pearson_logo from "../assets/images/Pearson_logo.png";
@@ -14,6 +15,8 @@ import CIE_logo_white from "../assets/images/CIE_logo_white.png";
 import miea_school from "../assets/images/miea_school.png";
 import StuGroup from "../assets/images/stugroup.png";
 import StuGroupWhite from "../assets/images/stugroup_white.png";
+import StuGroupCap from "../assets/images/stugroup_cap.png";
+import Graduation2024 from "../assets/images/2024_graduation.jpg";
 
 // Interfaces
 interface ServiceCardProps {
@@ -40,6 +43,7 @@ interface BlogCardProps {
   CardSubTitle: string;
   CardTitle: string;
   CardDescription: string;
+  date: string;
 }
 
 interface BlogSideCardItemProps {
@@ -355,18 +359,18 @@ const Services = () => {
 
         <div className="-mx-4 flex flex-wrap justify-center">
           <ServiceCard
-            title="Marketing Solutions"
-            details="Lorem Ipsum is simply dummy text of the printing and industry."
+            title="A Level"
+            details="Year 12 - Year 13 (iAS & iAL)"
             icon={<FaBullhorn className="text-red text-4xl" />}
           />
           <ServiceCard
-            title="Business Analytics"
-            details="Lorem Ipsum is simply dummy text of the printing and industry."
+            title="Upper Secondary Level"
+            details="Year 10 - Year 11 (iGCSE)"
             icon={<FaChartLine className="text-green text-4xl" />}
           />
           <ServiceCard
-            title="UX & UI Design"
-            details="Lorem Ipsum is simply dummy text of the printing and industry."
+            title="Lower Secondary Level"
+            details="Year 7 - Year 8 - Year 9 (Pre-iGCSE)"
             icon={<FaPaintBrush className="text-blue text-4xl" />}
           />
         </div>
@@ -406,8 +410,8 @@ const Features = () => {
               transition={{ duration: 0.5 }}
             >
               <img
-                src="https://i.ibb.co/bv6mt6w/image-1.jpg"
-                alt="service image"
+                src={Graduation2024}
+                alt="MIEA 2024 Graduation"
                 className="w-full object-cover object-center"
               />
             </motion.div>
@@ -422,13 +426,20 @@ const Features = () => {
                 className="mb-11 border-b border-stroke pb-11 dark:border-dark-3"
               >
                 <h3 className="mb-5 text-xl font-bold text-green dark:text-white">
-                  MIEA
+                  MIEA School
                 </h3>
-                <p className="text-semibold text-lg text-dark dark:text-white">
-                  It is a long established fact that a reader will be distracted
-                  by the readable content of a page when looking at its layout.
-                  The point of using Lorem Ipsum is that it has a distribution
-                  of letters.
+                <p className="text-semibold text-lg text-dark text-justify dark:text-white">
+                  MIEA School is a private academic centre in Yangon, Myanmar,
+                  offering a wide range of courses for students from Year 7 to
+                  Year 13.
+                </p>
+                <p className="text-semibold text-lg text-dark text-justify dark:text-white">
+                  We are committed to providing high-quality education and
+                  fostering academic excellence through a structured curriculum
+                  that covers all key stages of secondary education, including
+                  Lower Secondary (Pre-IGCSE) for Years 7 to 9, Upper Secondary
+                  (IGCSE) for Years 10 to 11, and A Level (iAS/iAL) for Years 12
+                  to 13.
                 </p>
               </motion.div>
 
@@ -515,21 +526,24 @@ const Achievements = () => {
                 Some Fun Facts
               </motion.span>
               <h2 className="mb-3 text-3xl font-bold leading-[1.2] text-green dark:text-white md:text-[40px]">
-                Our achievements
+                Achievements of MIEA
               </h2>
               <p className="text-base text-body-color dark:text-dark-6">
-                There are many variations of passages of Lorem Ipsum available
-                but the majority have suffered alteration in some form.
+                Here are some of the achievements of MIEA over the years.
               </p>
             </div>
           </motion.div>
 
           <div className="w-full px-4 lg:w-1/2">
             <div className="-mx-3 flex flex-wrap md:-mx-4">
-              <StatsItem user={56825} title="Clients" />
-              <StatsItem user={35574} title="Commits" />
-              <StatsItem user={570} title="Team Members" />
-              <StatsItem user={50} title="First Year of Use" suffix="%" />
+              <StatsItem user={1682} title="Total Registered Students" />
+              <StatsItem user={102} title="Total Candidates in 2024" />
+              <StatsItem user={12} title="Qualified Teachers" />
+              <StatsItem
+                user={87}
+                title="Passed with A-A* students in 2024"
+                suffix="%"
+              />
             </div>
           </div>
         </div>
@@ -604,16 +618,12 @@ const Testimonials = () => {
           <div className="-mx-4 flex flex-wrap justify-center">
             <div className="w-full px-4">
               <div className="mx-auto mb-[60px] max-w-[510px] text-center">
-                <span className="mb-2 block text-lg font-semibold text-primary">
+                <span className="mb-2 block text-lg font-semibold text-green">
                   Testimonials
                 </span>
                 <h2 className="mb-3 text-3xl font-bold leading-[1.2] text-dark dark:text-white sm:text-4xl md:text-[40px]">
-                  What our Clients Says
+                  What our students say
                 </h2>
-                <p className="text-base text-body-color dark:text-dark-6">
-                  There are many variations of passages of Lorem Ipsum available
-                  but the majority have suffered alteration in some form.
-                </p>
               </div>
             </div>
           </div>
@@ -637,6 +647,11 @@ const Testimonials = () => {
                 slidesPerView: 3,
               },
             }}
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false,
+            }}
+            modules={[Autoplay]}
             loop={true}
             spaceBetween={30}
             ref={swiperRef}
@@ -646,7 +661,7 @@ const Testimonials = () => {
               <SingleTestimonial
                 details="Our members are so impressed. It's intuitive. It's clean. It's distraction free. If you're building a community. Our members are so impressed. It's intuitive. It's clean. It's distraction free. If you're building a community."
                 image="https://cdn.tailgrids.com/2.0/image/marketing/images/testimonials/testimonial-04/image-01.png"
-                name="1"
+                name="Aung Aung"
                 position="Founder @ Rolex"
               />
             </SwiperSlide>
@@ -654,7 +669,7 @@ const Testimonials = () => {
               <SingleTestimonial
                 details="Our members are so impressed. It's intuitive. It's clean. It's distraction free. If you're building a community."
                 image="https://cdn.tailgrids.com/2.0/image/marketing/images/testimonials/testimonial-04/image-02.png"
-                name="2"
+                name="Myat Myat"
                 position="Founder @ Ayro UI"
               />
             </SwiperSlide>
@@ -662,7 +677,7 @@ const Testimonials = () => {
               <SingleTestimonial
                 details="Our members are so impressed. It's intuitive. It's clean. It's distraction free. If you're building a community."
                 image="https://cdn.tailgrids.com/2.0/image/marketing/images/testimonials/testimonial-04/image-03.png"
-                name="3"
+                name="Hla Hla"
                 position="Founder @ Trorex"
               />
             </SwiperSlide>
@@ -670,7 +685,7 @@ const Testimonials = () => {
               <SingleTestimonial
                 details="Our members are so impressed. It's intuitive. It's clean. It's distraction free. If you're building a community."
                 image="https://cdn.tailgrids.com/2.0/image/marketing/images/testimonials/testimonial-04/image-01.png"
-                name="4"
+                name="Zaw Zaw"
                 position="Founder @ Rolex"
               />
             </SwiperSlide>
@@ -678,7 +693,7 @@ const Testimonials = () => {
               <SingleTestimonial
                 details="Our members are so impressed. It's intuitive. It's clean. It's distraction free. If you're building a community."
                 image="https://cdn.tailgrids.com/2.0/image/marketing/images/testimonials/testimonial-04/image-02.png"
-                name="5"
+                name="Kyaw Kyaw"
                 position="Founder @ Ayro UI"
               />
             </SwiperSlide>
@@ -686,7 +701,7 @@ const Testimonials = () => {
               <SingleTestimonial
                 details="Our members are so impressed. It's intuitive. It's clean. It's distraction free. If you're building a community."
                 image="https://cdn.tailgrids.com/2.0/image/marketing/images/testimonials/testimonial-04/image-03.png"
-                name="6"
+                name="Aye Aye"
                 position="Founder @ Trorex"
               />
             </SwiperSlide>
@@ -784,32 +799,24 @@ const Video = () => {
           <div className="w-full px-4">
             <div className="relative z-10 overflow-hidden">
               <img
-                src="https://cdn.tailgrids.com/2.0/image/marketing/images/videos/image-03.jpg"
-                alt="image"
-                className="absolute left-0 top-0 z-[-1] h-full w-full object-cover object-center"
+                src={StuGroupCap}
+                alt="MIEA Students"
+                className="absolute left-0 top-[-230px] z-[-1] h-[calc(100%+230px)] w-full object-cover object-top"
               />
-              <div className="relative z-10 bg-[#090E34] bg-opacity-90 px-8 py-20 md:py-[120px]">
+              {/* Green overlay with opacity */}
+              <div className="absolute inset-0 bg-green-900 opacity-80 z-0"></div>
+
+              <div className="relative z-10 px-8 py-32 md:py-[180px]">
                 <div className="mx-auto max-w-[500px] text-center">
-                  <h2 className="mb-5 text-3xl font-bold leading-[1.2] text-white sm:text-4xl md:text-[40px]">
-                    Watch Our Intro Video
+                  <h2 className="mb-5 text-3xl font-bold leading-[1.2] text-yellow sm:text-4xl md:text-[40px]">
+                    School Life at MIEA
                   </h2>
-                  <span className="mx-auto mb-4 block h-1 w-[60px] rounded bg-white"></span>
-                  <p className="mb-[50px] text-base text-white md:text-lg">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Proin at quam fringilla, scelerisque nisl diam.
-                  </p>
+
                   <button
                     onClick={() => setVideoOpen(true)}
-                    className="z-20 mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-white text-primary dark:bg-dark-3 dark:text-white md:h-[100px] md:w-[100px]"
+                    className="z-20 mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-transparent text-white/80 hover:text-white transition-all duration-300 ease-in-out md:h-[100px] md:w-[100px]"
                   >
-                    <svg
-                      width="23"
-                      height="27"
-                      viewBox="0 0 23 27"
-                      className="fill-current"
-                    >
-                      <path d="M22.5 12.634C23.1667 13.0189 23.1667 13.9811 22.5 14.366L2.25 26.0574C1.58333 26.4423 0.750001 25.9611 0.750001 25.1913L0.750002 1.80866C0.750002 1.03886 1.58334 0.557731 2.25 0.942631L22.5 12.634Z" />
-                    </svg>
+                    <FaPlay className="text-2xl md:text-4xl hover:scale-150 transition-transform duration-300" />
                   </button>
                 </div>
                 <div>
@@ -838,10 +845,10 @@ const Video = () => {
                           y2="678.647"
                           gradientUnits="userSpaceOnUse"
                         >
-                          <stop stopColor="#3056D3" stopOpacity="0.26" />
+                          <stop stopColor="#16a34a" stopOpacity="0.26" />
                           <stop
                             offset="1"
-                            stopColor="#3056D3"
+                            stopColor="#16a34a"
                             stopOpacity="0"
                           />
                         </linearGradient>
@@ -873,10 +880,10 @@ const Video = () => {
                           y2="585.157"
                           gradientUnits="userSpaceOnUse"
                         >
-                          <stop stopColor="#3056D3" stopOpacity="0.36" />
+                          <stop stopColor="#16a34a" stopOpacity="0.36" />
                           <stop
                             offset="1"
-                            stopColor="#3056D3"
+                            stopColor="#16a34a"
                             stopOpacity="0"
                           />
                         </linearGradient>
@@ -922,15 +929,14 @@ const RecentNews = () => {
         <div className="container mx-auto">
           <div className="w-full px-4">
             <div className="mx-auto mb-[60px] max-w-[510px] text-center lg:mb-20">
-              <span className="mb-2 block text-lg font-semibold text-primary">
-                Our Blogs
+              <span className="mb-2 block text-lg font-semibold text-green dark:text-green-400">
+                Blogs
               </span>
               <h2 className="mb-4 text-3xl font-bold text-dark dark:text-white sm:text-4xl md:text-[40px]">
                 Our Recent News
               </h2>
               <p className="text-base text-body-color dark:text-dark-6">
-                There are many variations of passages of Lorem Ipsum available
-                but the majority have suffered alteration in some form.
+                Stay updated with the latest news and events from MIEA.
               </p>
             </div>
           </div>
@@ -942,17 +948,19 @@ const RecentNews = () => {
                 CardTitle="How to use Facebook ads to sell online courses"
                 CardDescription="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
                 image="https://i.ibb.co/9WvDZHw/image-01.png"
+                date="Dec 22, 2024"
               />
               <BlogCard
                 CardSubTitle="Digital Marketing"
                 CardTitle="The Data-Driven Approach to Understanding."
                 CardDescription="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
                 image="https://i.ibb.co/X44PwNn/image-02.jpg"
+                date="Dec 15, 2024"
               />
             </div>
 
             <div className="w-full px-4 lg:w-4/12">
-              <div className="relative mb-8 bg-primary p-8">
+              <div className="relative mb-8 bg-gradient-to-br from-green-600 to-green-800 dark:from-green-700 dark:to-green-900 p-8">
                 <BlogSideCardItem
                   subtitle="Graphics Design"
                   title="Design is a Plan or The Construction of an Object."
@@ -1116,6 +1124,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
   CardSubTitle,
   CardTitle,
   CardDescription,
+  date,
 }) => {
   return (
     <>
@@ -1132,13 +1141,18 @@ const BlogCard: React.FC<BlogCardProps> = ({
           </div>
           <div className="w-full px-8 md:w-1/2 md:px-4">
             <div className="w-full py-8">
-              <span className="mb-2 inline-block text-sm font-medium tracking-wide text-primary">
-                {CardSubTitle}
-              </span>
+              <div className="mb-2 flex items-center justify-between">
+                <span className="text-sm font-medium tracking-wide text-yellow-400 dark:text-yellow">
+                  {CardSubTitle}
+                </span>
+                <span className="text-xs text-body-color dark:text-dark-6">
+                  {date}
+                </span>
+              </div>
               <h3>
                 <a
                   href="#"
-                  className="mb-3 inline-block text-xl font-semibold text-dark hover:text-primary dark:text-white"
+                  className="mb-3 inline-block text-xl font-semibold text-dark hover:text-green dark:text-white dark:hover:text-green-400"
                 >
                   {CardTitle}
                 </a>
@@ -1148,7 +1162,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
               </p>
               <a
                 href="#"
-                className="group inline-flex items-center text-sm font-medium text-body-color duration-300 hover:text-primary dark:text-dark-6"
+                className="group inline-flex items-center text-sm font-medium text-body-color duration-300 hover:text-green dark:text-dark-6 dark:hover:text-green-400"
               >
                 Read More
                 <span className="ml-1 duration-300 group-hover:translate-x-2">
