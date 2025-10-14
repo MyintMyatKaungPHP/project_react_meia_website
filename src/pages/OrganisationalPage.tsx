@@ -146,7 +146,7 @@ const OrganisationalStructure: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className="mx-auto w-full max-w-[1170px] mb-10">
+        <div className="mx-auto w-full max-w-[1170px] pb-10">
           <div className="grid grid-cols-12 gap-6">
             <div className="col-span-12">
               <motion.div
