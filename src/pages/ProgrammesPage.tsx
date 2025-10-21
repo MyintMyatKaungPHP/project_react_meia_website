@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import ImageSlider from "../components/ImageSlider"; // path ကိုသင့် folder structure အတိုင်း
 
@@ -108,6 +108,26 @@ const ProgramListItem: React.FC<ListItemProps> = ({ count, text }) => {
 const ProgrammesPage: React.FC = () => {
   const [openTab, setOpenTab] = useState<string>("1");
 
+  // Handle hash navigation from HomePage ServiceCard links
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash) {
+      switch (hash) {
+        case "#a-level":
+          setOpenTab("1");
+          break;
+        case "#upper-secondary":
+          setOpenTab("2");
+          break;
+        case "#lower-secondary":
+          setOpenTab("3");
+          break;
+        default:
+          setOpenTab("1");
+      }
+    }
+  }, []);
+
   // Tab-specific images
   let selectedImages = imagesTab1;
   if (openTab === "2") selectedImages = imagesTab2;
@@ -177,7 +197,7 @@ const ProgrammesPage: React.FC = () => {
             <div className="lg:pl-8 2xl:pl-[60px]">
               <div className="text-dark dark:text-white text-justify">
                 {openTab === "1" && (
-                  <div>
+                  <div id="a-level">
                     <h2 className="mb-6 text-3xl font-semibold text-dark dark:text-white">
                       Advanced Level
                     </h2>
@@ -285,7 +305,7 @@ const ProgrammesPage: React.FC = () => {
                 )}
 
                 {openTab === "2" && (
-                  <div>
+                  <div id="upper-secondary">
                     <h2 className="mb-6 text-3xl font-semibold text-dark dark:text-white">
                       Upper Secondary (IGCSE)
                     </h2>
@@ -422,7 +442,7 @@ const ProgrammesPage: React.FC = () => {
                   </div>
                 )}
                 {openTab === "3" && (
-                  <div>
+                  <div id="lower-secondary">
                     <h2 className="mb-6 text-3xl font-semibold text-dark dark:text-white">
                       Lower Secondary (Pre-IGCSE)
                     </h2>

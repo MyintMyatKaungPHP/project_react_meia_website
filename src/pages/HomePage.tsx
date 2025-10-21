@@ -23,9 +23,11 @@ import Graduation2024 from "../assets/images/2024_graduation.jpg";
 
 // Interfaces
 interface ServiceCardProps {
-  icon: React.ReactNode;
   title: string;
   details: string;
+  image?: string;
+  overlayColor?: string;
+  link?: string;
 }
 
 interface StatsItemProps {
@@ -41,7 +43,13 @@ interface TestimonialProps {
   position: string;
 }
 
-const ServiceCard: React.FC<ServiceCardProps> = ({ icon, title, details }) => {
+const ServiceCard: React.FC<ServiceCardProps> = ({
+  title,
+  details,
+  image,
+  overlayColor,
+  link,
+}) => {
   return (
     <motion.div
       className="w-full px-4 sm:w-4/5 md:w-1/2 lg:w-1/3"
@@ -51,37 +59,54 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ icon, title, details }) => {
       transition={{ duration: 1, ease: "easeOut" }}
     >
       <motion.div
-        className="group relative mb-8 rounded-xl border border-stroke bg-white p-10 text-center dark:border-dark-3 dark:bg-dark-2 md:px-8 lg:px-6 lg:py-9 xl:px-[43px] xl:py-[45px]"
+        className="group relative mb-8 rounded-xl border border-stroke overflow-hidden p-10 text-center md:px-8 lg:px-6 lg:py-9 xl:px-[43px] xl:py-[45px] cursor-pointer"
+        style={{
+          backgroundImage: image ? `url(${image})` : undefined,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
         whileHover={{ scale: 1.05 }}
         transition={{ duration: 0.3 }}
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
+        onClick={() => {
+          if (link) {
+            window.location.href = link;
+          }
+        }}
       >
-        <motion.div
-          className="relative z-10 mx-auto mb-10 inline-flex h-11 items-center"
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 0.5, ease: "backOut" }}
-        >
-          <span className="absolute -right-3 top-0 z-[-1] h-[34px] w-[34px] rounded-full bg-primary opacity-10"></span>
-          {icon}
-        </motion.div>
-        <motion.h4
-          className="mb-[14px] text-2xl font-bold text-dark dark:text-white"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          {title}
-        </motion.h4>
-        <motion.p
-          className="text-body-color dark:text-dark-6"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          {details}
-        </motion.p>
+        {/* Background overlay - hidden by default, shows on hover */}
+        <div
+          className="absolute inset-0 transition-all duration-300 opacity-0 group-hover:opacity-100"
+          style={{
+            backgroundColor: overlayColor
+              ? `${overlayColor}90`
+              : "rgba(255, 255, 255, 0.9)",
+            backgroundImage: "none",
+          }}
+        ></div>
+        {/* Content - hidden by default, shows on hover */}
+        <div className="relative z-10 opacity-0 group-hover:opacity-100 transition-all duration-300">
+          <motion.h4
+            className="mb-[14px] text-2xl font-bold text-white"
+            style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.8)" }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            {title}
+          </motion.h4>
+          <motion.p
+            className="text-white"
+            style={{ textShadow: "1px 1px 3px rgba(0, 0, 0, 0.8)" }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            {details}
+          </motion.p>
+        </div>
         <motion.span
           className="absolute -bottom-2 left-0 right-0 z-[-1] mx-auto h-12 w-3/4 bg-primary opacity-0 blur-[12px]"
           initial={{ opacity: 0 }}
@@ -419,17 +444,23 @@ const Services = () => {
           <ServiceCard
             title="A Level"
             details="Year 12 - Year 13 (iAS & iAL)"
-            icon={<FaBullhorn className="text-red text-4xl" />}
+            image={Graduation2024}
+            overlayColor="#ef4444"
+            link="/programmes#a-level"
           />
           <ServiceCard
             title="Upper Secondary Level"
             details="Year 10 - Year 11 (iGCSE)"
-            icon={<FaChartLine className="text-green text-4xl" />}
+            image={Graduation2024}
+            overlayColor="#22c55e"
+            link="/programmes#upper-secondary"
           />
           <ServiceCard
             title="Lower Secondary Level"
             details="Year 7 - Year 8 - Year 9 (Pre-iGCSE)"
-            icon={<FaPaintBrush className="text-blue text-4xl" />}
+            image={Graduation2024}
+            overlayColor="#3b82f6"
+            link="/programmes#lower-secondary"
           />
         </div>
       </div>
