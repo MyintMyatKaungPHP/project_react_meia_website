@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import http from "../services/http";
-import MaintenancePage from "../pages/MaintenancePage";
+import UnderConstructionPage from "../pages/UnderConstructionPage";
 
 const MaintenanceOnlyRoute: React.FC = () => {
   const [loading, setLoading] = useState(true);
@@ -21,9 +21,9 @@ const MaintenanceOnlyRoute: React.FC = () => {
           if (mounted) setAllowed(true);
           return;
         }
-        const { data: json } = await http.get(`/site-settings/basic-info`);
+        const { data: json } = await http.get(`/site-settings/homepage`);
         const d = json?.data || {};
-        if (mounted) setAllowed(Boolean(d.maintenance_mode));
+        if (mounted) setAllowed(Boolean(d.page_under_maintenance));
       } catch (_e) {
         // On error, do not allow
         if (mounted) setAllowed(false);
@@ -39,7 +39,7 @@ const MaintenanceOnlyRoute: React.FC = () => {
 
   if (loading) return null;
 
-  return allowed ? <MaintenancePage /> : <Navigate to="/" replace />;
+  return allowed ? <UnderConstructionPage /> : <Navigate to="/" replace />;
 };
 
 export default MaintenanceOnlyRoute;

@@ -8,6 +8,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import BlogCard from "../components/BlogCard";
 import BlogSideCardItem from "../components/BlogSideCard";
+import http from "../services/http";
 
 // Import images
 import Pearson_logo from "../assets/images/Pearson_logo.png";
@@ -95,6 +96,53 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ icon, title, details }) => {
 const Hero = () => {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
+  // Hero section API data
+  const [heroData, setHeroData] = useState({
+    school_name: "MIEA School",
+    typewriter_texts: ["A Level and IGCSE Centre"],
+    intro_text:
+      "We are committed to providing the best education for students.",
+    button_text: "Get Started",
+    button_link: "/#",
+    button_show: true,
+    hero_image: miea_school,
+  });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchHeroData = async () => {
+      try {
+        const { data: json } = await http.get(`/site-settings/hero-section`);
+        const data = json?.data;
+        if (data) {
+          setHeroData({
+            school_name: data.school_name || "MIEA School",
+            typewriter_texts: data.typewriter_texts || [
+              "A Level and IGCSE Centre",
+            ],
+            intro_text:
+              data.intro_text ||
+              "We are committed to providing the best education for students.",
+            button_text: data.button_text || "Get Started",
+            button_link: data.button_link || "/#",
+            button_show:
+              data.button_show !== undefined ? data.button_show : true,
+            hero_image: data.hero_image
+              ? `http://project_laravel_miea_portal.test${data.hero_image}`
+              : miea_school,
+          });
+        }
+      } catch (error) {
+        console.error("Failed to fetch hero data:", error);
+        // Keep default values on error
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchHeroData();
+  }, []);
+
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
       setMousePos({
@@ -131,33 +179,50 @@ const Hero = () => {
                   transition={{ duration: 2 }}
                 >
                   <h1 className="mb-5 text-4xl font-bold !leading-[1.208] text-green dark:text-green-300 xs:text-[30px] sm:text-[40px] md:text-[45px] lg:text-[38px] xl:text-5xl">
-                    MIEA School
+                    {loading ? (
+                      <span className="inline-block h-12 w-48 animate-pulse rounded bg-gray-200 dark:bg-dark-2" />
+                    ) : (
+                      heroData.school_name
+                    )}
                   </h1>
-                  <h2 className="mb-8 text-dark dark:text-white xs:text-[28px] sm:text-[32px] md:text-[36px] lg:text-[40px] xl:text-[40px]">
-                    <Typewriter
-                      words={["A Level and IGCSE Centre"]}
-                      loop={0}
-                      cursor
-                      cursorStyle="_"
-                      typeSpeed={100}
-                      deleteSpeed={50}
-                      delaySpeed={1000}
-                    />
+                  <h2 className="mb-8 text-dark dark:text-white xs:text-[22px] sm:text-[26px] md:text-[30px] lg:text-[34px] xl:text-[38px]">
+                    {loading ? (
+                      <span className="inline-block h-8 w-64 animate-pulse rounded bg-gray-200 dark:bg-dark-2" />
+                    ) : (
+                      <Typewriter
+                        words={heroData.typewriter_texts}
+                        loop={0}
+                        cursor
+                        cursorStyle="_"
+                        typeSpeed={100}
+                        deleteSpeed={50}
+                        delaySpeed={1000}
+                      />
+                    )}
                   </h2>
                   <p className="mb-8 max-w-[480px] text-base text-body-color dark:text-dark-6 xs:text-[14px] sm:text-[16px] md:text-[18px] lg:text-[20px] xl:text-[22px]">
-                    We are committed to providing the best education for
-                    students.
+                    {loading ? (
+                      <span className="inline-block h-4 w-full animate-pulse rounded bg-gray-200 dark:bg-dark-2" />
+                    ) : (
+                      heroData.intro_text
+                    )}
                   </p>
-                  <ul className="flex flex-wrap items-center">
-                    <motion.li whileHover={{ scale: 1.05 }}>
-                      <a
-                        href="/#"
-                        className="inline-flex items-center justify-center rounded-md bg-yellow px-6 py-3 text-center text-base font-medium text-dark hover:text-white hover:bg-green lg:px-7"
-                      >
-                        Get Started
-                      </a>
-                    </motion.li>
-                  </ul>
+                  {heroData.button_show && (
+                    <ul className="flex flex-wrap items-center">
+                      <motion.li whileHover={{ scale: 1.05 }}>
+                        <a
+                          href={heroData.button_link}
+                          className="inline-flex items-center justify-center rounded-md bg-yellow px-6 py-3 text-center text-base font-medium text-dark hover:text-white hover:bg-green lg:px-7"
+                        >
+                          {loading ? (
+                            <span className="inline-block h-4 w-24 animate-pulse rounded bg-gray-200 dark:bg-dark-2" />
+                          ) : (
+                            heroData.button_text
+                          )}
+                        </a>
+                      </motion.li>
+                    </ul>
+                  )}
                 </motion.div>
                 <div className="clients pt-16">
                   <h6 className="mb-6 flex items-center text-xs font-normal text-body-color dark:text-dark-6">
@@ -216,10 +281,15 @@ const Hero = () => {
                   >
                     <span className="group">
                       <motion.img
-                        src={miea_school}
+                        src={loading ? miea_school : heroData.hero_image}
                         alt="hero"
-                        className="max-w-full lg:ml-auto transition-transform duration-300 ease-in-out transform group-hover:scale-105"
+                        style={{ height: "490px", width: "auto" }}
+                        className="max-w-full lg:ml-auto transition-transform duration-300 ease-in-out transform group-hover:scale-105 object-cover"
                         whileHover={{ scale: 1.05 }}
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.src = miea_school;
+                        }}
                       />
                     </span>
                   </motion.div>
