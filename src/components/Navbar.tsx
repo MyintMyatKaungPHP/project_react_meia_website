@@ -10,6 +10,8 @@ import { useTheme } from "../context/ThemeContext";
 import { FaSun, FaMoon } from "react-icons/fa";
 import miea_logo_hr from "../assets/images/miea_logo_hr.png";
 import miea_logo_hr_white from "../assets/images/miea_logo_hr_white.png";
+import { API_CONFIG } from "../config/api";
+import http from "../services/http";
 
 interface ListItemProps {
   children: ReactNode;
@@ -37,6 +39,13 @@ const Navbar: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
   const { theme, toggleTheme } = useTheme();
+  const [logoLightUrl, setLogoLightUrl] = useState<string | null>(null);
+  const [logoDarkUrl, setLogoDarkUrl] = useState<string | null>(null);
+  const [isLoadingLogos, setIsLoadingLogos] = useState<boolean>(true);
+  const DISABLE_FALLBACK =
+    String(
+      (import.meta as any).env?.VITE_DISABLE_FALLBACK || "false"
+    ).toLowerCase() === "true";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,6 +55,29 @@ const Navbar: React.FC = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
+  }, []);
+
+  // Fetch site logos from API (basic info)
+  useEffect(() => {
+    const fetchLogos = async () => {
+      try {
+        setIsLoadingLogos(true);
+        const { data: json } = await http.get(`/site-settings/basic-info`);
+        const data = json?.data;
+        const assetBase = API_CONFIG.BASE_URL.replace(/\/api\/?$/, "");
+        if (data?.site_logo_light) {
+          setLogoLightUrl(`${assetBase}${data.site_logo_light}`);
+        }
+        if (data?.site_logo_dark) {
+          setLogoDarkUrl(`${assetBase}${data.site_logo_dark}`);
+        }
+      } catch (e) {
+        // Ignore and fall back to local assets
+      } finally {
+        setIsLoadingLogos(false);
+      }
+    };
+    fetchLogos();
   }, []);
 
   return (
@@ -59,14 +91,37 @@ const Navbar: React.FC = () => {
       <div className="container mx-auto">
         <div className="relative -mx-4 flex items-center justify-between">
           <div className="w-60 max-w-full px-4">
-            <a href="/#" className="block w-full py-5">
-              <img src={miea_logo_hr} alt="logo" className="dark:hidden" />
-              <img
-                src={miea_logo_hr_white}
-                alt="logo"
-                className="hidden dark:block"
-              />
-            </a>
+            <Link to="/" className="block w-full py-5">
+              {isLoadingLogos ? (
+                <div className="h-8 w-40 rounded bg-gray-200 dark:bg-dark-2 animate-pulse" />
+              ) : (
+                <>
+                  <img
+                    src={logoLightUrl ?? (DISABLE_FALLBACK ? "" : miea_logo_hr)}
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      if (!DISABLE_FALLBACK) target.src = miea_logo_hr;
+                      else target.style.display = "none";
+                    }}
+                    alt="logo"
+                    className="dark:hidden"
+                  />
+                  <img
+                    src={
+                      logoDarkUrl ??
+                      (DISABLE_FALLBACK ? "" : miea_logo_hr_white)
+                    }
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      if (!DISABLE_FALLBACK) target.src = miea_logo_hr_white;
+                      else target.style.display = "none";
+                    }}
+                    alt="logo"
+                    className="hidden dark:block"
+                  />
+                </>
+              )}
+            </Link>
           </div>
           <div className="flex w-full items-center justify-between px-4">
             <div>

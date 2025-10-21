@@ -1,3 +1,33 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Hero Carousel Custom Styles */
+@layer components {
+  .hero-swiper {
+    @apply relative;
+  }
+
+  .hero-swiper .swiper-slide {
+    @apply transition-opacity duration-1000;
+  }
+
+  .hero-swiper img {
+    @apply select-none;
+    -webkit-user-drag: none;
+    user-select: none;
+  }
+
+  /* Force autoplay to work */
+  .hero-swiper .swiper-wrapper {
+    @apply transition-transform duration-800 ease-in-out;
+  }
+  
+  .hero-swiper .swiper-slide-active {
+    @apply opacity-100;
+  }
+  
+  .hero-swiper .swiper-slide {
+    @apply opacity-0;
+  }
+}

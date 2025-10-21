@@ -783,20 +783,12 @@ const Video = () => {
   });
 
   return (
-    <section className="bg-white dark:bg-dark">
+    <section className="bg-gradient-to-br from-green-600 to-green-800 dark:from-green-700 dark:to-green-900">
       <div ref={domNode} className="mx-auto">
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4">
             <div className="relative z-10 overflow-hidden">
-              <img
-                src={StuGroupCap}
-                alt="MIEA Students"
-                className="absolute left-0 top-[-230px] z-[-1] h-[calc(100%+230px)] w-full object-cover object-top"
-              />
-              {/* Green overlay with opacity */}
-              <div className="absolute inset-0 bg-green-900 opacity-80 z-0"></div>
-
-              <div className="relative z-10 px-8 py-32 md:py-[180px]">
+              <div className="relative z-10 px-8 py-32 min-h-[420px] md:py-[180px] md:min-h-[550px]">
                 <div className="mx-auto max-w-[500px] text-center">
                   <motion.h2
                     className="mb-5 text-3xl font-bold leading-[1.2] text-yellow sm:text-4xl md:text-[40px]"
@@ -806,6 +798,15 @@ const Video = () => {
                   >
                     School Life at MIEA
                   </motion.h2>
+
+                  <motion.p
+                    className="mb-6 text-base text-white md:text-lg"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                  >
+                    Discover our student and teacher activities at MIEA.
+                  </motion.p>
 
                   <motion.button
                     onClick={() => setVideoOpen(true)}
@@ -820,8 +821,8 @@ const Video = () => {
                 <div>
                   <span className="absolute bottom-0 left-0 z-[-1]">
                     <svg
-                      width="957"
-                      height="550"
+                      width="1100"
+                      height="650"
                       viewBox="0 0 957 550"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
@@ -837,16 +838,16 @@ const Video = () => {
                       <defs>
                         <linearGradient
                           id="paint0_linear"
-                          x1="-70.8242"
+                          x1="-60.8242"
                           y1="678.647"
                           x2="1009.31"
                           y2="678.647"
                           gradientUnits="userSpaceOnUse"
                         >
-                          <stop stopColor="#16a34a" stopOpacity="0.26" />
+                          <stop stopColor="#f5c115" stopOpacity="0.46" />
                           <stop
                             offset="1"
-                            stopColor="#16a34a"
+                            stopColor="#f5c115"
                             stopOpacity="0"
                           />
                         </linearGradient>
@@ -855,8 +856,8 @@ const Video = () => {
                   </span>
                   <span className="absolute bottom-0 right-0 z-[-1]">
                     <svg
-                      width="431"
-                      height="320"
+                      width="451"
+                      height="500"
                       viewBox="0 0 431 320"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
@@ -878,10 +879,10 @@ const Video = () => {
                           y2="585.157"
                           gradientUnits="userSpaceOnUse"
                         >
-                          <stop stopColor="#16a34a" stopOpacity="0.36" />
+                          <stop stopColor="#f5c115" stopOpacity="0.36" />
                           <stop
                             offset="1"
-                            stopColor="#16a34a"
+                            stopColor="#f5c115"
                             stopOpacity="0"
                           />
                         </linearGradient>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MIEA School</title>
-    <link rel="icon" href="./src/assets/images/MIEA_logo.png" />
+    <link id="favicon" rel="icon" href="./src/assets/images/MIEA_logo.png" />
 
     <!-- Google Fonts - Roboto Slab -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -15,6 +15,52 @@
     />
 
     <link rel="stylesheet" href="./src/assets/styles/style.css" />
+
+    <script>
+      (function () {
+        try {
+          var apiBase =
+            "%VITE_API_URL%" || "http://project_laravel_miea_portal.test/api";
+          if (
+            !apiBase ||
+            apiBase === "" ||
+            apiBase.includes("%VITE_API_URL%")
+          ) {
+            apiBase = "http://project_laravel_miea_portal.test/api";
+          }
+          var assetBase = apiBase.replace(/\/api\/?$/, "");
+          fetch(apiBase + "/site-settings/basic-info")
+            .then(function (r) {
+              return r.ok ? r.json() : null;
+            })
+            .then(function (json) {
+              if (!json || !json.data) return;
+              var d = json.data;
+              if (d.site_name) {
+                document.title = d.site_name;
+              }
+              if (d.site_favicon) {
+                var href = String(d.site_favicon || "");
+                if (!/^https?:\/\//i.test(href)) {
+                  href = assetBase + href;
+                }
+                var link =
+                  document.querySelector("link#favicon") ||
+                  document.createElement("link");
+                link.id = "favicon";
+                link.rel = "icon";
+                link.href = href;
+                if (!link.parentNode) document.head.appendChild(link);
+              }
+            })
+            .catch(function () {
+              /* ignore */
+            });
+        } catch (e) {
+          /* ignore */
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -1,144 +1,433 @@
-import React from "react";
+import { useState, useEffect } from "react";
+import http from "../services/http";
+import { API_CONFIG } from "../config/api";
 
-const tableData = [
-  {
-    name: "Musharof Chowdhury",
-    title: "Multidisciplinary Web Entrepreneur",
-    email: "musharof@example.com",
-    role: "Owner",
-  },
-  {
-    name: "Naimur Rahman",
-    title: "Website Front-end Developer",
-    email: "naimurrahman@example.com",
-    role: "Member",
-  },
-  {
-    name: "Shafiq Hammad",
-    title: "Regional Paradigm Technician",
-    email: "shafiq.hd@example.com",
-    role: "Moderator",
-  },
-  {
-    name: "Alex Semuyel",
-    title: "Applications Engineer",
-    email: "alex.semuel@example.com",
-    role: "Admin",
-  },
-  {
-    name: "Sulium Keliym",
-    title: "Lead Implementation Liaison",
-    email: "suliym.info@example.com",
-    role: "Member",
-  },
-  {
-    name: "Devid Deekook",
-    title: "Central Security Manager",
-    email: "devid.decok@example.com",
-    role: "Moderator",
-  },
-];
+interface ApiResponse {
+  success: boolean;
+  data: any;
+}
 
-const headers = [
-  { name: "Name", styles: "min-w-[280px]" },
-  { name: "Position", styles: "min-w-[280px]" },
-  { name: "Email", styles: "min-w-[250px]" },
-  { name: "Role", styles: "min-w-[140px]" },
-  { name: "Edit", styles: "min-w-[140px] text-right" },
-];
+const Test = () => {
+  const [basicInfo, setBasicInfo] = useState<ApiResponse | null>(null);
+  const [footerInfo, setFooterInfo] = useState<ApiResponse | null>(null);
+  const [allSettings, setAllSettings] = useState<ApiResponse | null>(null);
+  const [homepageSettings, setHomepageSettings] = useState<ApiResponse | null>(
+    null
+  );
+  const [heroSection, setHeroSection] = useState<ApiResponse | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-const Table5 = () => {
-  return (
-    <section className="bg-white dark:bg-dark py-20 lg:py-[120px]">
-      <div className="container mx-auto">
-        <div className="-mx-4 flex flex-wrap">
-          <div className="w-full px-4">
-            <div className="max-w-full overflow-x-auto rounded-xl shadow-[0px_3px_8px_0px_rgba(0,0,0,0.08)] bg-white dark:bg-dark-2">
-              <table className="w-full table-auto">
-                <TableHead headers={headers} />
-                <TableBody data={tableData} />
-              </table>
+  const ASSET_BASE = API_CONFIG.BASE_URL.replace(/\/api\/?$/, "");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+
+        // Fetch Basic Information
+        const { data: basicData } = await http.get(`/site-settings/basic-info`);
+        setBasicInfo(basicData);
+
+        // Fetch Footer Information
+        const { data: footerData } = await http.get(
+          `/site-settings/footer-info`
+        );
+        setFooterInfo(footerData);
+
+        // Fetch All Settings
+        const { data: allData } = await http.get(`/site-settings/all`);
+        setAllSettings(allData);
+
+        // Fetch Homepage Settings
+        const { data: homepageData } = await http.get(
+          `/site-settings/homepage`
+        );
+        setHomepageSettings(homepageData);
+
+        // Fetch Hero Section (single image)
+        const { data: heroData } = await http.get(
+          `/site-settings/hero-section`
+        );
+        setHeroSection(heroData);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Unknown error occurred");
+        console.error("API Error:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-100 p-8">
+        <div className="max-w-6xl mx-auto">
+          <h1 className="text-3xl font-bold mb-8">Site Settings API Test</h1>
+          <div className="bg-white p-6 rounded-lg shadow">
+            <div className="animate-pulse">
+              <div className="h-4 bg-gray-200 rounded w-1/4 mb-4"></div>
+              <div className="h-4 bg-gray-200 rounded w-1/2 mb-2"></div>
+              <div className="h-4 bg-gray-200 rounded w-3/4"></div>
             </div>
+            <p className="mt-4 text-blue-600">Loading API data...</p>
+          </div>
+
+          {/* Homepage Settings */}
+          {/* moved to main screen after loading */}
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gray-100 p-8">
+        <div className="max-w-6xl mx-auto">
+          <h1 className="text-3xl font-bold mb-8">Site Settings API Test</h1>
+          <div className="bg-red-50 border border-red-200 p-6 rounded-lg">
+            <h2 className="text-red-800 font-bold mb-2">Error</h2>
+            <p className="text-red-600">{error}</p>
           </div>
         </div>
       </div>
-    </section>
-  );
-};
+    );
+  }
 
-export default Table5;
-
-const TableHead = ({ headers }) => {
   return (
-    <thead>
-      <tr className="bg-primary text-left">
-        {headers.map((header, index) => (
-          <th
-            className={`py-4 px-4 first:pl-11 last:pr-11 text-base font-medium text-white ${header.styles}`}
-            key={index}
-          >
-            {header.name}
-          </th>
-        ))}
-      </tr>
-    </thead>
-  );
-};
+    <div className="min-h-screen bg-gray-100 p-8">
+      <div className="max-w-6xl mx-auto">
+        <h1 className="text-3xl font-bold mb-8">Site Settings API Test</h1>
 
-const TableBody = ({ data }) => {
-  return (
-    <tbody>
-      {data.map((row, index) => (
-        <tr key={index}>
-          <td className="px-4 py-5 border-t border-stroke dark:border-dark-3 pl-11">
-            <h5 className="text-base text-body-color dark:text-dark-6">
-              {row.name}
-            </h5>
-          </td>
-          <td className="px-4 py-5 border-t border-stroke dark:border-dark-3">
-            <p className="text-base text-body-color dark:text-dark-6">
-              {row.title}
-            </p>
-          </td>
-          <td className="px-4 py-5 border-t border-stroke dark:border-dark-3">
-            <p className="text-base text-body-color dark:text-dark-6">
-              {row.email}
-            </p>
-          </td>
-          <td className="px-4 py-5 border-t border-stroke dark:border-dark-3">
-            <p className="text-base text-body-color dark:text-dark-6">
-              {row.role}
-            </p>
-          </td>
-          <td className="px-4 py-5 text-right border-t border-stroke pr-11 dark:border-dark-3">
-            <div className="relative">
-              <select className="text-body-color shadow-1 dark:bg-dark-3 dark:text-dark-6 dark:shadow-card appearance-none rounded-md bg-white py-[6px] pl-3 pr-8 text-sm outline-none">
-                <option value="Action" disabled>
-                  Action
-                </option>
-                <option value="">Edit</option>
-                <option value="">Delete</option>
-                <option value="">Details</option>
-              </select>
-              <span className="absolute -translate-y-1/2 top-1/2 right-5 text-dark dark:text-dark-7">
-                <svg
-                  width={10}
-                  height={6}
-                  viewBox="0 0 10 6"
-                  className="fill-current"
-                >
-                  <path d="M0.47072 0.732694C0.47072 0.673853 0.500141 0.600303 0.54427 0.556173C0.647241 0.453203 0.809051 0.453203 0.912022 0.541463L4.85431 4.24839C4.92785 4.32194 5.06025 4.32194 5.14851 4.24839L9.09079 0.541464C9.19376 0.438494 9.35557 0.453203 9.45854 0.556174C9.56151 0.659144 9.5468 0.820954 9.44383 0.923924L5.50155 4.63085C5.22206 4.88092 4.78076 4.88092 4.51598 4.63085L0.558981 0.923924C0.50014 0.865084 0.47072 0.806244 0.47072 0.732694Z" />
-                  <path
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d="M1.22659 0.19111L5.00141 3.74057L8.76422 0.2024C9.08459 -0.110932 9.54201 -0.0260654 9.79139 0.223319C10.112 0.543965 10.0277 1.00575 9.77668 1.25677L9.76644 1.26701L5.81552 4.98175C5.36257 5.38702 4.6445 5.39893 4.19352 4.97378C4.19327 4.97354 4.19377 4.97401 4.19352 4.97378L0.225953 1.25695C0.102762 1.13375 -4.20186e-08 0.961273 -3.20269e-08 0.732689C-2.40601e-08 0.550431 0.0780105 0.356728 0.211421 0.223318C0.494701 -0.0599624 0.935574 -0.0583303 1.21836 0.184061L1.22659 0.19111ZM4.51598 4.63085C4.78076 4.88092 5.22206 4.88092 5.50155 4.63085L9.44383 0.923924C9.5468 0.820954 9.56151 0.659144 9.45854 0.556174C9.35557 0.453203 9.19376 0.438494 9.09079 0.541464L5.14851 4.24839C5.06025 4.32194 4.92785 4.32194 4.85431 4.24839L0.912022 0.541463C0.809051 0.453203 0.647241 0.453203 0.54427 0.556173C0.500141 0.600303 0.47072 0.673853 0.47072 0.732694C0.47072 0.806244 0.50014 0.865084 0.558981 0.923924L4.51598 4.63085Z"
-                  />
-                </svg>
-              </span>
+        {/* Homepage Settings */}
+        <div className="bg-white p-6 rounded-lg shadow mb-8">
+          <h2 className="text-2xl font-bold mb-4 text-emerald-600">
+            Homepage Settings API
+          </h2>
+          <div className="bg-gray-50 p-4 rounded">
+            <pre className="text-sm overflow-auto max-h-96">
+              {JSON.stringify(homepageSettings, null, 2)}
+            </pre>
+          </div>
+
+          {homepageSettings?.data && (
+            <div className="mt-4 text-sm">
+              <p>
+                <strong>page_under_maintenance:</strong>{" "}
+                {String(homepageSettings.data.page_under_maintenance)}
+              </p>
+              <p className="mt-2">
+                <strong>under_maintenance_message:</strong>{" "}
+                {homepageSettings.data.under_maintenance_message ?? "-"}
+              </p>
             </div>
-          </td>
-        </tr>
-      ))}
-    </tbody>
+          )}
+        </div>
+
+        {/* Hero Section (Single Image) */}
+        <div className="bg-white p-6 rounded-lg shadow mb-8">
+          <h2 className="text-2xl font-bold mb-4 text-orange-600">
+            Hero Section API (single image)
+          </h2>
+          <div className="bg-gray-50 p-4 rounded">
+            <pre className="text-sm overflow-auto max-h-96">
+              {JSON.stringify(heroSection, null, 2)}
+            </pre>
+          </div>
+
+          {heroSection?.data && (
+            <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <p>
+                  <strong>School Name:</strong> {heroSection.data.school_name}
+                </p>
+                <p className="mt-1">
+                  <strong>Intro Text:</strong> {heroSection.data.intro_text}
+                </p>
+                <p className="mt-1">
+                  <strong>Button:</strong> {heroSection.data.button_text} →{" "}
+                  {heroSection.data.button_link}
+                </p>
+              </div>
+              <div>
+                {heroSection.data.hero_image && (
+                  <div>
+                    <strong>Hero Image URL:</strong>
+                    <div className="text-xs text-gray-500 mb-1">
+                      {`http://project_laravel_miea_portal.test${heroSection.data.hero_image}`}
+                    </div>
+                    <img
+                      src={`http://project_laravel_miea_portal.test${heroSection.data.hero_image}`}
+                      alt="Hero"
+                      className="mt-1 h-28 w-auto rounded border object-cover"
+                    />
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+        {/* Basic Information */}
+        <div className="bg-white p-6 rounded-lg shadow mb-8">
+          <h2 className="text-2xl font-bold mb-4 text-green-600">
+            Basic Information API
+          </h2>
+          <div className="bg-gray-50 p-4 rounded">
+            <pre className="text-sm overflow-auto">
+              {JSON.stringify(basicInfo, null, 2)}
+            </pre>
+          </div>
+
+          {basicInfo?.data && (
+            <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <h3 className="font-bold mb-2">Logos & Favicon:</h3>
+
+                {/* Light Logo */}
+                {basicInfo.data.site_logo_light && (
+                  <div className="mb-4">
+                    <strong>Light Logo:</strong>
+                    <div className="text-xs text-gray-500 mb-1">
+                      URL:{" "}
+                      {`http://project_laravel_miea_portal.test${basicInfo.data.site_logo_light}`}
+                    </div>
+                    <img
+                      src={`http://project_laravel_miea_portal.test${basicInfo.data.site_logo_light}`}
+                      alt="Light Logo"
+                      className="w-20 h-20 object-contain border rounded mt-1"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = "none";
+                        const nextSibling = target.nextSibling as HTMLElement;
+                        if (nextSibling) nextSibling.style.display = "block";
+                      }}
+                    />
+                    <div className="hidden text-red-500 text-sm">
+                      Light Logo not found
+                    </div>
+                  </div>
+                )}
+
+                {/* Dark Logo */}
+                {basicInfo.data.site_logo_dark && (
+                  <div className="mb-4">
+                    <strong>Dark Logo:</strong>
+                    <div className="text-xs text-gray-500 mb-1">
+                      URL:{" "}
+                      {`http://project_laravel_miea_portal.test${basicInfo.data.site_logo_dark}`}
+                    </div>
+                    <img
+                      src={`http://project_laravel_miea_portal.test${basicInfo.data.site_logo_dark}`}
+                      alt="Dark Logo"
+                      className="w-20 h-20 object-contain border rounded mt-1 bg-gray-100"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = "none";
+                        const nextSibling = target.nextSibling as HTMLElement;
+                        if (nextSibling) nextSibling.style.display = "block";
+                      }}
+                    />
+                    <div className="hidden text-red-500 text-sm">
+                      Dark Logo not found
+                    </div>
+                  </div>
+                )}
+
+                {/* Favicon */}
+                {basicInfo.data.site_favicon && (
+                  <div className="mb-2">
+                    <strong>Favicon:</strong>
+                    <div className="text-xs text-gray-500 mb-1">
+                      URL:{" "}
+                      {`http://project_laravel_miea_portal.test${basicInfo.data.site_favicon}`}
+                    </div>
+                    <img
+                      src={`http://project_laravel_miea_portal.test${basicInfo.data.site_favicon}`}
+                      alt="Favicon"
+                      className="w-8 h-8 object-contain border rounded mt-1"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = "none";
+                        const nextSibling = target.nextSibling as HTMLElement;
+                        if (nextSibling) nextSibling.style.display = "block";
+                      }}
+                    />
+                    <div className="hidden text-red-500 text-sm">
+                      Favicon not found
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Footer Information */}
+        <div className="bg-white p-6 rounded-lg shadow mb-8">
+          <h2 className="text-2xl font-bold mb-4 text-blue-600">
+            Footer Information API
+          </h2>
+          <div className="bg-gray-50 p-4 rounded">
+            <pre className="text-sm overflow-auto">
+              {JSON.stringify(footerInfo, null, 2)}
+            </pre>
+          </div>
+
+          {footerInfo?.data && (
+            <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <h3 className="font-bold mb-2">Footer Content:</h3>
+
+                {/* Footer Logo */}
+                {footerInfo.data.logo && (
+                  <div className="mb-4">
+                    <strong>Footer Logo:</strong>
+                    <div className="text-xs text-gray-500 mb-1">
+                      URL:{" "}
+                      {`http://project_laravel_miea_portal.test${footerInfo.data.logo}`}
+                    </div>
+                    <img
+                      src={`http://project_laravel_miea_portal.test${footerInfo.data.logo}`}
+                      alt="Footer Logo"
+                      className="w-20 h-20 object-contain border rounded mt-1"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = "none";
+                        const nextSibling = target.nextSibling as HTMLElement;
+                        if (nextSibling) nextSibling.style.display = "block";
+                      }}
+                    />
+                    <div className="hidden text-red-500 text-sm">
+                      Footer Logo not found
+                    </div>
+                  </div>
+                )}
+
+                {/* Footer Text */}
+                {footerInfo.data.description && (
+                  <div className="mb-2">
+                    <strong>Footer Description:</strong>
+                    <p className="text-sm mt-1">
+                      {footerInfo.data.description}
+                    </p>
+                  </div>
+                )}
+
+                {/* Copyright Text */}
+                {footerInfo.data.copyright_text && (
+                  <div className="mb-2">
+                    <strong>Copyright Text:</strong>
+                    <p className="text-sm mt-1">
+                      {footerInfo.data.copyright_text}
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* All Settings */}
+        <div className="bg-white p-6 rounded-lg shadow">
+          <h2 className="text-2xl font-bold mb-4 text-purple-600">
+            All Settings API
+          </h2>
+
+          {/* Image URLs Display */}
+          {allSettings?.data && (
+            <div className="mb-6">
+              <h3 className="text-lg font-bold mb-3">All Image URLs:</h3>
+              <div className="bg-blue-50 p-4 rounded">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                  {/* Basic Info Images */}
+                  <div>
+                    <h4 className="font-bold mb-2 text-blue-700">
+                      Basic Info Images:
+                    </h4>
+                    {allSettings.data.basic_info?.site_logo_light && (
+                      <div className="mb-1">
+                        <strong>Light Logo:</strong>
+                        <br />
+                        <code className="text-xs bg-white p-1 rounded border">
+                          http://project_laravel_miea_portal.test
+                          {allSettings.data.basic_info.site_logo_light}
+                        </code>
+                      </div>
+                    )}
+                    {allSettings.data.basic_info?.site_logo_dark && (
+                      <div className="mb-1">
+                        <strong>Dark Logo:</strong>
+                        <br />
+                        <code className="text-xs bg-white p-1 rounded border">
+                          http://project_laravel_miea_portal.test
+                          {allSettings.data.basic_info.site_logo_dark}
+                        </code>
+                      </div>
+                    )}
+                    {allSettings.data.basic_info?.site_favicon && (
+                      <div className="mb-1">
+                        <strong>Favicon:</strong>
+                        <br />
+                        <code className="text-xs bg-white p-1 rounded border">
+                          http://project_laravel_miea_portal.test
+                          {allSettings.data.basic_info.site_favicon}
+                        </code>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Footer Images */}
+                  <div>
+                    <h4 className="font-bold mb-2 text-blue-700">
+                      Footer Images:
+                    </h4>
+                    {allSettings.data.footer?.logo && (
+                      <div className="mb-1">
+                        <strong>Footer Logo:</strong>
+                        <br />
+                        <code className="text-xs bg-white p-1 rounded border">
+                          http://project_laravel_miea_portal.test
+                          {allSettings.data.footer.logo}
+                        </code>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Hero Images */}
+                  {allSettings.data.homepage?.hero_section?.hero_images && (
+                    <div className="col-span-2">
+                      <h4 className="font-bold mb-2 text-blue-700">
+                        Hero Images:
+                      </h4>
+                      {allSettings.data.homepage.hero_section.hero_images.map(
+                        (image: string, index: number) => (
+                          <div key={index} className="mb-1">
+                            <strong>Hero Image {index + 1}:</strong>
+                            <br />
+                            <code className="text-xs bg-white p-1 rounded border">
+                              http://project_laravel_miea_portal.test{image}
+                            </code>
+                          </div>
+                        )
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+
+          <div className="bg-gray-50 p-4 rounded">
+            <pre className="text-sm overflow-auto max-h-96">
+              {JSON.stringify(allSettings, null, 2)}
+            </pre>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
+
+export default Test;

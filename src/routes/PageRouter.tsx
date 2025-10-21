@@ -11,56 +11,89 @@ import FacilitiesPage from "../pages/FacilitiesPage";
 import Contact from "../pages/ContactPage";
 import NewsPage from "../pages/NewsPage";
 import NewsDetailPage from "../pages/NewsDetailPage";
+import TestPage from "../pages/Test";
+import MaintenancePage from "../pages/MaintenancePage";
+import UnderConstructionPage from "../pages/UnderConstructionPage";
+import NotFoundPage from "../pages/NotFoundPage";
+import MaintenanceGuard from "./MaintenanceGuard";
+import MaintenanceOnlyRoute from "./MaintenanceOnlyRoute";
 
-const router = createBrowserRouter([
-  {
-    element: <MainLayout />,
-    children: [
+const MAINTENANCE =
+  String(
+    (import.meta as any).env?.VITE_MAINTENANCE_MODE || "false"
+  ).toLowerCase() === "true";
+
+const router = MAINTENANCE
+  ? createBrowserRouter([
+      { path: "/", element: <MaintenancePage /> },
+      { path: "*", element: <MaintenancePage /> },
+    ])
+  : createBrowserRouter([
       {
-        path: "/",
-        element: <HomePage />,
+        element: (
+          <MaintenanceGuard>
+            <MainLayout />
+          </MaintenanceGuard>
+        ),
+        children: [
+          {
+            path: "/",
+            element: <HomePage />,
+          },
+          {
+            path: "/about_miea",
+            element: <AboutMIEAPage />,
+          },
+          {
+            path: "/organisational_structure",
+            element: <OrganisationalPage />,
+          },
+          {
+            path: "/school_achievement",
+            element: <AchievementPage />,
+          },
+          {
+            path: "/student_achievements",
+            element: <StudentAchievementsPage />,
+          },
+          {
+            path: "/programmes",
+            element: <ProgrammesPage />,
+          },
+          {
+            path: "/facilities",
+            element: <FacilitiesPage />,
+          },
+          {
+            path: "/contact",
+            element: <Contact />,
+          },
+          {
+            path: "/news",
+            element: <NewsPage />,
+          },
+          {
+            path: "/news_details",
+            element: <NewsDetailPage />,
+          },
+          {
+            path: "/test",
+            element: <TestPage />,
+          },
+          {
+            path: "/maintenance",
+            element: <MaintenanceOnlyRoute />,
+          },
+          {
+            path: "/under-construction",
+            element: <UnderConstructionPage />,
+          },
+          {
+            path: "*",
+            element: <NotFoundPage />,
+          },
+        ],
       },
-      {
-        path: "/about_miea",
-        element: <AboutMIEAPage />,
-      },
-      {
-        path: "/organisational_structure",
-        element: <OrganisationalPage />,
-      },
-      {
-        path: "/school_achievement",
-        element: <AchievementPage />,
-      },
-      {
-        path: "/student_achievements",
-        element: <StudentAchievementsPage />,
-      },
-      {
-        path: "/programmes",
-        element: <ProgrammesPage />,
-      },
-      {
-        path: "/facilities",
-        element: <FacilitiesPage />,
-      },
-      {
-        path: "/contact",
-        element: <Contact />,
-      },
-      {
-        path: "/news",
-        element: <NewsPage />,
-      },
-      {
-        path: "/news_details",
-        element: <NewsDetailPage />,
-      },
-      {
-        path: "/events",
-      },
-    ],
-  },
-]);
+    ]);
 
 export default router;
