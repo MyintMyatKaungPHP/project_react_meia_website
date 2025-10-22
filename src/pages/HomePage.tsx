@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMotionValue, useTransform, motion } from "framer-motion";
 import { Typewriter } from "react-simple-typewriter";
-import { FaBullhorn, FaChartLine, FaPaintBrush, FaPlay } from "react-icons/fa";
+import { FaPlay } from "react-icons/fa";
 import { useInView } from "react-intersection-observer";
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -10,7 +10,6 @@ import { Autoplay } from "swiper/modules";
 import BlogCard from "../components/BlogCard";
 import BlogSideCardItem from "../components/BlogSideCard";
 import UnderConstructionPage from "./UnderConstructionPage";
-import Footer from "../components/Footer";
 import http from "../services/http";
 
 // Import images
@@ -21,7 +20,6 @@ import CIE_logo_white from "../assets/images/CIE_logo_white.png";
 import miea_school from "../assets/images/miea_school.png";
 import StuGroup from "../assets/images/stugroup.png";
 import StuGroupWhite from "../assets/images/stugroup_white.png";
-import StuGroupCap from "../assets/images/stugroup_cap.png";
 import Graduation2024 from "../assets/images/2024_graduation.jpg";
 
 // Interfaces
@@ -37,7 +35,7 @@ interface ServiceCardProps {
 }
 
 interface StatsItemProps {
-  user: number;
+  user: number | string;
   title: string;
   suffix?: string;
 }
@@ -790,6 +788,40 @@ const Moto = () => {
 };
 
 const Achievements = () => {
+  // Achievement section API data state
+  const [achievementData, setAchievementData] = useState({
+    graduated_students: 1682,
+    qualified_teachers: 12,
+    student_teacher_ratio: "15:1",
+    courses_offered: 102,
+  });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchAchievementData = async () => {
+      try {
+        setLoading(true);
+        const { data: json } = await http.get(`/site-settings/achievements`);
+        if (json?.success && json?.data) {
+          const data = json.data;
+          setAchievementData({
+            graduated_students: data.graduated_students || 1682,
+            qualified_teachers: data.qualified_teachers || 12,
+            student_teacher_ratio: data.student_teacher_ratio || "15:1",
+            courses_offered: data.courses_offered || 102,
+          });
+        }
+      } catch (error) {
+        console.error("Failed to fetch achievement data:", error);
+        // Keep default values on error
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAchievementData();
+  }, []);
+
   return (
     <section className="bg-gray-4 py-20 dark:bg-dark-2 lg:py-[120px]">
       <div className="mx-auto px-4 sm:container">
@@ -807,26 +839,39 @@ const Achievements = () => {
                 whileInView={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.3 }}
               >
-                Some Fun Facts
+                Our Impact in Numbers
               </motion.span>
               <h2 className="mb-3 text-3xl font-bold leading-[1.2] text-green dark:text-white md:text-[40px]">
-                Achievements of MIEA
+                MIEA by the Numbers
               </h2>
               <p className="text-base text-body-color dark:text-dark-6">
-                Here are some of the achievements of MIEA over the years.
+                Discover our journey through key statistics that showcase our
+                commitment to educational excellence.
+              </p>
+              <p className="text-base text-body-color dark:text-dark-6">
+                We continue to strive for growth and are still counting our
+                achievements.
               </p>
             </div>
           </motion.div>
 
           <div className="w-full px-4 lg:w-1/2">
             <div className="-mx-3 flex flex-wrap md:-mx-4">
-              <StatsItem user={1682} title="Total Registered Students" />
-              <StatsItem user={102} title="Total Candidates in 2024" />
-              <StatsItem user={12} title="Qualified Teachers" />
               <StatsItem
-                user={87}
-                title="Passed with A-A* students in 2024"
-                suffix="%"
+                user={loading ? 0 : achievementData.graduated_students}
+                title="Graduated Students"
+              />
+              <StatsItem
+                user={loading ? 0 : achievementData.qualified_teachers}
+                title="Qualified Teachers"
+              />
+              <StatsItem
+                user={loading ? 0 : achievementData.student_teacher_ratio}
+                title="Student-Teacher Ratio"
+              />
+              <StatsItem
+                user={loading ? 0 : achievementData.courses_offered}
+                title="No. of Courses Offering"
               />
             </div>
           </div>
@@ -838,20 +883,27 @@ const Achievements = () => {
 
 const StatsItem: React.FC<StatsItemProps> = ({ user, title, suffix = "" }) => {
   const [ref, inView] = useInView({ triggerOnce: false });
-  const [count, setCount] = useState(0);
+  const [displayValue, setDisplayValue] = useState<number | string>(0);
 
   useEffect(() => {
     if (inView) {
+      // If user is a string (like "15:1"), display it directly
+      if (typeof user === "string") {
+        setDisplayValue(user);
+        return;
+      }
+
+      // If user is a number, animate it
       let start = 0;
       const duration = 2000; // Animation duration in ms
       const increment = Math.ceil(user / (duration / 30)); // Adjust speed
       const interval = setInterval(() => {
         start += increment;
         if (start >= user) {
-          setCount(user);
+          setDisplayValue(user);
           clearInterval(interval);
         } else {
-          setCount(start);
+          setDisplayValue(start);
         }
       }, 30);
       return () => clearInterval(interval);
@@ -868,7 +920,7 @@ const StatsItem: React.FC<StatsItemProps> = ({ user, title, suffix = "" }) => {
     >
       <div className="group mb-6 rounded-[5px] bg-white px-4 py-6 text-center shadow-three hover:bg-green dark:bg-dark md:mb-8">
         <h4 className="mb-1 text-2xl font-bold leading-tight text-dark group-hover:text-white dark:text-white sm:text-[28px]">
-          {count}
+          {displayValue}
           {suffix}
         </h4>
         <p className="text-base text-body-color group-hover:text-white dark:text-dark-6">
