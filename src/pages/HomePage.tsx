@@ -550,7 +550,49 @@ const Services = () => {
   );
 };
 
-const Features = () => {
+const About = () => {
+  // About MIEA School, Content, Mission & Vision API data state
+  const [aboutData, setAboutData] = useState({
+    title: "About MIEA School",
+    content:
+      "MIEA School is a private academic centre in Yangon, Myanmar, offering a wide range of courses for students from Year 7 to Year 13.",
+    mission:
+      "Our mission is to provide high-quality education and foster academic excellence.",
+    vision: "Our vision is to be a leading educational institution in Myanmar.",
+  });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchAboutData = async () => {
+      try {
+        setLoading(true);
+        const { data: json } = await http.get(`/site-settings/about-section`);
+        if (json?.success && json?.data) {
+          const data = json.data;
+          setAboutData({
+            title: data.title || "About MIEA School",
+            content:
+              data.content ||
+              "MIEA School is a private academic centre in Yangon, Myanmar, offering a wide range of courses for students from Year 7 to Year 13.",
+            mission:
+              data.mission ||
+              "Our mission is to provide high-quality education and foster academic excellence.",
+            vision:
+              data.vision ||
+              "Our vision is to be a leading educational institution in Myanmar.",
+          });
+        }
+      } catch (error) {
+        console.error("Failed to fetch about data:", error);
+        // Keep default values on error
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAboutData();
+  }, []);
+
   return (
     <section className="bg-white pb-12 pt-20 dark:bg-dark lg:pb-[90px] lg:pt-[120px]">
       <div className="container mx-auto">
@@ -597,21 +639,24 @@ const Features = () => {
                 className="mb-11 border-b border-stroke pb-11 dark:border-dark-3"
               >
                 <h3 className="mb-5 text-xl font-bold text-green dark:text-white">
-                  MIEA School
+                  {loading ? (
+                    <span className="inline-block h-6 w-32 animate-pulse rounded bg-gray-200 dark:bg-dark-2" />
+                  ) : (
+                    aboutData.title
+                  )}
                 </h3>
-                <p className="text-semibold text-lg text-dark text-justify dark:text-white">
-                  MIEA School is a private academic centre in Yangon, Myanmar,
-                  offering a wide range of courses for students from Year 7 to
-                  Year 13.
-                </p>
-                <p className="text-semibold text-lg text-dark text-justify dark:text-white">
-                  We are committed to providing high-quality education and
-                  fostering academic excellence through a structured curriculum
-                  that covers all key stages of secondary education, including
-                  Lower Secondary (Pre-IGCSE) for Years 7 to 9, Upper Secondary
-                  (IGCSE) for Years 10 to 11, and A Level (iAS/iAL) for Years 12
-                  to 13.
-                </p>
+                <div className="text-semibold text-lg text-dark text-justify dark:text-white">
+                  {loading ? (
+                    <>
+                      <div className="h-4 w-full animate-pulse rounded bg-gray-200 dark:bg-dark-2 mb-2" />
+                      <div className="h-4 w-3/4 animate-pulse rounded bg-gray-200 dark:bg-dark-2" />
+                    </>
+                  ) : (
+                    <div
+                      dangerouslySetInnerHTML={{ __html: aboutData.content }}
+                    />
+                  )}
+                </div>
               </motion.div>
 
               <div className="grid grid-cols-2 gap-8">
@@ -624,8 +669,11 @@ const Features = () => {
                     Mission
                   </h3>
                   <p className="text-base leading-normal text-dark dark:text-dark-6">
-                    Lorem ipsum dolor sit amet sitim consectetur elit estibulum
-                    tincidunt rutrum.
+                    {loading ? (
+                      <span className="inline-block h-4 w-full animate-pulse rounded bg-gray-200 dark:bg-dark-2" />
+                    ) : (
+                      aboutData.mission
+                    )}
                   </p>
                 </motion.div>
                 <motion.div
@@ -637,8 +685,11 @@ const Features = () => {
                     Vision
                   </h3>
                   <p className="text-base leading-normal text-dark dark:text-dark-6">
-                    Lorem ipsum dolor sit amet sitim consectetur elit estibulum
-                    tincidunt rutrum.
+                    {loading ? (
+                      <span className="inline-block h-4 w-full animate-pulse rounded bg-gray-200 dark:bg-dark-2" />
+                    ) : (
+                      aboutData.vision
+                    )}
                   </p>
                 </motion.div>
               </div>
@@ -650,7 +701,37 @@ const Features = () => {
   );
 };
 
-const About = () => {
+const Moto = () => {
+  // Moto section API data state
+  const [motoData, setMotoData] = useState({
+    image: StuGroup,
+  });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchMotoData = async () => {
+      try {
+        setLoading(true);
+        const { data: json } = await http.get(`/site-settings/about-section`);
+        if (json?.success && json?.data) {
+          const data = json.data;
+          setMotoData({
+            image: data.image
+              ? `http://project_laravel_miea_portal.test${data.image}`
+              : StuGroup,
+          });
+        }
+      } catch (error) {
+        console.error("Failed to fetch moto data:", error);
+        // Keep default values on error
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMotoData();
+  }, []);
+
   return (
     <section className="overflow-hidden bg-white dark:bg-dark">
       <div className="container mx-auto">
@@ -660,14 +741,22 @@ const About = () => {
           whileInView={{ opacity: 1, scale: 1 }} // Zoom-out to normal size
           transition={{ duration: 2, ease: "easeOut" }}
         >
-          <img
-            src={StuGroup}
-            alt="about image"
-            className="w-full object-center dark:hidden"
-          />
+          {loading ? (
+            <div className="w-full h-96 bg-gray-200 dark:bg-dark-2 animate-pulse rounded-lg"></div>
+          ) : (
+            <img
+              src={motoData.image}
+              alt="moto image"
+              className="w-full object-center dark:hidden"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.src = StuGroup;
+              }}
+            />
+          )}
           <img
             src={StuGroupWhite}
-            alt="about image"
+            alt="moto image"
             className="w-full object-center hidden dark:block"
           />
         </motion.div>
@@ -1527,8 +1616,8 @@ const Home: React.FC = () => {
     <>
       <Hero />
       <Services />
-      <Features />
       <About />
+      <Moto />
       <Achievements />
       <Testimonials />
       <Video />
