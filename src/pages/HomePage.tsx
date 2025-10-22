@@ -668,13 +668,20 @@ const About = () => {
                   <h3 className="mb-5 text-xl font-bold text-green dark:text-white">
                     Mission
                   </h3>
-                  <p className="text-base leading-normal text-dark dark:text-dark-6">
+                  <div className="text-base leading-normal text-dark dark:text-dark-6">
                     {loading ? (
                       <span className="inline-block h-4 w-full animate-pulse rounded bg-gray-200 dark:bg-dark-2" />
                     ) : (
-                      aboutData.mission
+                      <div
+                        className="[&_ul]:list-disc [&_ul]:ml-6 [&_ol]:list-decimal [&_ol]:ml-6 [&_li]:mb-1 [&_p]:mb-2 [&_strong]:font-bold"
+                        style={{
+                          listStyleType: "disc",
+                          listStylePosition: "outside",
+                        }}
+                        dangerouslySetInnerHTML={{ __html: aboutData.mission }}
+                      />
                     )}
-                  </p>
+                  </div>
                 </motion.div>
                 <motion.div
                   initial={{ opacity: 0, x: 30 }}
@@ -684,13 +691,20 @@ const About = () => {
                   <h3 className="mb-5 text-xl font-bold text-green dark:text-white">
                     Vision
                   </h3>
-                  <p className="text-base leading-normal text-dark dark:text-dark-6">
+                  <div className="text-base leading-normal text-dark dark:text-dark-6">
                     {loading ? (
                       <span className="inline-block h-4 w-full animate-pulse rounded bg-gray-200 dark:bg-dark-2" />
                     ) : (
-                      aboutData.vision
+                      <div
+                        className="[&_ul]:list-disc [&_ul]:ml-6 [&_ol]:list-decimal [&_ol]:ml-6 [&_li]:mb-1 [&_p]:mb-2 [&_strong]:font-bold"
+                        style={{
+                          listStyleType: "disc",
+                          listStylePosition: "outside",
+                        }}
+                        dangerouslySetInnerHTML={{ __html: aboutData.vision }}
+                      />
                     )}
-                  </p>
+                  </div>
                 </motion.div>
               </div>
             </div>
@@ -704,7 +718,8 @@ const About = () => {
 const Moto = () => {
   // Moto section API data state
   const [motoData, setMotoData] = useState({
-    image: StuGroup,
+    lightImage: StuGroup,
+    darkImage: StuGroupWhite,
   });
   const [loading, setLoading] = useState(true);
 
@@ -712,13 +727,16 @@ const Moto = () => {
     const fetchMotoData = async () => {
       try {
         setLoading(true);
-        const { data: json } = await http.get(`/site-settings/about-section`);
+        const { data: json } = await http.get(`/site-settings/moto-section`);
         if (json?.success && json?.data) {
           const data = json.data;
           setMotoData({
-            image: data.image
-              ? `http://project_laravel_miea_portal.test${data.image}`
+            lightImage: data.light_image
+              ? `http://project_laravel_miea_portal.test${data.light_image}`
               : StuGroup,
+            darkImage: data.dark_image
+              ? `http://project_laravel_miea_portal.test${data.dark_image}`
+              : StuGroupWhite,
           });
         }
       } catch (error) {
@@ -744,21 +762,27 @@ const Moto = () => {
           {loading ? (
             <div className="w-full h-96 bg-gray-200 dark:bg-dark-2 animate-pulse rounded-lg"></div>
           ) : (
-            <img
-              src={motoData.image}
-              alt="moto image"
-              className="w-full object-center dark:hidden"
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                target.src = StuGroup;
-              }}
-            />
+            <>
+              <img
+                src={motoData.lightImage}
+                alt="moto image light"
+                className="w-full object-center dark:hidden"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.src = StuGroup;
+                }}
+              />
+              <img
+                src={motoData.darkImage}
+                alt="moto image dark"
+                className="w-full object-center hidden dark:block"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.src = StuGroupWhite;
+                }}
+              />
+            </>
           )}
-          <img
-            src={StuGroupWhite}
-            alt="moto image"
-            className="w-full object-center hidden dark:block"
-          />
         </motion.div>
       </div>
     </section>
