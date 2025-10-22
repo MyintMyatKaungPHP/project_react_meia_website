@@ -52,8 +52,10 @@ const Test = () => {
         );
         setHeroSection(heroData);
 
-        // Fetch Service Cards
-        const { data: serviceCardsData } = await http.get(`/service-cards`);
+        // Fetch Service Cards (updated endpoint)
+        const { data: serviceCardsData } = await http.get(
+          `/site-settings/service-cards`
+        );
         setServiceCards(serviceCardsData);
       } catch (err) {
         setError(err instanceof Error ? err.message : "Unknown error occurred");

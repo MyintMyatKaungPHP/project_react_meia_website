@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { useMotionValue, useTransform, motion } from "framer-motion";
 import { Typewriter } from "react-simple-typewriter";
 import { FaBullhorn, FaChartLine, FaPaintBrush, FaPlay } from "react-icons/fa";
@@ -32,6 +33,7 @@ interface ServiceCardProps {
   overlayColor?: string;
   overlay_color?: string;
   link?: string;
+  tag_name?: string;
 }
 
 interface StatsItemProps {
@@ -53,7 +55,9 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   image,
   overlayColor,
   link,
+  tag_name,
 }) => {
+  const navigate = useNavigate();
   return (
     <motion.div
       className="w-full px-4 sm:w-4/5 md:w-1/2 lg:w-1/3"
@@ -78,7 +82,8 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
         whileInView={{ opacity: 1, y: 0 }}
         onClick={() => {
           if (link) {
-            window.location.href = link;
+            const finalLink = tag_name ? `${link}#${tag_name}` : link;
+            navigate(finalLink);
           }
         }}
       >
@@ -420,7 +425,7 @@ const Services = () => {
     const fetchServiceCards = async () => {
       try {
         setLoading(true);
-        const { data: json } = await http.get(`/service-cards`);
+        const { data: json } = await http.get(`/site-settings/service-cards`);
         if (json?.success && json?.data) {
           setServiceCards(json.data);
         }
@@ -455,7 +460,7 @@ const Services = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
               >
-                Our Best Services
+                Our Best Programmes
               </motion.h2>
               <motion.p
                 className="text-base text-body-color dark:text-dark-6"
@@ -463,8 +468,8 @@ const Services = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
               >
-                There are many variations of passages of Lorem Ipsum available
-                but the majority have suffered alteration in some form.
+                We offer a wide range of international qualifications programmes
+                from lower secondary to advanced level.
               </motion.p>
             </motion.div>
           </div>
@@ -535,6 +540,7 @@ const Services = () => {
                 image={card.image}
                 overlayColor={card.overlay_color}
                 link={card.link}
+                tag_name={card.tag_name}
               />
             ))
           )}

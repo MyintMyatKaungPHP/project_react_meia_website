@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import ImageSlider from "../components/ImageSlider"; // path ကိုသင့် folder structure အတိုင်း
 
@@ -107,26 +108,22 @@ const ProgramListItem: React.FC<ListItemProps> = ({ count, text }) => {
 
 const ProgrammesPage: React.FC = () => {
   const [openTab, setOpenTab] = useState<string>("1");
+  const location = useLocation();
 
-  // Handle hash navigation from HomePage ServiceCard links
+  // Sync tab from query param (?tab=1|2|3) or hash (#1|#2|#3)
   useEffect(() => {
-    const hash = window.location.hash;
-    if (hash) {
-      switch (hash) {
-        case "#a-level":
-          setOpenTab("1");
-          break;
-        case "#upper-secondary":
-          setOpenTab("2");
-          break;
-        case "#lower-secondary":
-          setOpenTab("3");
-          break;
-        default:
-          setOpenTab("1");
+    const params = new URLSearchParams(location.search);
+    const tabParam = params.get("tab");
+    if (tabParam && ["1", "2", "3"].includes(tabParam)) {
+      setOpenTab(tabParam);
+    } else if (location.hash) {
+      // Handle hash-based navigation (#1, #2, #3)
+      const hash = location.hash.substring(1); // Remove #
+      if (["1", "2", "3"].includes(hash)) {
+        setOpenTab(hash);
       }
     }
-  }, []);
+  }, [location.search, location.hash]);
 
   // Tab-specific images
   let selectedImages = imagesTab1;
