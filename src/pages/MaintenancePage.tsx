@@ -16,7 +16,7 @@ const MaintenancePage: React.FC = () => {
     let mounted = true;
     const fetchBasicInfo = async () => {
       try {
-        const { data: json } = await http.get(`/site-settings/basic-info`);
+        const { data: json } = await http.get(`/site-settings/homepage`);
         const d = json?.data || {};
         if (!mounted) return;
         if (d?.site_name) setSiteName(String(d.site_name));

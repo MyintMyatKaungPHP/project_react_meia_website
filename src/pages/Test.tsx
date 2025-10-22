@@ -15,6 +15,7 @@ const Test = () => {
     null
   );
   const [heroSection, setHeroSection] = useState<ApiResponse | null>(null);
+  const [serviceCards, setServiceCards] = useState<ApiResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -50,6 +51,10 @@ const Test = () => {
           `/site-settings/hero-section`
         );
         setHeroSection(heroData);
+
+        // Fetch Service Cards
+        const { data: serviceCardsData } = await http.get(`/service-cards`);
+        setServiceCards(serviceCardsData);
       } catch (err) {
         setError(err instanceof Error ? err.message : "Unknown error occurred");
         console.error("API Error:", err);
@@ -169,6 +174,80 @@ const Test = () => {
             </div>
           )}
         </div>
+
+        {/* Service Cards API */}
+        <div className="bg-white p-6 rounded-lg shadow mb-8">
+          <h2 className="text-2xl font-bold mb-4 text-purple-600">
+            Service Cards API
+          </h2>
+          <div className="bg-gray-50 p-4 rounded">
+            <pre className="text-sm overflow-auto max-h-96">
+              {JSON.stringify(serviceCards, null, 2)}
+            </pre>
+          </div>
+
+          {serviceCards?.data && Array.isArray(serviceCards.data) && (
+            <div className="mt-4">
+              <h3 className="text-lg font-semibold mb-3">
+                Service Cards ({serviceCards.data.length})
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {serviceCards.data.map((card: any, index: number) => (
+                  <div key={index} className="border rounded-lg p-4 bg-gray-50">
+                    <div className="mb-2">
+                      <strong>Title:</strong> {card.title}
+                    </div>
+                    <div className="mb-2">
+                      <strong>Details:</strong> {card.details}
+                    </div>
+                    <div className="mb-2">
+                      <strong>Link:</strong> {card.link}
+                    </div>
+                    <div className="mb-2">
+                      <strong>Overlay Color:</strong>
+                      <span
+                        className="inline-block w-4 h-4 rounded ml-2 border"
+                        style={{ backgroundColor: card.overlay_color }}
+                      ></span>
+                      <span className="ml-2 text-sm text-gray-600">
+                        {card.overlay_color}
+                      </span>
+                    </div>
+                    {card.image && (
+                      <div>
+                        <strong>Image:</strong>
+                        <div className="text-xs text-gray-500 mb-1">
+                          {card.image}
+                        </div>
+                        <img
+                          src={card.image}
+                          alt={card.title}
+                          className="mt-1 h-20 w-auto rounded border object-cover"
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.style.display = "none";
+                            const nextSibling =
+                              target.nextSibling as HTMLElement;
+                            if (nextSibling) {
+                              nextSibling.style.display = "block";
+                            }
+                          }}
+                        />
+                        <div
+                          className="text-xs text-red-500 mt-1"
+                          style={{ display: "none" }}
+                        >
+                          Failed to load image: {card.image}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
         {/* Basic Information */}
         <div className="bg-white p-6 rounded-lg shadow mb-8">
           <h2 className="text-2xl font-bold mb-4 text-green-600">

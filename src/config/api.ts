@@ -13,6 +13,7 @@ export const API_ENDPOINTS = {
     PARTNERS: '/partners',
     RECENT_NEWS: '/blog/posts/published',
     STATISTICS: '/site-settings/achievements',
+    SERVICE_CARDS: '/service-cards',
   },
   NEWS: {
     LIST: '/blog/posts',

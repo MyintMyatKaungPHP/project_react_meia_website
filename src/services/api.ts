@@ -58,6 +58,15 @@ export interface StatsData {
   description?: string;
 }
 
+export interface ServiceCardData {
+  id: number;
+  title: string;
+  details: string;
+  image: string;
+  overlay_color: string;
+  link: string;
+}
+
 // API service functions
 export const apiService = {
   // Get hero section data
@@ -242,15 +251,69 @@ export const apiService = {
     }
   },
 
+  // Get service cards data
+  async getServiceCards(): Promise<ServiceCardData[]> {
+    try {
+      const response = await fetch(`${API_BASE_URL}${API_ENDPOINTS.HOME.SERVICE_CARDS}`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch service cards');
+      }
+      const json = await response.json();
+      
+      if (!json.success) {
+        throw new Error(json.message || 'API returned error');
+      }
+      
+      const list = json?.data || [];
+      return (Array.isArray(list) ? list : []).map((card: any) => ({
+        id: card.id,
+        title: card.title,
+        details: card.details,
+        image: card.image,
+        overlay_color: card.overlay_color,
+        link: card.link
+      }));
+    } catch (error) {
+      console.warn('Service Cards API not available, using fallback data:', error);
+      return [
+        {
+          id: 1,
+          title: "A Level",
+          details: "Year 12 - Year 13 (iAS & iAL)",
+          image: "/assets/images/2024_graduation.jpg",
+          overlay_color: "#ef4444",
+          link: "/programmes#a-level"
+        },
+        {
+          id: 2,
+          title: "Upper Secondary Level",
+          details: "Year 10 - Year 11 (iGCSE)",
+          image: "/assets/images/2024_graduation.jpg",
+          overlay_color: "#22c55e",
+          link: "/programmes#upper-secondary"
+        },
+        {
+          id: 3,
+          title: "Lower Secondary Level",
+          details: "Year 7 - Year 8 - Year 9 (Pre-iGCSE)",
+          image: "/assets/images/2024_graduation.jpg",
+          overlay_color: "#3b82f6",
+          link: "/programmes#lower-secondary"
+        }
+      ];
+    }
+  },
+
   // Get all home page data at once
   async getHomePageData() {
     try {
-      const [hero, testimonials, partners, recentNews, statistics] = await Promise.all([
+      const [hero, testimonials, partners, recentNews, statistics, serviceCards] = await Promise.all([
         this.getHeroData(),
         this.getTestimonials(),
         this.getPartners(),
         this.getRecentNews(3),
-        this.getStatistics()
+        this.getStatistics(),
+        this.getServiceCards()
       ]);
 
       return {
@@ -258,7 +321,8 @@ export const apiService = {
         testimonials,
         partners,
         recentNews,
-        statistics
+        statistics,
+        serviceCards
       };
     } catch (error) {
       console.error('Error fetching home page data:', error);

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import http from "../services/http";
 import { API_CONFIG } from "../config/api";
-import UnderConstructionPage from "../pages/UnderConstructionPage";
+import MaintenancePage from "../pages/MaintenancePage";
 
 interface Props {
   children: React.ReactNode;
@@ -18,7 +18,7 @@ const MaintenanceGuard: React.FC<Props> = ({ children }) => {
         setLoading(true);
         const { data: json } = await http.get(`/site-settings/homepage`);
         const d = json?.data || {};
-        if (isMounted) setIsMaintenance(Boolean(d.page_under_maintenance));
+        if (isMounted) setIsMaintenance(Boolean(d.maintenance_mode));
       } catch (_e) {
         // On API failure, do not block the app; assume not maintenance
         if (isMounted) setIsMaintenance(false);
@@ -57,7 +57,7 @@ const MaintenanceGuard: React.FC<Props> = ({ children }) => {
   }
 
   if (showMaintenance) {
-    return <UnderConstructionPage />;
+    return <MaintenancePage />;
   }
 
   return <>{children}</>;

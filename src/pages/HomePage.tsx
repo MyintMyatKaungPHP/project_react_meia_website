@@ -8,6 +8,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import BlogCard from "../components/BlogCard";
 import BlogSideCardItem from "../components/BlogSideCard";
+import UnderConstructionPage from "./UnderConstructionPage";
+import Footer from "../components/Footer";
 import http from "../services/http";
 
 // Import images
@@ -23,10 +25,12 @@ import Graduation2024 from "../assets/images/2024_graduation.jpg";
 
 // Interfaces
 interface ServiceCardProps {
+  id?: number;
   title: string;
   details: string;
   image?: string;
   overlayColor?: string;
+  overlay_color?: string;
   link?: string;
 }
 
@@ -59,12 +63,14 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
       transition={{ duration: 1, ease: "easeOut" }}
     >
       <motion.div
-        className="group relative mb-8 rounded-xl border border-stroke overflow-hidden p-10 text-center md:px-8 lg:px-6 lg:py-9 xl:px-[43px] xl:py-[45px] cursor-pointer"
+        className="group relative mb-8 rounded-xl border border-stroke overflow-hidden cursor-pointer"
         style={{
           backgroundImage: image ? `url(${image})` : undefined,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
+          aspectRatio: "16/9",
+          width: "100%",
         }}
         whileHover={{ scale: 1.05 }}
         transition={{ duration: 0.3 }}
@@ -78,18 +84,18 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
       >
         {/* Background overlay - hidden by default, shows on hover */}
         <div
-          className="absolute inset-0 transition-all duration-300 opacity-0 group-hover:opacity-100"
+          className="absolute inset-0 transition-all duration-300 opacity-0 group-hover:opacity-100 z-20"
           style={{
             backgroundColor: overlayColor
               ? `${overlayColor}90`
-              : "rgba(255, 255, 255, 0.9)",
+              : "rgba(239, 68, 68, 0.9)",
             backgroundImage: "none",
           }}
         ></div>
         {/* Content - hidden by default, shows on hover */}
-        <div className="relative z-10 opacity-0 group-hover:opacity-100 transition-all duration-300">
+        <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-6 z-50 opacity-0 group-hover:opacity-100 transition-all duration-300">
           <motion.h4
-            className="mb-[14px] text-2xl font-bold text-white"
+            className="mb-3 text-xl md:text-2xl font-bold text-white"
             style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.8)" }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -98,7 +104,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
             {title}
           </motion.h4>
           <motion.p
-            className="text-white"
+            className="text-white text-sm md:text-base px-4"
             style={{ textShadow: "1px 1px 3px rgba(0, 0, 0, 0.8)" }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -405,6 +411,30 @@ const Hero = () => {
 };
 
 const Services = () => {
+  // ServiceCard API data state
+  const [serviceCards, setServiceCards] = useState<ServiceCardProps[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchServiceCards = async () => {
+      try {
+        setLoading(true);
+        const { data: json } = await http.get(`/service-cards`);
+        if (json?.success && json?.data) {
+          setServiceCards(json.data);
+        }
+      } catch (error) {
+        console.error("Failed to fetch service cards:", error);
+        setError("Failed to load service cards");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchServiceCards();
+  }, []);
+
   return (
     <section className="pb-12 pt-20 dark:bg-dark lg:pb-[90px] lg:pt-[120px]">
       <div className="container mx-auto">
@@ -441,27 +471,73 @@ const Services = () => {
         </div>
 
         <div className="-mx-4 flex flex-wrap justify-center">
-          <ServiceCard
-            title="A Level"
-            details="Year 12 - Year 13 (iAS & iAL)"
-            image={Graduation2024}
-            overlayColor="#ef4444"
-            link="/programmes#a-level"
-          />
-          <ServiceCard
-            title="Upper Secondary Level"
-            details="Year 10 - Year 11 (iGCSE)"
-            image={Graduation2024}
-            overlayColor="#22c55e"
-            link="/programmes#upper-secondary"
-          />
-          <ServiceCard
-            title="Lower Secondary Level"
-            details="Year 7 - Year 8 - Year 9 (Pre-iGCSE)"
-            image={Graduation2024}
-            overlayColor="#3b82f6"
-            link="/programmes#lower-secondary"
-          />
+          {loading ? (
+            // Loading skeleton
+            <>
+              {[1, 2, 3].map((index) => (
+                <motion.div
+                  key={index}
+                  className="w-full px-4 sm:w-4/5 md:w-1/2 lg:w-1/3"
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1, ease: "easeOut" }}
+                >
+                  <div className="group relative mb-8 rounded-xl border border-stroke overflow-hidden p-10 text-center md:px-8 lg:px-6 lg:py-9 xl:px-[43px] xl:py-[45px]">
+                    <div className="animate-pulse">
+                      <div className="h-64 w-full bg-gray-200 dark:bg-dark-2 rounded-lg mb-4"></div>
+                      <div className="h-6 bg-gray-200 dark:bg-dark-2 rounded mb-2"></div>
+                      <div className="h-4 bg-gray-200 dark:bg-dark-2 rounded"></div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </>
+          ) : error ? (
+            // Error state
+            <motion.div
+              className="w-full px-4 text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-6">
+                <p className="text-red-600 dark:text-red-400">{error}</p>
+                <button
+                  onClick={() => window.location.reload()}
+                  className="mt-2 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors"
+                >
+                  Try Again
+                </button>
+              </div>
+            </motion.div>
+          ) : serviceCards.length === 0 ? (
+            // Empty state
+            <motion.div
+              className="w-full px-4 text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+                <p className="text-gray-600 dark:text-gray-400">
+                  No service cards available at the moment.
+                </p>
+              </div>
+            </motion.div>
+          ) : (
+            // Service cards from API
+            serviceCards.map((card, index) => (
+              <ServiceCard
+                key={card.id || index}
+                title={card.title}
+                details={card.details}
+                image={card.image}
+                overlayColor={card.overlay_color}
+                link={card.link}
+              />
+            ))
+          )}
         </div>
       </div>
     </section>
@@ -1399,6 +1475,48 @@ const Partners = () => {
 };
 
 const Home: React.FC = () => {
+  const [isUnderMaintenance, setIsUnderMaintenance] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const checkMaintenanceStatus = async () => {
+      try {
+        const { data: json } = await http.get(`/site-settings/homepage`);
+        const d = json?.data || {};
+        setIsUnderMaintenance(Boolean(d.page_under_maintenance));
+      } catch (error) {
+        console.error("Failed to fetch maintenance status:", error);
+        // On error, assume not under maintenance
+        setIsUnderMaintenance(false);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    checkMaintenanceStatus();
+  }, []);
+
+  if (loading) {
+    return (
+      <section className="relative z-10 overflow-hidden bg-white dark:bg-dark">
+        <div className="container mx-auto px-4">
+          <div className="-mx-4 flex flex-wrap items-center justify-center py-24 md:py-32 lg:py-40">
+            <div className="w-full px-4">
+              <div className="mx-auto max-w-[650px] text-center">
+                <div className="mx-auto h-6 w-48 animate-pulse rounded bg-gray-200 dark:bg-dark-2" />
+                <div className="mx-auto mt-4 h-4 w-96 animate-pulse rounded bg-gray-200 dark:bg-dark-2" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (isUnderMaintenance) {
+    return <UnderConstructionPage showGoHomeButton={false} />;
+  }
+
   return (
     <>
       <Hero />
