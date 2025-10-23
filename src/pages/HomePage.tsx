@@ -443,7 +443,7 @@ const Services = () => {
   }, []);
 
   return (
-    <section className="pb-12 pt-20 dark:bg-dark lg:pb-[90px] lg:pt-[120px]">
+    <section className="bg-white pb-12 pt-20 dark:bg-dark lg:pb-[90px] lg:pt-[120px]">
       <div className="container mx-auto">
         <div className="-mx-4 flex flex-wrap">
           <div className="w-full px-4">
@@ -994,7 +994,7 @@ const Testimonials = () => {
 
   return (
     <>
-      <section className="pb-10 pt-20 dark:bg-dark lg:pb-20 lg:pt-[120px]">
+      <section className="bg-white pb-10 pt-20 dark:bg-dark lg:pb-20 lg:pt-[120px]">
         <div className="container mx-auto">
           <div className="-mx-4 flex flex-wrap justify-center">
             <div className="w-full px-4">
@@ -1231,7 +1231,7 @@ const Video = () => {
   });
 
   return (
-    <section className="relative w-screen attach-top overflow-hidden">
+    <section className="relative w-screen h-screen overflow-hidden">
       {/* Background Video */}
       <video
         className="absolute inset-0 h-full w-full object-cover"
@@ -1239,6 +1239,14 @@ const Video = () => {
         muted
         loop
         playsInline
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100vw",
+          height: "100vh",
+          zIndex: -1,
+        }}
       >
         <source src={miea_school_video} type="video/mp4" />
         Your browser does not support the video tag.
@@ -1248,8 +1256,11 @@ const Video = () => {
       <div className="absolute inset-0 bg-black bg-opacity-50"></div>
 
       {/* Content */}
-      <div className="relative z-10 flex h-full items-center justify-center">
-        <div className="mx-auto max-w-4xl px-4 py-32 text-center">
+      <div
+        className="relative z-10 flex items-center justify-center py-32"
+        style={{ height: "calc(100vh - 80px)" }}
+      >
+        <div className="mx-auto max-w-4xl px-4 text-center">
           <motion.h2
             className="mb-6 text-4xl font-bold text-white sm:text-5xl md:text-6xl lg:text-7xl"
             initial={{ opacity: 0, y: 30 }}
