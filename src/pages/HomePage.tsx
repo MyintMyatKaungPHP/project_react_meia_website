@@ -4,6 +4,8 @@ import { useMotionValue, useTransform, motion } from "framer-motion";
 import { Typewriter } from "react-simple-typewriter";
 import { FaPlay } from "react-icons/fa";
 import { useInView } from "react-intersection-observer";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faQuoteRight } from "@fortawesome/free-solid-svg-icons";
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
@@ -934,6 +936,60 @@ const StatsItem: React.FC<StatsItemProps> = ({ user, title, suffix = "" }) => {
 const Testimonials = () => {
   const swiperRef = useRef<any>(null);
 
+  // Testimonials API data state
+  const [testimonialsData, setTestimonialsData] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchTestimonialsData = async () => {
+      try {
+        setLoading(true);
+        const { data: json } = await http.get(`/testimonials`);
+        if (json?.success && json?.data) {
+          setTestimonialsData(json.data);
+        }
+      } catch (error) {
+        console.error("Failed to fetch testimonials data:", error);
+        setError("Failed to load testimonials");
+        // Fallback to default testimonials
+        setTestimonialsData([
+          {
+            id: 1,
+            name: "Aung Aung",
+            role: "Student @ Class of 2021",
+            content:
+              "Our members are so impressed. It's intuitive. It's clean. It's distraction free. If you're building a community.",
+            image:
+              "https://cdn.tailgrids.com/2.0/image/marketing/images/testimonials/testimonial-04/image-01.png",
+          },
+          {
+            id: 2,
+            name: "Myat Myat",
+            role: "Parent @ Student",
+            content:
+              "Our members are so impressed. It's intuitive. It's clean. It's distraction free. If you're building a community.",
+            image:
+              "https://cdn.tailgrids.com/2.0/image/marketing/images/testimonials/testimonial-04/image-02.png",
+          },
+          {
+            id: 3,
+            name: "Hla Hla",
+            role: "Student @ Class of 2022",
+            content:
+              "Our members are so impressed. It's intuitive. It's clean. It's distraction free. If you're building a community.",
+            image:
+              "https://cdn.tailgrids.com/2.0/image/marketing/images/testimonials/testimonial-04/image-03.png",
+          },
+        ]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTestimonialsData();
+  }, []);
+
   return (
     <>
       <section className="pb-10 pt-20 dark:bg-dark lg:pb-20 lg:pt-[120px]">
@@ -960,90 +1016,100 @@ const Testimonials = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.3 }}
                 >
-                  What our students say
+                  What our students and parents say
                 </motion.h2>
               </motion.div>
             </div>
           </div>
 
-          <Swiper
-            breakpoints={{
-              640: {
-                width: 640,
-                slidesPerView: 1,
-              },
-              768: {
-                width: 768,
-                slidesPerView: 2.2,
-              },
-              1024: {
-                width: 1024,
-                slidesPerView: 2.2,
-              },
-              1280: {
-                width: 1280,
-                slidesPerView: 3,
-              },
-            }}
-            autoplay={{
-              delay: 3000,
-              disableOnInteraction: false,
-            }}
-            modules={[Autoplay]}
-            loop={true}
-            spaceBetween={30}
-            ref={swiperRef}
-            className="!overflow-visible"
-          >
-            <SwiperSlide>
-              <SingleTestimonial
-                details="Our members are so impressed. It's intuitive. It's clean. It's distraction free. If you're building a community. Our members are so impressed. It's intuitive. It's clean. It's distraction free. If you're building a community."
-                image="https://cdn.tailgrids.com/2.0/image/marketing/images/testimonials/testimonial-04/image-01.png"
-                name="Aung Aung"
-                position="Founder @ Rolex"
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <SingleTestimonial
-                details="Our members are so impressed. It's intuitive. It's clean. It's distraction free. If you're building a community."
-                image="https://cdn.tailgrids.com/2.0/image/marketing/images/testimonials/testimonial-04/image-02.png"
-                name="Myat Myat"
-                position="Founder @ Ayro UI"
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <SingleTestimonial
-                details="Our members are so impressed. It's intuitive. It's clean. It's distraction free. If you're building a community."
-                image="https://cdn.tailgrids.com/2.0/image/marketing/images/testimonials/testimonial-04/image-03.png"
-                name="Hla Hla"
-                position="Founder @ Trorex"
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <SingleTestimonial
-                details="Our members are so impressed. It's intuitive. It's clean. It's distraction free. If you're building a community."
-                image="https://cdn.tailgrids.com/2.0/image/marketing/images/testimonials/testimonial-04/image-01.png"
-                name="Zaw Zaw"
-                position="Founder @ Rolex"
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <SingleTestimonial
-                details="Our members are so impressed. It's intuitive. It's clean. It's distraction free. If you're building a community."
-                image="https://cdn.tailgrids.com/2.0/image/marketing/images/testimonials/testimonial-04/image-02.png"
-                name="Kyaw Kyaw"
-                position="Founder @ Ayro UI"
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <SingleTestimonial
-                details="Our members are so impressed. It's intuitive. It's clean. It's distraction free. If you're building a community."
-                image="https://cdn.tailgrids.com/2.0/image/marketing/images/testimonials/testimonial-04/image-03.png"
-                name="Aye Aye"
-                position="Founder @ Trorex"
-              />
-            </SwiperSlide>
-          </Swiper>
+          {loading ? (
+            // Loading skeleton
+            <div className="flex justify-center">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl">
+                {[1, 2, 3].map((index) => (
+                  <div
+                    key={index}
+                    className="bg-white p-6 rounded-lg shadow-sm animate-pulse"
+                  >
+                    <div className="h-4 bg-gray-200 dark:bg-dark-2 rounded mb-4"></div>
+                    <div className="h-4 bg-gray-200 dark:bg-dark-2 rounded mb-2"></div>
+                    <div className="h-4 bg-gray-200 dark:bg-dark-2 rounded w-3/4"></div>
+                    <div className="flex items-center mt-4">
+                      <div className="h-12 w-12 bg-gray-200 dark:bg-dark-2 rounded-full mr-4"></div>
+                      <div>
+                        <div className="h-4 bg-gray-200 dark:bg-dark-2 rounded w-24 mb-1"></div>
+                        <div className="h-3 bg-gray-200 dark:bg-dark-2 rounded w-32"></div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : error ? (
+            // Error state
+            <div className="text-center">
+              <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-6 max-w-md mx-auto">
+                <p className="text-red-600 dark:text-red-400">{error}</p>
+                <button
+                  onClick={() => window.location.reload()}
+                  className="mt-2 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors"
+                >
+                  Try Again
+                </button>
+              </div>
+            </div>
+          ) : testimonialsData.length === 0 ? (
+            // Empty state
+            <div className="text-center">
+              <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 max-w-md mx-auto">
+                <p className="text-gray-600 dark:text-gray-400">
+                  No testimonials available at the moment.
+                </p>
+              </div>
+            </div>
+          ) : (
+            // Testimonials from API
+            <Swiper
+              breakpoints={{
+                640: {
+                  width: 640,
+                  slidesPerView: 1,
+                },
+                768: {
+                  width: 768,
+                  slidesPerView: 2.2,
+                },
+                1024: {
+                  width: 1024,
+                  slidesPerView: 2.2,
+                },
+                1280: {
+                  width: 1280,
+                  slidesPerView: 3,
+                },
+              }}
+              autoplay={{
+                delay: 3000,
+                disableOnInteraction: false,
+              }}
+              modules={[Autoplay]}
+              loop={testimonialsData.length > 1}
+              spaceBetween={30}
+              ref={swiperRef}
+              className="!overflow-visible"
+            >
+              {testimonialsData.map((testimonial, index) => (
+                <SwiperSlide key={testimonial.id || index}>
+                  <SingleTestimonial
+                    details={testimonial.content}
+                    image={testimonial.image}
+                    name={testimonial.name}
+                    position={testimonial.role}
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          )}
         </div>
       </section>
     </>
@@ -1056,37 +1122,27 @@ const SingleTestimonial: React.FC<TestimonialProps> = ({
   name,
   position,
 }) => {
-  const starIcon = (
-    <svg
-      width="18"
-      height="16"
-      viewBox="0 0 18 16"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M9.09815 0.360596L11.1054 6.06493H17.601L12.3459 9.5904L14.3532 15.2947L9.09815 11.7693L3.84309 15.2947L5.85035 9.5904L0.595291 6.06493H7.0909L9.09815 0.360596Z"
-        fill="#FBB040"
-      />
-    </svg>
-  );
   return (
     <div className="relative flex justify-center">
       <div className="relative w-full pb-16">
-        <div className="mb-10 bg-white p-8 shadow-testimonial-5 dark:bg-dark-2 dark:shadow-box-dark lg:px-6 lg:py-8 xl:p-8">
-          <div className="mb-5 flex items-center">
-            <span className="mr-1">{starIcon}</span>
-            <span className="mr-1">{starIcon}</span>
-            <span className="mr-1">{starIcon}</span>
-            <span className="mr-1">{starIcon}</span>
-            <span className="mr-1">{starIcon}</span>
-          </div>
-          <p className="mb-6 text-base text-body-color dark:text-dark-6">
+        {/* Closing quotation mark - bottom right only */}
+        <div
+          className="absolute bottom-2 right-0 text-green dark:text-yellow select-none pointer-events-none z-20"
+          style={{
+            fontSize: "60pt",
+            transform: "translate(15px, -40px)",
+          }}
+        >
+          <FontAwesomeIcon icon={faQuoteRight} />
+        </div>
+
+        <div className="mb-10 bg-white p-8 shadow-testimonial-5 dark:bg-dark-2 dark:shadow-box-dark lg:px-6 lg:py-8 xl:p-8 relative border-2 border-green/20 rounded-xl">
+          <p className="mb-6 text-base text-body-color dark:text-dark-6 relative z-10">
             {details}
           </p>
-          <div className="flex items-center">
+          <div className="flex items-center relative z-10">
             <div className="mr-4 h-[50px] w-full max-w-[50px]">
-              <img src={image} alt="image" className="w-full" />
+              <img src={image} alt="image" className="w-full rounded-full" />
             </div>
             <div className="w-full">
               <h5 className="mb-0.5 text-sm font-semibold text-dark dark:text-white">

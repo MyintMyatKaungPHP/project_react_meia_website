@@ -16,6 +16,7 @@ const Test = () => {
   );
   const [heroSection, setHeroSection] = useState<ApiResponse | null>(null);
   const [serviceCards, setServiceCards] = useState<ApiResponse | null>(null);
+  const [testimonials, setTestimonials] = useState<ApiResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -57,6 +58,10 @@ const Test = () => {
           `/site-settings/service-cards`
         );
         setServiceCards(serviceCardsData);
+
+        // Fetch Testimonials
+        const { data: testimonialsData } = await http.get(`/testimonials`);
+        setTestimonials(testimonialsData);
       } catch (err) {
         setError(err instanceof Error ? err.message : "Unknown error occurred");
         console.error("API Error:", err);
@@ -243,6 +248,59 @@ const Test = () => {
                         </div>
                       </div>
                     )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Testimonials API */}
+        <div className="bg-white p-6 rounded-lg shadow mb-8">
+          <h2 className="text-2xl font-bold mb-4 text-indigo-600">
+            Testimonials API
+          </h2>
+          <div className="bg-gray-50 p-4 rounded">
+            <pre className="text-sm overflow-auto max-h-96">
+              {JSON.stringify(testimonials, null, 2)}
+            </pre>
+          </div>
+
+          {testimonials?.data && Array.isArray(testimonials.data) && (
+            <div className="mt-4">
+              <h3 className="text-lg font-semibold mb-3">
+                Testimonials ({testimonials.data.length})
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {testimonials.data.map((testimonial: any, index: number) => (
+                  <div
+                    key={index}
+                    className="border rounded-lg p-4 bg-white shadow-sm hover:shadow-md transition-shadow"
+                  >
+                    <div className="flex items-start space-x-3">
+                      {testimonial.image && (
+                        <img
+                          src={testimonial.image}
+                          alt={testimonial.name}
+                          className="h-12 w-12 rounded-full border object-cover flex-shrink-0"
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.style.display = "none";
+                          }}
+                        />
+                      )}
+                      <div className="flex-1 min-w-0">
+                        <h4 className="text-lg font-semibold text-gray-900 mb-1">
+                          {testimonial.name}
+                        </h4>
+                        <p className="text-sm text-blue-600 mb-2">
+                          {testimonial.role}
+                        </p>
+                        <p className="text-sm text-gray-700 leading-relaxed">
+                          "{testimonial.content}"
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 ))}
               </div>
