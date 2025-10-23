@@ -8,9 +8,10 @@ import {
 import React, { useEffect, useState } from "react";
 import { API_CONFIG } from "../config/api";
 import http from "../services/http";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Footer: React.FC = () => {
+  const location = useLocation();
   const [footerLogoUrl, setFooterLogoUrl] = useState<string | null>(null);
   const [copyrightText, setCopyrightText] = useState<string>(
     `© ${new Date().getFullYear()} MIEA School | All Rights Reserved`
@@ -59,70 +60,84 @@ const Footer: React.FC = () => {
 
   return (
     <footer className="relative z-10">
-      <div className="w-full bg-green px-5 py-14 sm:p-14 dark:bg-yellow dark:text-dark">
-        <div className="container mx-auto flex flex-wrap">
-          <div className="w-full px-4 md:w-1/2 lg:w-1/3">
-            <div className="mb-5 flex lg:mb-0">
-              <div className="mr-4 flex items-center h-full">
-                <FaEnvelope className="text-white text-3xl dark:text-dark" />
-              </div>
-              <div>
-                <h5 className="text-lg font-semibold text-white dark:text-dark">
-                  Email
-                </h5>
-                <p className="text-base text-white/70 hover:text-white dark:text-dark dark:hover:text-white">
-                  {contactEmail ? (
-                    <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
-                  ) : (
-                    <span>info@miea.school</span>
-                  )}
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="w-full px-4 md:w-1/2 lg:w-1/3">
-            <div className="mb-5 flex lg:mb-0">
-              <div className="mr-4 flex items-center h-full">
-                <FaPhone className="text-white text-3xl dark:text-dark" />
-              </div>
-              <div>
-                <h5 className="text-lg font-semibold text-white dark:text-dark">
-                  Phone Numbers
-                </h5>
-                <p className="text-base text-white/70 dark:text-dark">
-                  {contactPhone1 ?? "09 9585 94545"}
-                </p>
-                <p className="text-base text-white/70 dark:text-dark">
-                  {contactPhone2 ?? "09 7767 94545"}
-                </p>
+      {location.pathname !== "/contact" && (
+        <div className="w-full bg-green px-5 py-14 sm:p-14 dark:bg-yellow dark:text-dark">
+          <div className="container mx-auto flex flex-wrap">
+            <div className="w-full px-4 md:w-1/2 lg:w-1/3">
+              <div className="mb-5 flex lg:mb-0">
+                <div className="mr-4 flex items-center h-full">
+                  <FaEnvelope className="text-white text-3xl dark:text-dark" />
+                </div>
+                <div>
+                  <h5 className="text-lg font-semibold text-white dark:text-dark">
+                    Email
+                  </h5>
+                  <p className="text-base text-white/70 hover:text-white dark:text-dark dark:hover:text-white">
+                    {isLoadingFooter ? (
+                      <span className="animate-pulse">Loading...</span>
+                    ) : contactEmail ? (
+                      <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
+                    ) : (
+                      <span>info@miea.school</span>
+                    )}
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="w-full px-4 md:w-1/2 lg:w-1/3">
-            <div className="mb-5 flex lg:mb-0">
-              <div className="mr-4 flex items-center h-full">
-                <FaMapMarkerAlt className="text-white text-3xl dark:text-dark" />
+            <div className="w-full px-4 md:w-1/2 lg:w-1/3">
+              <div className="mb-5 flex lg:mb-0">
+                <div className="mr-4 flex items-center h-full">
+                  <FaPhone className="text-white text-3xl dark:text-dark" />
+                </div>
+                <div>
+                  <h5 className="text-lg font-semibold text-white dark:text-dark">
+                    Phone Numbers
+                  </h5>
+                  <p className="text-base text-white/70 dark:text-dark">
+                    {isLoadingFooter ? (
+                      <span className="animate-pulse">Loading...</span>
+                    ) : (
+                      contactPhone1 ?? "09 9585 94545"
+                    )}
+                  </p>
+                  <p className="text-base text-white/70 dark:text-dark">
+                    {isLoadingFooter ? (
+                      <span className="animate-pulse">Loading...</span>
+                    ) : (
+                      contactPhone2 ?? "09 7767 94545"
+                    )}
+                  </p>
+                </div>
               </div>
-              <div>
-                <h5 className="text-lg font-semibold text-white dark:text-dark">
-                  School Address
-                </h5>
-                <p className="text-base text-white/70 dark:text-dark">
-                  {contactAddress ? (
-                    <span>{contactAddress}</span>
-                  ) : (
-                    <>
-                      No. (2A,520-C3), <br />
-                      Shwe Taung Gone Yeik Thar St, <br />
-                      Shwe Gone Taing, Bahan Township, Yangon
-                    </>
-                  )}
-                </p>
+            </div>
+            <div className="w-full px-4 md:w-1/2 lg:w-1/3">
+              <div className="mb-5 flex lg:mb-0">
+                <div className="mr-4 flex items-center h-full">
+                  <FaMapMarkerAlt className="text-white text-3xl dark:text-dark" />
+                </div>
+                <div>
+                  <h5 className="text-lg font-semibold text-white dark:text-dark">
+                    School Address
+                  </h5>
+                  <p className="text-base text-white/70 dark:text-dark">
+                    {isLoadingFooter ? (
+                      <span className="animate-pulse">Loading...</span>
+                    ) : contactAddress ? (
+                      <span>{contactAddress}</span>
+                    ) : (
+                      <>
+                        No. (2A,520-C3), <br />
+                        Shwe Taung Gone Yeik Thar St, <br />
+                        Shwe Gone Taing, Bahan Township, Yangon
+                      </>
+                    )}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
       <div className="py-3 bg-[#005e16]">
         <div className="container mx-auto">
           <div className="-mx-4 flex flex-wrap items-center justify-center lg:justify-start">
