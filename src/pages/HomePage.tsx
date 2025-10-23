@@ -23,6 +23,7 @@ import miea_school from "../assets/images/miea_school.png";
 import StuGroup from "../assets/images/stugroup.png";
 import StuGroupWhite from "../assets/images/stugroup_white.png";
 import Graduation2024 from "../assets/images/2024_graduation.jpg";
+import miea_school_video from "../assets/videos/miea_school_video.mp4";
 
 // Interfaces
 interface ServiceCardProps {
@@ -1187,138 +1188,88 @@ const Video = () => {
   });
 
   return (
-    <section className="bg-gradient-to-br from-green-600 to-green-800 dark:from-green-700 dark:to-green-900">
-      <div ref={domNode} className="mx-auto">
-        <div className="-mx-4 flex flex-wrap">
-          <div className="w-full px-4">
-            <div className="relative z-10 overflow-hidden">
-              <div className="relative z-10 px-8 py-32 min-h-[420px] md:py-[180px] md:min-h-[550px]">
-                <div className="mx-auto max-w-[500px] text-center">
-                  <motion.h2
-                    className="mb-5 text-3xl font-bold leading-[1.2] text-yellow sm:text-4xl md:text-[40px]"
-                    initial={{ opacity: 0, y: -30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
-                  >
-                    School Life at MIEA
-                  </motion.h2>
+    <section className="relative w-screen attach-top overflow-hidden">
+      {/* Background Video */}
+      <video
+        className="absolute inset-0 h-full w-full object-cover"
+        autoPlay
+        muted
+        loop
+        playsInline
+      >
+        <source src={miea_school_video} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
 
-                  <motion.p
-                    className="mb-6 text-base text-white md:text-lg"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
-                  >
-                    Discover our student and teacher activities at MIEA.
-                  </motion.p>
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black bg-opacity-50"></div>
 
-                  <motion.button
-                    onClick={() => setVideoOpen(true)}
-                    className="z-20 mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-transparent text-white/80 hover:text-white transition-all duration-300 ease-in-out md:h-[100px] md:w-[100px]"
-                    initial={{ opacity: 0, scale: 0.5 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.8, delay: 0.3, ease: "backOut" }}
-                  >
-                    <FaPlay className="text-2xl md:text-4xl hover:scale-150 transition-transform duration-300" />
-                  </motion.button>
-                </div>
-                <div>
-                  <span className="absolute bottom-0 left-0 z-[-1]">
-                    <svg
-                      width="1100"
-                      height="650"
-                      viewBox="0 0 957 550"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <rect
-                        x="-70.8242"
-                        y="490.75"
-                        width="1080.13"
-                        height="373.353"
-                        transform="rotate(-45 -70.8242 490.75)"
-                        fill="url(#paint0_linear)"
-                      />
-                      <defs>
-                        <linearGradient
-                          id="paint0_linear"
-                          x1="-60.8242"
-                          y1="678.647"
-                          x2="1009.31"
-                          y2="678.647"
-                          gradientUnits="userSpaceOnUse"
-                        >
-                          <stop stopColor="#f5c115" stopOpacity="0.46" />
-                          <stop
-                            offset="1"
-                            stopColor="#f5c115"
-                            stopOpacity="0"
-                          />
-                        </linearGradient>
-                      </defs>
-                    </svg>
-                  </span>
-                  <span className="absolute bottom-0 right-0 z-[-1]">
-                    <svg
-                      width="451"
-                      height="500"
-                      viewBox="0 0 431 320"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <rect
-                        x="385.004"
-                        y="501.935"
-                        width="544.154"
-                        height="165.364"
-                        transform="rotate(-135 385.004 501.935)"
-                        fill="url(#paint0_linear)"
-                      />
-                      <defs>
-                        <linearGradient
-                          id="paint0_linear"
-                          x1="385.004"
-                          y1="585.157"
-                          x2="929.158"
-                          y2="585.157"
-                          gradientUnits="userSpaceOnUse"
-                        >
-                          <stop stopColor="#f5c115" stopOpacity="0.36" />
-                          <stop
-                            offset="1"
-                            stopColor="#f5c115"
-                            stopOpacity="0"
-                          />
-                        </linearGradient>
-                      </defs>
-                    </svg>
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
+      {/* Content */}
+      <div className="relative z-10 flex h-full items-center justify-center">
+        <div className="mx-auto max-w-4xl px-4 py-32 text-center">
+          <motion.h2
+            className="mb-6 text-4xl font-bold text-white sm:text-5xl md:text-6xl lg:text-7xl"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            School Life at MIEA
+          </motion.h2>
+
+          <motion.p
+            className="mb-8 text-lg text-white sm:text-xl md:text-2xl"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            Discover our student and teacher activities at MIEA.
+          </motion.p>
+
+          <motion.button
+            onClick={() => setVideoOpen(true)}
+            className="group mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-white bg-opacity-20 backdrop-blur-sm text-white transition-all duration-300 hover:bg-opacity-30 hover:scale-110 md:h-24 md:w-24"
+            initial={{ opacity: 0, scale: 0.5 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.3, ease: "backOut" }}
+          >
+            <FaPlay className="ml-1 text-2xl transition-transform duration-300 group-hover:scale-110 md:text-3xl" />
+          </motion.button>
         </div>
       </div>
 
+      {/* Modal Dialog */}
       {videoOpen && (
-        <div className="fixed left-0 top-0 z-50 flex h-screen w-full items-center justify-center bg-black bg-opacity-70">
-          <div className="mx-auto w-full max-w-[550px] bg-white">
-            <>
-              <iframe
-                className="h-[320px] w-full"
-                src="https://www.youtube.com/embed/LXb3EKWsInQ?autoplay=1&mute=1"
-              />
-            </>
-          </div>
+        <div className="fixed left-0 top-0 z-50 flex h-screen w-full items-center justify-center bg-black bg-opacity-80 p-4">
+          <div className="relative mx-auto w-1/2 max-w-2xl rounded-lg bg-white shadow-2xl sm:w-3/4 md:w-1/2 lg:w-1/2">
+            {/* Header */}
+            <div className="flex items-center justify-between border-b border-gray-200 px-4 py-3">
+              <h3 className="text-base text-center w-full font-semibold text-gray-900">
+                School Life at MIEA
+              </h3>
+              <button
+                onClick={() => setVideoOpen(false)}
+                className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-100 text-gray-500 transition-colors hover:bg-gray-200 hover:text-gray-700"
+              >
+                <svg viewBox="0 0 16 15" className="h-3 w-3 fill-current">
+                  <path d="M3.37258 1.27L8.23258 6.13L13.0726 1.29C13.1574 1.19972 13.2596 1.12749 13.373 1.07766C13.4864 1.02783 13.6087 1.00141 13.7326 1C13.9978 1 14.2522 1.10536 14.4397 1.29289C14.6272 1.48043 14.7326 1.73478 14.7326 2C14.7349 2.1226 14.7122 2.24439 14.6657 2.35788C14.6193 2.47138 14.5502 2.57419 14.4626 2.66L9.57258 7.5L14.4626 12.39C14.6274 12.5512 14.724 12.7696 14.7326 13C14.7326 13.2652 14.6272 13.5196 14.4397 13.7071C14.2522 13.8946 13.9978 14 13.7326 14C13.6051 14.0053 13.478 13.984 13.3592 13.9375C13.2404 13.8911 13.1326 13.8204 13.0426 13.73L8.23258 8.87L3.38258 13.72C3.29809 13.8073 3.19715 13.8769 3.08559 13.925C2.97402 13.9731 2.85405 13.9986 2.73258 14C2.46737 14 2.21301 13.8946 2.02548 13.7071C1.83794 13.5196 1.73258 13.2652 1.73258 13C1.73025 12.8774 1.753 12.7556 1.79943 12.6421C1.84586 12.5286 1.91499 12.4258 2.00258 12.34L6.89258 7.5L2.00258 2.61C1.83777 2.44876 1.74112 2.23041 1.73258 2C1.73258 1.73478 1.83794 1.48043 2.02548 1.29289C2.21301 1.10536 2.46737 1 2.73258 1C2.97258 1.003 3.20258 1.1 3.37258 1.27Z" />
+                </svg>
+              </button>
+            </div>
 
-          <button
-            onClick={() => setVideoOpen(false)}
-            className="absolute right-0 top-0 flex h-20 w-20 cursor-pointer items-center justify-center text-body-color hover:bg-black"
-          >
-            <svg viewBox="0 0 16 15" className="h-8 w-8 fill-current">
-              <path d="M3.37258 1.27L8.23258 6.13L13.0726 1.29C13.1574 1.19972 13.2596 1.12749 13.373 1.07766C13.4864 1.02783 13.6087 1.00141 13.7326 1C13.9978 1 14.2522 1.10536 14.4397 1.29289C14.6272 1.48043 14.7326 1.73478 14.7326 2C14.7349 2.1226 14.7122 2.24439 14.6657 2.35788C14.6193 2.47138 14.5502 2.57419 14.4626 2.66L9.57258 7.5L14.4626 12.39C14.6274 12.5512 14.724 12.7696 14.7326 13C14.7326 13.2652 14.6272 13.5196 14.4397 13.7071C14.2522 13.8946 13.9978 14 13.7326 14C13.6051 14.0053 13.478 13.984 13.3592 13.9375C13.2404 13.8911 13.1326 13.8204 13.0426 13.73L8.23258 8.87L3.38258 13.72C3.29809 13.8073 3.19715 13.8769 3.08559 13.925C2.97402 13.9731 2.85405 13.9986 2.73258 14C2.46737 14 2.21301 13.8946 2.02548 13.7071C1.83794 13.5196 1.73258 13.2652 1.73258 13C1.73025 12.8774 1.753 12.7556 1.79943 12.6421C1.84586 12.5286 1.91499 12.4258 2.00258 12.34L6.89258 7.5L2.00258 2.61C1.83777 2.44876 1.74112 2.23041 1.73258 2C1.73258 1.73478 1.83794 1.48043 2.02548 1.29289C2.21301 1.10536 2.46737 1 2.73258 1C2.97258 1.003 3.20258 1.1 3.37258 1.27Z" />
-            </svg>
-          </button>
+            {/* Video Content */}
+            <div className="p-4">
+              <video
+                className="h-auto w-full rounded-lg"
+                controls
+                preload="metadata"
+                poster=""
+                autoPlay
+              >
+                <source src={miea_school_video} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
         </div>
       )}
     </section>
