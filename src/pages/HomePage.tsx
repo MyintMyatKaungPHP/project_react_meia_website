@@ -7,8 +7,9 @@ import { useInView } from "react-intersection-observer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQuoteRight } from "@fortawesome/free-solid-svg-icons";
 import "swiper/css";
+import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
+import { Autoplay, Navigation } from "swiper/modules";
 import BlogCard from "../components/BlogCard";
 import BlogSideCardItem from "../components/BlogSideCard";
 import UnderConstructionPage from "./UnderConstructionPage";
@@ -960,25 +961,25 @@ const Testimonials = () => {
             name: "Aung Aung",
             role: "Student @ Class of 2021",
             content:
-              "Our members are so impressed. It's intuitive. It's clean. It's distraction free. If you're building a community.",
+              "I have been a student at MIEA since 2021 and I have loved every moment of it. The teachers are so helpful and the students are so friendly. I have made so many friends and I have learned so much.",
             image:
               "https://cdn.tailgrids.com/2.0/image/marketing/images/testimonials/testimonial-04/image-01.png",
           },
           {
             id: 2,
-            name: "Myat Myat",
+            name: "May Myat",
             role: "Parent @ Student",
             content:
-              "Our members are so impressed. It's intuitive. It's clean. It's distraction free. If you're building a community.",
+              "The teachers are so helpful and the students are so friendly. I have made so many friends and I have learned so much.",
             image:
               "https://cdn.tailgrids.com/2.0/image/marketing/images/testimonials/testimonial-04/image-02.png",
           },
           {
             id: 3,
-            name: "Hla Hla",
+            name: "David Thant",
             role: "Student @ Class of 2022",
             content:
-              "Our members are so impressed. It's intuitive. It's clean. It's distraction free. If you're building a community.",
+              "Teacher at MIEA since 2021 and I have loved every moment of it. The students are so friendly and the teachers are so helpful. I have made so many friends and I have learned so much.",
             image:
               "https://cdn.tailgrids.com/2.0/image/marketing/images/testimonials/testimonial-04/image-03.png",
           },
@@ -1070,46 +1071,88 @@ const Testimonials = () => {
             </div>
           ) : (
             // Testimonials from API
-            <Swiper
-              breakpoints={{
-                640: {
-                  width: 640,
-                  slidesPerView: 1,
-                },
-                768: {
-                  width: 768,
-                  slidesPerView: 2.2,
-                },
-                1024: {
-                  width: 1024,
-                  slidesPerView: 2.2,
-                },
-                1280: {
-                  width: 1280,
-                  slidesPerView: 3,
-                },
-              }}
-              autoplay={{
-                delay: 3000,
-                disableOnInteraction: false,
-              }}
-              modules={[Autoplay]}
-              loop={testimonialsData.length > 1}
-              spaceBetween={30}
-              ref={swiperRef}
-              className="!overflow-visible"
-            >
-              {testimonialsData.map((testimonial, index) => (
-                <SwiperSlide key={testimonial.id || index}>
-                  <SingleTestimonial
-                    details={testimonial.content}
-                    image={testimonial.image}
-                    name={testimonial.name}
-                    position={testimonial.role}
-                  />
-                </SwiperSlide>
-              ))}
-            </Swiper>
+            <>
+              <div className="w-full overflow-hidden">
+                <Swiper
+                  breakpoints={{
+                    640: {
+                      width: 640,
+                      slidesPerView: 1,
+                    },
+                    768: {
+                      width: 768,
+                      slidesPerView: 2,
+                    },
+                    1024: {
+                      width: 1024,
+                      slidesPerView: 2,
+                    },
+                    1280: {
+                      width: 1280,
+                      slidesPerView: 3,
+                    },
+                  }}
+                  autoplay={false}
+                  modules={[Autoplay, Navigation]}
+                  navigation={{
+                    nextEl: ".testimonial-next",
+                    prevEl: ".testimonial-prev",
+                  }}
+                  loop={testimonialsData.length > 1}
+                  spaceBetween={30}
+                  centeredSlides={false}
+                  watchSlidesProgress={true}
+                  allowTouchMove={true}
+                  ref={swiperRef}
+                  className="w-full"
+                >
+                  {testimonialsData.map((testimonial, index) => (
+                    <SwiperSlide key={testimonial.id || index}>
+                      <SingleTestimonial
+                        details={testimonial.content}
+                        image={testimonial.image}
+                        name={testimonial.name}
+                        position={testimonial.role}
+                      />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </div>
+
+              {/* Navigation Buttons */}
+              <div className="flex justify-center space-x-4 mt-8">
+                <button className="testimonial-prev flex h-10 w-10 items-center justify-center rounded-full bg-gray-200 shadow-lg transition-all duration-300 hover:bg-green hover:text-white">
+                  <svg
+                    className="h-5 w-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M15 19l-7-7 7-7"
+                    />
+                  </svg>
+                </button>
+                <button className="testimonial-next flex h-10 w-10 items-center justify-center rounded-full bg-gray-200 shadow-lg transition-all duration-300 hover:bg-green hover:text-white">
+                  <svg
+                    className="h-5 w-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </>
           )}
         </div>
       </section>
@@ -1131,7 +1174,7 @@ const SingleTestimonial: React.FC<TestimonialProps> = ({
           className="absolute bottom-2 right-0 text-green dark:text-yellow select-none pointer-events-none z-20"
           style={{
             fontSize: "60pt",
-            transform: "translate(15px, -40px)",
+            transform: "translate(5px, -40px)",
           }}
         >
           <FontAwesomeIcon icon={faQuoteRight} />
@@ -1606,47 +1649,84 @@ const Partners = () => {
           </motion.div>
         </div>
 
-        <Swiper
-          breakpoints={{
-            320: {
-              slidesPerView: 2,
-              spaceBetween: 20,
-            },
-            640: {
-              slidesPerView: 3,
-              spaceBetween: 30,
-            },
-            1024: {
-              slidesPerView: 5,
-              spaceBetween: 40,
-            },
-          }}
-          autoplay={{
-            delay: 2500,
-            disableOnInteraction: false,
-          }}
-          modules={[Autoplay]}
-          loop={true}
-          ref={swiperRef}
-          className="!overflow-visible"
-        >
-          {partnersData.map((partner, index) => (
-            <SwiperSlide key={index}>
-              <a
-                href={partner.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex h-28 items-center justify-center rounded-lg border border-stroke bg-white px-6 py-6 hover:border-green hover:shadow-lg transition-all duration-300 dark:bg-gray-100"
-              >
-                <img
-                  src={partner.logo}
-                  alt={partner.name}
-                  className="h-16 w-full object-contain"
-                />
-              </a>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+        <div className="w-full overflow-hidden">
+          <Swiper
+            breakpoints={{
+              320: {
+                slidesPerView: 2,
+                spaceBetween: 20,
+              },
+              640: {
+                slidesPerView: 3,
+                spaceBetween: 30,
+              },
+              1024: {
+                slidesPerView: 4,
+                spaceBetween: 30,
+              },
+            }}
+            autoplay={false}
+            modules={[Autoplay, Navigation]}
+            navigation={{
+              nextEl: ".partners-next",
+              prevEl: ".partners-prev",
+            }}
+            loop={true}
+            ref={swiperRef}
+            className="w-full"
+          >
+            {partnersData.map((partner, index) => (
+              <SwiperSlide key={index}>
+                <a
+                  href={partner.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex h-28 items-center justify-center rounded-lg border border-stroke bg-white px-6 py-6 hover:border-green hover:shadow-lg transition-all duration-300 dark:bg-gray-100"
+                >
+                  <img
+                    src={partner.logo}
+                    alt={partner.name}
+                    className="h-16 w-full object-contain"
+                  />
+                </a>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+
+        {/* Navigation Buttons */}
+        <div className="flex justify-center space-x-4 mt-4">
+          <button className="partners-prev flex h-10 w-10 items-center justify-center rounded-full bg-gray-200 shadow-lg transition-all duration-300 hover:bg-green hover:text-white">
+            <svg
+              className="h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+          </button>
+          <button className="partners-next flex h-10 w-10 items-center justify-center rounded-full bg-gray-200 shadow-lg transition-all duration-300 hover:bg-green hover:text-white">
+            <svg
+              className="h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </button>
+        </div>
       </div>
     </section>
   );
