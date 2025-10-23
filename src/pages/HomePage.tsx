@@ -24,6 +24,9 @@ import miea_school from "../assets/images/miea_school.png";
 import StuGroup from "../assets/images/stugroup.png";
 import StuGroupWhite from "../assets/images/stugroup_white.png";
 import Graduation2024 from "../assets/images/2024_graduation.jpg";
+import iQuals_logo from "../assets/images/iquals.jpeg";
+import BC_Myanmar_logo from "../assets/images/bc_myanmar.png";
+import TEDx_logo from "../assets/images/tedx.webp";
 import miea_school_video from "../assets/videos/miea_school_video.mp4";
 
 // Interfaces
@@ -1225,13 +1228,17 @@ let useClickOutside = (handler: () => void) => {
 
 const Video = () => {
   const [videoOpen, setVideoOpen] = useState(false);
+  const [ref, inView] = useInView({
+    threshold: 0.1,
+    triggerOnce: false,
+  });
 
   let domNode = useClickOutside(() => {
     setVideoOpen(false);
   });
 
   return (
-    <section className="relative w-screen h-screen overflow-hidden">
+    <section ref={ref} className="relative w-screen h-screen overflow-hidden">
       {/* Background Video */}
       <video
         className="absolute inset-0 h-full w-full object-cover"
@@ -1246,6 +1253,7 @@ const Video = () => {
           width: "100vw",
           height: "100vh",
           zIndex: -1,
+          display: inView ? "block" : "none",
         }}
       >
         <source src={miea_school_video} type="video/mp4" />
@@ -1580,43 +1588,18 @@ const Partners = () => {
     },
     {
       name: "iQuals",
-      logo: "https://www.iquals.org/wp-content/uploads/2023/05/iQuals-Logo.png",
+      logo: iQuals_logo,
       link: "https://www.iquals.org/",
     },
     {
       name: "British Council Myanmar",
-      logo: "https://upload.wikimedia.org/wikipedia/en/thumb/8/89/British_Council_logo.svg/1200px-British_Council_logo.svg.png",
+      logo: BC_Myanmar_logo,
       link: "https://www.britishcouncil.org.mm/",
     },
     {
       name: "TEDx",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/TEDx_logo.svg/2560px-TEDx_logo.svg.png",
+      logo: TEDx_logo,
       link: "https://www.ted.com/about/programs-initiatives/tedx-program",
-    },
-    {
-      name: "Oxford University Press",
-      logo: "https://global.oup.com/academic/online/free/images/9780198736424_cover.jpg",
-      link: "https://global.oup.com/",
-    },
-    {
-      name: "International Baccalaureate",
-      logo: "https://upload.wikimedia.org/wikipedia/en/thumb/8/89/International_Baccalaureate_Logo.svg/1200px-International_Baccalaureate_Logo.svg.png",
-      link: "https://www.ibo.org/",
-    },
-    {
-      name: "Coursera",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Coursera-Logo_600x600.svg/1200px-Coursera-Logo_600x600.svg.png",
-      link: "https://www.coursera.org/",
-    },
-    {
-      name: "Khan Academy",
-      logo: "https://cdn.kastatic.org/images/khan-logo-dark-background.png",
-      link: "https://www.khanacademy.org/",
-    },
-    {
-      name: "EdX",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/EdX_newer_logo.svg/1200px-EdX_newer_logo.svg.png",
-      link: "https://www.edx.org/",
     },
   ];
 
